@@ -1,47 +1,274 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --color-primary: #E07A5F;
+  --color-secondary: #3D405B;
+  --color-accent: #81B29A;
+  --color-background: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-text: #2B2D42;
+  --color-muted: #6B7280;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-  color: #213547;
-  background-color: #ffffff;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid rgba(61, 64, 91, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--color-secondary);
+}
+
+.brand-icon {
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, var(--color-primary), #F4A261);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-secondary);
+}
+
+.nav-social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-instagram {
+  color: #E1306C;
+  background-color: #FDF2F4;
+  border: 1px solid rgba(225, 48, 108, 0.15);
+}
+
+.btn-instagram:hover {
+  background-color: #FCE7EB;
+}
+
+.btn-whatsapp {
+  color: #128C7E;
+  background-color: #E7F6F3;
+  border: 1px solid rgba(18, 140, 126, 0.2);
+}
+
+.btn-whatsapp:hover {
+  background-color: #D6EFEA;
+}
+
+/* --- Hero Section --- */
+.hero {
+  padding: 4rem 1.5rem;
   text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  background-color: rgba(224, 122, 95, 0.12);
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--color-secondary);
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem 0;
+}
+
+.hero-title span {
+  color: var(--color-primary);
+}
+
+.hero-tagline {
+  font-size: 1.2rem;
+  color: var(--color-muted);
+  max-width: 640px;
+  margin: 0 auto 2rem auto;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(224, 122, 95, 0.3);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-cta-primary:hover {
+  background-color: #D36C52;
+  transform: translateY(-1px);
+}
+
+.btn-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--color-surface);
+  color: var(--color-secondary);
+  border: 1px solid rgba(61, 64, 91, 0.2);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.btn-cta-secondary:hover {
+  background-color: #F4F3EF;
+}
+
+/* --- Status Card / Backend Check --- */
+.status-section {
+  max-width: 600px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 1.5rem;
+  width: 100%;
 }
 
 .card {
-  padding: 2em;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: center;
 }
 
 .status-badge {
-  font-weight: bold;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.875rem;
   color: #059669;
   background: #d1fae5;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  margin-left: 0.5rem;
+}
+
+.status-badge.error {
+  color: #DC2626;
+  background: #FEE2E2;
 }
 
 .success-msg {
   color: #059669;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 .error-msg {
-  color: #dc2626;
+  color: #DC2626;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
+/* --- Responsive (R3) --- */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nav-social-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero {
+    padding: 2.5rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
