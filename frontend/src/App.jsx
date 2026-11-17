@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { siteConfig } from './config/site.js';
+import ProductGrid from './components/ProductGrid.jsx';
 
 function App() {
   const [healthStatus, setHealthStatus] = useState('Conectando...');
@@ -68,23 +69,24 @@ function App() {
           <p className="hero-tagline">{siteConfig.tagline}</p>
           <div className="hero-actions">
             <a
-              href={siteConfig.social.whatsapp.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#catalogo"
               className="btn-cta-primary"
             >
-              Pedir por WhatsApp
+              Explorar Catálogo
             </a>
             <a
-              href={siteConfig.social.instagram.url}
+              href={siteConfig.social.whatsapp.url}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-cta-secondary"
             >
-              Ver perfil en Instagram
+              Pedir por WhatsApp
             </a>
           </div>
         </section>
+
+        {/* Catálogo interactivo de lámparas 3D (REC-1 / Unidad 003) */}
+        <ProductGrid />
 
         {/* Sección de estado del sistema (no regresión con backend) */}
         <section className="status-section">

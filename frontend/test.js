@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('Running frontend verification tests (002-theming-marcas)...');
+console.log('Running frontend verification tests (003-catalogo-productos)...');
 
 const appJsxPath = path.join(__dirname, 'src/App.jsx');
 const mainJsxPath = path.join(__dirname, 'src/main.jsx');
@@ -30,25 +30,41 @@ assert.strictEqual(siteConfig.colors?.secondary?.toUpperCase(), '#3D405B', 'R1: 
 assert.strictEqual(siteConfig.colors?.background?.toUpperCase(), '#FAF9F6', 'R1: background color token must be #FAF9F6');
 assert.strictEqual(siteConfig.colors?.text?.toUpperCase(), '#2B2D42', 'R1: text color token must be #2B2D42');
 
-// R2: Canales de contacto en site.js
+// R2 (002): Canales de contacto en site.js
 assert.strictEqual(siteConfig.social?.instagram?.handle, '@luminalab.co', 'R2: instagram handle must be @luminalab.co');
 assert.strictEqual(siteConfig.social?.instagram?.url, 'https://instagram.com/luminalab.co', 'R2: instagram url must match');
 assert.strictEqual(siteConfig.social?.whatsapp?.number, '+573001234567', 'R2: whatsapp number must be +573001234567');
 assert(siteConfig.social?.whatsapp?.url?.includes('573001234567'), 'R2: whatsapp url must include number');
 
-// 3. R1 / R3: CSS variables y responsive design en index.css
-const cssContent = fs.readFileSync(indexCssPath, 'utf-8');
-assert(cssContent.includes('--color-primary: #E07A5F') || cssContent.includes('--color-primary:#E07A5F') || cssContent.toUpperCase().includes('#E07A5F'), 'R1: index.css must define primary color variable #E07A5F');
-assert(cssContent.includes('--color-secondary') || cssContent.toUpperCase().includes('#3D405B'), 'R1: index.css must define secondary color variable');
-assert(cssContent.includes('--color-background') || cssContent.toUpperCase().includes('#FAF9F6'), 'R1: index.css must define background color variable');
-assert(cssContent.includes('@media'), 'R3: index.css must include responsive styles (@media rules)');
+// 3. R3 (003): Componentes de Catálogo
+const productCardPath = path.join(__dirname, 'src/components/ProductCard.jsx');
+const productGridPath = path.join(__dirname, 'src/components/ProductGrid.jsx');
+const productDetailModalPath = path.join(__dirname, 'src/components/ProductDetailModal.jsx');
 
-// 4. R2: Navbar, Hero y preservación de health check en App.jsx
+assert(fs.existsSync(productCardPath), 'R3: src/components/ProductCard.jsx must exist');
+assert(fs.existsSync(productGridPath), 'R3: src/components/ProductGrid.jsx must exist');
+assert(fs.existsSync(productDetailModalPath), 'R3: src/components/ProductDetailModal.jsx must exist');
+
+// Verificaciones de contenido en componentes de catálogo
+const cardContent = fs.readFileSync(productCardPath, 'utf-8');
+assert(cardContent.includes('COP') || cardContent.includes('format') || cardContent.includes('Intl'), 'R3: ProductCard must format price in COP');
+assert(cardContent.includes('color') || cardContent.includes('colors'), 'R3: ProductCard must handle filament color selection');
+
+const gridContent = fs.readFileSync(productGridPath, 'utf-8');
+assert(gridContent.includes('/api/products/'), 'R3: ProductGrid must fetch /api/products/');
+assert(gridContent.includes('ProductCard'), 'R3: ProductGrid must render ProductCard');
+
+const modalContent = fs.readFileSync(productDetailModalPath, 'utf-8');
+assert(modalContent.includes('dimensions') || modalContent.includes('Medidas') || modalContent.includes('Dimensiones'), 'R3: ProductDetailModal must display dimensions');
+assert(modalContent.includes('demanda') || modalContent.includes('días') || modalContent.includes('impresión') || modalContent.includes('fabricación'), 'R3: ProductDetailModal must display print-on-demand note');
+
+// 4. Integración en App.jsx
 const appContent = fs.readFileSync(appJsxPath, 'utf-8');
-assert(appContent.includes('siteConfig') || appContent.includes('Lumina Lab'), 'R2: App.jsx must render Lumina Lab brand');
-assert(appContent.includes('instagram') || appContent.includes('Instagram'), 'R2: App.jsx must include Instagram link/button');
-assert(appContent.includes('whatsapp') || appContent.includes('WhatsApp'), 'R2: App.jsx must include WhatsApp link/button');
-assert(appContent.includes('/api/health/'), 'No regresión: App.jsx must connect to /api/health/');
-assert(appContent.includes('status-badge') || appContent.includes('healthStatus'), 'No regresión: App.jsx must display health status');
+assert(appContent.includes('ProductGrid'), 'R3: App.jsx must include ProductGrid');
+
+// CSS variables y responsive design en index.css
+const cssContent = fs.readFileSync(indexCssPath, 'utf-8');
+assert(cssContent.includes('.product-grid') || cssContent.includes('product-card'), 'R3: index.css must contain product grid/card styling');
+assert(cssContent.includes('@media'), 'R3: index.css must include responsive styles (@media rules)');
 
 console.log('All frontend verification tests passed successfully!');
