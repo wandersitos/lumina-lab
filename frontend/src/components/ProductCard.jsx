@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useCart } from '../context/CartContext.jsx';
 
 // Paleta visual para los filamentos de Lumina Lab
 const COLOR_HEX_MAP = {
@@ -19,9 +20,15 @@ export function formatCOP(amount) {
 }
 
 export default function ProductCard({ product, onSelectDetail }) {
+  const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState(
     product.colors && product.colors.length > 0 ? product.colors[0] : null
   );
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    addToCart(product, selectedColor, 1);
+  };
 
   return (
     <article className="product-card" data-slug={product.slug}>
@@ -76,13 +83,22 @@ export default function ProductCard({ product, onSelectDetail }) {
             <span className="product-price-label">Precio</span>
             <span className="product-price-val">{formatCOP(product.price)} COP</span>
           </div>
-          <button
-            type="button"
-            className="btn-details"
-            onClick={() => onSelectDetail({ ...product, selectedColor })}
-          >
-            Ver detalles
-          </button>
+          <div className="product-card-actions">
+            <button
+              type="button"
+              className="btn-add-to-cart"
+              onClick={handleAddToCart}
+            >
+              + Carrito
+            </button>
+            <button
+              type="button"
+              className="btn-details"
+              onClick={() => onSelectDetail({ ...product, selectedColor })}
+            >
+              Detalles
+            </button>
+          </div>
         </div>
       </div>
     </article>

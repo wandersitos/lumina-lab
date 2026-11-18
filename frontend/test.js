@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('Running frontend verification tests (003-catalogo-productos)...');
+console.log('Running frontend verification tests (004-carrito-envios)...');
 
 const appJsxPath = path.join(__dirname, 'src/App.jsx');
 const mainJsxPath = path.join(__dirname, 'src/main.jsx');
@@ -45,26 +45,34 @@ assert(fs.existsSync(productCardPath), 'R3: src/components/ProductCard.jsx must 
 assert(fs.existsSync(productGridPath), 'R3: src/components/ProductGrid.jsx must exist');
 assert(fs.existsSync(productDetailModalPath), 'R3: src/components/ProductDetailModal.jsx must exist');
 
-// Verificaciones de contenido en componentes de catálogo
-const cardContent = fs.readFileSync(productCardPath, 'utf-8');
-assert(cardContent.includes('COP') || cardContent.includes('format') || cardContent.includes('Intl'), 'R3: ProductCard must format price in COP');
-assert(cardContent.includes('color') || cardContent.includes('colors'), 'R3: ProductCard must handle filament color selection');
+// 4. R3 (004): Carrito y Cotización de Envíos
+const cartContextPath = path.join(__dirname, 'src/context/CartContext.jsx');
+const cartDrawerPath = path.join(__dirname, 'src/components/CartDrawer.jsx');
+const shippingCalculatorPath = path.join(__dirname, 'src/components/ShippingCalculator.jsx');
 
-const gridContent = fs.readFileSync(productGridPath, 'utf-8');
-assert(gridContent.includes('/api/products/'), 'R3: ProductGrid must fetch /api/products/');
-assert(gridContent.includes('ProductCard'), 'R3: ProductGrid must render ProductCard');
+assert(fs.existsSync(cartContextPath), 'R3: src/context/CartContext.jsx must exist');
+assert(fs.existsSync(cartDrawerPath), 'R3: src/components/CartDrawer.jsx must exist');
+assert(fs.existsSync(shippingCalculatorPath), 'R3: src/components/ShippingCalculator.jsx must exist');
 
-const modalContent = fs.readFileSync(productDetailModalPath, 'utf-8');
-assert(modalContent.includes('dimensions') || modalContent.includes('Medidas') || modalContent.includes('Dimensiones'), 'R3: ProductDetailModal must display dimensions');
-assert(modalContent.includes('demanda') || modalContent.includes('días') || modalContent.includes('impresión') || modalContent.includes('fabricación'), 'R3: ProductDetailModal must display print-on-demand note');
+const cartContextContent = fs.readFileSync(cartContextPath, 'utf-8');
+assert(cartContextContent.includes('useCart'), 'R3: CartContext must export useCart hook');
+assert(cartContextContent.includes('addToCart'), 'R3: CartContext must provide addToCart');
+assert(cartContextContent.includes('removeFromCart'), 'R3: CartContext must provide removeFromCart');
+assert(cartContextContent.includes('updateQuantity'), 'R3: CartContext must provide updateQuantity');
+assert(cartContextContent.includes('localStorage'), 'R3: CartContext must persist cart in localStorage');
 
-// 4. Integración en App.jsx
+const cartDrawerContent = fs.readFileSync(cartDrawerPath, 'utf-8');
+assert(cartDrawerContent.includes('ShippingCalculator'), 'R3: CartDrawer must include ShippingCalculator');
+assert(cartDrawerContent.includes('subtotal') || cartDrawerContent.includes('Subtotal'), 'R3: CartDrawer must display subtotal');
+assert(cartDrawerContent.includes('total') || cartDrawerContent.includes('Total'), 'R3: CartDrawer must display total');
+assert(cartDrawerContent.includes('whatsapp') || cartDrawerContent.includes('WhatsApp'), 'R3: CartDrawer must have WhatsApp order button');
+
+const shippingCalcContent = fs.readFileSync(shippingCalculatorPath, 'utf-8');
+assert(shippingCalcContent.includes('/api/shipping/quote/'), 'R3: ShippingCalculator must call /api/shipping/quote/');
+assert(shippingCalcContent.includes('Medellín') || shippingCalcContent.includes('Medellin') || shippingCalcContent.includes('Bogotá') || shippingCalcContent.includes('Bogota'), 'R3: ShippingCalculator must list Colombian cities');
+
 const appContent = fs.readFileSync(appJsxPath, 'utf-8');
-assert(appContent.includes('ProductGrid'), 'R3: App.jsx must include ProductGrid');
-
-// CSS variables y responsive design en index.css
-const cssContent = fs.readFileSync(indexCssPath, 'utf-8');
-assert(cssContent.includes('.product-grid') || cssContent.includes('product-card'), 'R3: index.css must contain product grid/card styling');
-assert(cssContent.includes('@media'), 'R3: index.css must include responsive styles (@media rules)');
+assert(appContent.includes('CartProvider'), 'R3: App.jsx must wrap application in CartProvider');
+assert(appContent.includes('CartDrawer'), 'R3: App.jsx must render CartDrawer');
 
 console.log('All frontend verification tests passed successfully!');

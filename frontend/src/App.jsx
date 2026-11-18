@@ -1,8 +1,55 @@
 import { useEffect, useState } from 'react';
 import { siteConfig } from './config/site.js';
 import ProductGrid from './components/ProductGrid.jsx';
+import CartDrawer from './components/CartDrawer.jsx';
+import { CartProvider, useCart } from './context/CartContext.jsx';
 
-function App() {
+function NavbarContent() {
+  const { totalItems, setIsCartOpen } = useCart();
+
+  return (
+    <header className="navbar">
+      <a href="/" className="brand-link">
+        <div className="brand-icon">L</div>
+        <span className="brand-name">{siteConfig.name}</span>
+      </a>
+      <div className="navbar-right">
+        <nav className="nav-social-links" aria-label="Redes sociales oficiales">
+          <a
+            href={siteConfig.social.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-social btn-instagram"
+            aria-label="Instagram de Lumina Lab"
+          >
+            Instagram {siteConfig.social.instagram.handle}
+          </a>
+          <a
+            href={siteConfig.social.whatsapp.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-social btn-whatsapp"
+            aria-label="WhatsApp de Lumina Lab"
+          >
+            WhatsApp
+          </a>
+        </nav>
+        <button
+          type="button"
+          className="btn-cart-nav"
+          onClick={() => setIsCartOpen(true)}
+          aria-label="Abrir carrito de compras"
+        >
+          <span className="cart-nav-icon">🛒</span>
+          <span className="cart-nav-text">Carrito</span>
+          {totalItems > 0 && <span className="cart-nav-badge">{totalItems}</span>}
+        </button>
+      </div>
+    </header>
+  );
+}
+
+function MainApp() {
   const [healthStatus, setHealthStatus] = useState('Conectando...');
   const [errorDetails, setErrorDetails] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -31,33 +78,8 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Header / Navbar con identidad de marca y accesos directos */}
-      <header className="navbar">
-        <a href="/" className="brand-link">
-          <div className="brand-icon">L</div>
-          <span className="brand-name">{siteConfig.name}</span>
-        </a>
-        <nav className="nav-social-links" aria-label="Redes sociales oficiales">
-          <a
-            href={siteConfig.social.instagram.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-social btn-instagram"
-            aria-label="Instagram de Lumina Lab"
-          >
-            Instagram {siteConfig.social.instagram.handle}
-          </a>
-          <a
-            href={siteConfig.social.whatsapp.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-social btn-whatsapp"
-            aria-label="WhatsApp de Lumina Lab"
-          >
-            WhatsApp
-          </a>
-        </nav>
-      </header>
+      {/* Header / Navbar con identidad de marca y botón de carrito */}
+      <NavbarContent />
 
       {/* Hero Section: Escaparate y propuesta de valor de Lumina Lab */}
       <main>
@@ -111,7 +133,18 @@ function App() {
           </div>
         </section>
       </main>
+
+      {/* Panel lateral deslizable del carrito (REC-2 / Unidad 004) */}
+      <CartDrawer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <CartProvider>
+      <MainApp />
+    </CartProvider>
   );
 }
 

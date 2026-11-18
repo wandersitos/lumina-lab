@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { formatCOP } from './ProductCard.jsx';
 import { siteConfig } from '../config/site.js';
+import { useCart } from '../context/CartContext.jsx';
 
 export default function ProductDetailModal({ product, onClose }) {
+  const { addToCart } = useCart();
+
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
@@ -20,6 +23,11 @@ export default function ProductDetailModal({ product, onClose }) {
     `¡Hola! Estoy interesado en ordenar la ${product.name}${colorText} (${product.dimensions}) por ${formatCOP(product.price)} COP de Lumina Lab.`
   );
   const whatsappUrl = `https://wa.me/${siteConfig.social.whatsapp.number.replace(/[^0-9]/g, '')}?text=${message}`;
+
+  const handleAddToCart = () => {
+    addToCart(product, product.selectedColor, 1);
+    onClose();
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-product-title">
@@ -71,20 +79,27 @@ export default function ProductDetailModal({ product, onClose }) {
             <p className="modal-description">{product.description}</p>
 
             <div className="modal-actions">
+              <button
+                type="button"
+                className="btn-modal-add-cart"
+                onClick={handleAddToCart}
+              >
+                🛒 Añadir al carrito
+              </button>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-modal-order"
               >
-                Ordenar por WhatsApp
+                Pedir directo WhatsApp
               </a>
               <button
                 type="button"
                 className="btn-modal-back"
                 onClick={onClose}
               >
-                Volver al catálogo
+                Cerrar
               </button>
             </div>
           </div>
