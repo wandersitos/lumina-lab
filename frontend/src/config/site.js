@@ -17,8 +17,8 @@ export const siteConfig = {
   },
   social: {
     instagram: {
-      handle: '@luminalab.co',
-      url: 'https://instagram.com/luminalab.co',
+      handle: '@luminalab_co',
+      url: 'https://www.instagram.com/luminalab_co/',
     },
     whatsapp: {
       number: '+573001234567',

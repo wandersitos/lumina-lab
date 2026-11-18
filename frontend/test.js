@@ -18,6 +18,8 @@ const indexCssPath = path.join(__dirname, 'src/index.css');
 assert(fs.existsSync(appJsxPath), 'src/App.jsx must exist');
 assert(fs.existsSync(mainJsxPath), 'src/main.jsx must exist');
 assert(fs.existsSync(indexPath), 'index.html must exist');
+const indexHtml = fs.readFileSync(indexPath, 'utf-8');
+assert(indexHtml.includes('<title>Lumina Lab</title>'), 'index.html must have title Lumina Lab');
 
 // 2. R1: Tokens de diseño e identidad en site.js
 assert(fs.existsSync(siteConfigPath), 'R1: src/config/site.js must exist');
@@ -31,8 +33,8 @@ assert.strictEqual(siteConfig.colors?.background?.toUpperCase(), '#FAF9F6', 'R1:
 assert.strictEqual(siteConfig.colors?.text?.toUpperCase(), '#2B2D42', 'R1: text color token must be #2B2D42');
 
 // R2 (002): Canales de contacto en site.js
-assert.strictEqual(siteConfig.social?.instagram?.handle, '@luminalab.co', 'R2: instagram handle must be @luminalab.co');
-assert.strictEqual(siteConfig.social?.instagram?.url, 'https://instagram.com/luminalab.co', 'R2: instagram url must match');
+assert.strictEqual(siteConfig.social?.instagram?.handle, '@luminalab_co', 'R2: instagram handle must be @luminalab_co');
+assert.strictEqual(siteConfig.social?.instagram?.url, 'https://www.instagram.com/luminalab_co/', 'R2: instagram url must match');
 assert.strictEqual(siteConfig.social?.whatsapp?.number, '+573001234567', 'R2: whatsapp number must be +573001234567');
 assert(siteConfig.social?.whatsapp?.url?.includes('573001234567'), 'R2: whatsapp url must include number');
 
