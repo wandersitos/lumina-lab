@@ -15,6 +15,7 @@ export function CartProvider({ children }) {
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [shippingQuote, setShippingQuote] = useState(null);
 
   useEffect(() => {
@@ -96,6 +97,8 @@ export function CartProvider({ children }) {
         total,
         isCartOpen,
         setIsCartOpen,
+        isCheckoutOpen,
+        setIsCheckoutOpen,
         addToCart,
         removeFromCart,
         updateQuantity,

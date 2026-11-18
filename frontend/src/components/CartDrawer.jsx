@@ -9,6 +9,7 @@ export default function CartDrawer() {
     items,
     isCartOpen,
     setIsCartOpen,
+    setIsCheckoutOpen,
     removeFromCart,
     updateQuantity,
     subtotal,
@@ -168,13 +169,23 @@ export default function CartDrawer() {
             </div>
 
             <div className="cart-actions-footer">
+              <button
+                type="button"
+                className="btn-proceed-checkout"
+                onClick={() => {
+                  setIsCartOpen(false);
+                  setIsCheckoutOpen(true);
+                }}
+              >
+                Proceder al Checkout
+              </button>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-checkout-whatsapp"
               >
-                <span>Pedir por WhatsApp</span>
+                <span>Pedir directo por WhatsApp</span>
                 <span className="btn-checkout-price">{formatCOP(total)} COP</span>
               </a>
               <button

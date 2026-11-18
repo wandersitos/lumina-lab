@@ -25,6 +25,10 @@ export const siteConfig = {
       url: 'https://wa.me/573001234567?text=Hola%20Lumina%20Lab',
     },
   },
+  payments: {
+    gatewayEnabled: false,
+    defaultMethod: 'whatsapp',
+  },
 };
 
 export default siteConfig;

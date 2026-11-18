@@ -77,4 +77,23 @@ const appContent = fs.readFileSync(appJsxPath, 'utf-8');
 assert(appContent.includes('CartProvider'), 'R3: App.jsx must wrap application in CartProvider');
 assert(appContent.includes('CartDrawer'), 'R3: App.jsx must render CartDrawer');
 
+// 5. R3 (005): Checkout, pasarela desacoplada y pedidos por WhatsApp
+assert(siteConfig.payments, 'R3 (005): siteConfig must have payments section');
+assert.strictEqual(siteConfig.payments.gatewayEnabled, false, 'R3 (005): gatewayEnabled must be false by default');
+assert.strictEqual(siteConfig.payments.defaultMethod, 'whatsapp', 'R3 (005): defaultMethod must be whatsapp');
+
+assert(cartContextContent.includes('clearCart'), 'R3 (005): CartContext must expose clearCart()');
+
+const checkoutModalPath = path.join(__dirname, 'src/components/CheckoutModal.jsx');
+assert(fs.existsSync(checkoutModalPath), 'R3 (005): CheckoutModal.jsx must exist');
+const checkoutModalContent = fs.readFileSync(checkoutModalPath, 'utf-8');
+assert(checkoutModalContent.includes('/api/checkout/'), 'R3 (005): CheckoutModal must submit to /api/checkout/');
+assert(checkoutModalContent.includes('clearCart'), 'R3 (005): CheckoutModal must call clearCart on confirmed order');
+assert(checkoutModalContent.includes('wa.me') || checkoutModalContent.includes('WhatsApp'), 'R3 (005): CheckoutModal must include WhatsApp order option');
+assert(checkoutModalContent.includes('gatewayEnabled'), 'R3 (005): CheckoutModal must inspect gatewayEnabled setting');
+
+assert(cartDrawerContent.includes('CheckoutModal') || cartDrawerContent.includes('checkout') || cartDrawerContent.includes('Checkout'), 'R3 (005): CartDrawer must trigger checkout process');
+
+assert(appContent.includes('CheckoutModal'), 'R3 (005): App.jsx must mount CheckoutModal');
+
 console.log('All frontend verification tests passed successfully!');

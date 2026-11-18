@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'products',
     'shipping',
+    'orders.apps.OrdersConfig',
     'tests',
 ]
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { siteConfig } from './config/site.js';
 import ProductGrid from './components/ProductGrid.jsx';
 import CartDrawer from './components/CartDrawer.jsx';
+import CheckoutModal from './components/CheckoutModal.jsx';
 import { CartProvider, useCart } from './context/CartContext.jsx';
 
 function NavbarContent() {
@@ -136,6 +137,9 @@ function MainApp() {
 
       {/* Panel lateral deslizable del carrito (REC-2 / Unidad 004) */}
       <CartDrawer />
+
+      {/* Modal de checkout, pasarela y pedidos por WhatsApp (Unidad 005) */}
+      <CheckoutModal />
     </div>
   );
 }
