@@ -1,0 +1,49 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='products' %}">Products</a>
+&rsaquo; <a href="{% url 'admin:products_product_changelist' %}">Productos</a>
+&rsaquo; Subir catálogo masivo
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main" style="max-width: 800px; margin: 20px 0;">
+    <h1>Subir catálogo masivo</h1>
+    <p>Seleccione un archivo en formato <strong>.json</strong>, <strong>.csv</strong> o <strong>.xlsx</strong> (Excel) para crear o actualizar productos del catálogo.</p>
+    
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 20px; margin-top: 15px;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                <label for="id_catalog_file" style="display: block; font-weight: bold; margin-bottom: 8px;">
+                    Archivo de catálogo (.json, .csv, .xlsx):
+                </label>
+                <input type="file" name="catalog_file" id="id_catalog_file" required accept=".json,.csv,.xlsx,.xls" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; width: 100%;">
+            </div>
+            
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <input type="submit" value="Importar productos" class="default" style="background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                <a href="{% url 'admin:products_product_changelist' %}" class="button" style="padding: 10px 20px; text-decoration: none; border: 1px solid #cbd5e1; border-radius: 4px; display: inline-block;">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top: 30px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 20px;">
+        <h3 style="margin-top: 0;">Estructura esperada de campos:</h3>
+        <ul>
+            <li><strong>name</strong>: Nombre del producto (obligatorio).</li>
+            <li><strong>slug</strong>: Identificador único URL (opcional, generado automáticamente si se omite).</li>
+            <li><strong>price</strong>: Precio en COP (obligatorio, número entero).</li>
+            <li><strong>description</strong>: Descripción detallada (opcional).</li>
+            <li><strong>dimensions</strong>: Dimensiones ej. "20x15 cm" (opcional).</li>
+            <li><strong>colors</strong>: Lista o texto separado por comas (opcional).</li>
+            <li><strong>images</strong>: URLs o rutas de imágenes (opcional).</li>
+            <li><strong>is_active</strong>: true/false (opcional, por defecto true).</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
