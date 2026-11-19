@@ -3,17 +3,26 @@ from django.db import models
 from django.utils import timezone
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('PENDIENTE', 'Pendiente'),
+        ('CONFIRMADO', 'Confirmado'),
+        ('EN_PREPARACION', 'En Preparación'),
+        ('ENVIADO', 'Enviado'),
+        ('CANCELADO', 'Cancelado'),
+    ]
+
     order_number = models.CharField(max_length=64, unique=True, db_index=True)
     customer_name = models.CharField(max_length=200)
     customer_email = models.EmailField()
     customer_phone = models.CharField(max_length=50)
     shipping_address = models.CharField(max_length=255)
     shipping_city = models.CharField(max_length=100)
-    items_summary = models.JSONField(default=list)
+    items_summary = models.JSONField(default=list, blank=True)
     subtotal = models.IntegerField(default=0)
     shipping_cost = models.IntegerField(default=0)
     total_amount = models.IntegerField(default=0)
-    status = models.CharField(max_length=50, default='PENDIENTE')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='PENDIENTE')
+    tracking_number = models.CharField(max_length=100, blank=True, default='')
     payment_url = models.URLField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
