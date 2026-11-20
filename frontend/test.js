@@ -96,4 +96,44 @@ assert(cartDrawerContent.includes('CheckoutModal') || cartDrawerContent.includes
 
 assert(appContent.includes('CheckoutModal'), 'R3 (005): App.jsx must mount CheckoutModal');
 
+// =============================================================================
+// 6. R1-R3 (008-rediseno-ui): Minimalismo Cálido Nórdico & Elementos de Confianza
+// =============================================================================
+console.log('Verifying 008-rediseno-ui requirements (Warm Nordic Minimalism)...');
+
+const indexCssContent = fs.readFileSync(indexCssPath, 'utf-8');
+const productCardContent = fs.readFileSync(productCardPath, 'utf-8');
+const productDetailContent = fs.readFileSync(productDetailModalPath, 'utf-8');
+
+// R1: Navbar flotante con blur translúcido y paleta en index.css
+assert(indexCssContent.includes('backdrop-filter') && indexCssContent.includes('blur'), 'R1 (008): index.css must contain backdrop-filter blur for floating glassmorphism navbar/drawers');
+assert(indexCssContent.includes('--color-primary: #E07A5F') || indexCssContent.includes('#E07A5F'), 'R1 (008): index.css must define warm terracotta primary color');
+assert(indexCssContent.includes('16px'), 'R1 (008): index.css must include 16px soft border-radius scale');
+
+// R1: Hero editorial con badge artesanal y píldoras de valor en App.jsx
+assert(appContent.includes('Taller de Diseño 3D en Colombia'), 'R1 (008): App.jsx must render hero badge "Taller de Diseño 3D en Colombia"');
+assert(appContent.includes('Envío asegurado'), 'R1 (008): App.jsx must render "Envío asegurado" value pill');
+assert(appContent.includes('Filamento ecológico PLA'), 'R1 (008): App.jsx must render "Filamento ecológico PLA" value pill');
+assert(appContent.includes('Iluminación LED incluida'), 'R1 (008): App.jsx must render "Iluminación LED incluida" value pill');
+
+// R1: Sección de confianza y proceso de fabricación en App.jsx
+assert(appContent.includes('Del diseño 3D a tu espacio'), 'R1 (008): App.jsx must render process section "Del diseño 3D a tu espacio"');
+assert(appContent.includes('Modelado Digital'), 'R1 (008): App.jsx process section must describe step 1 "Modelado Digital"');
+assert(appContent.includes('Impresión 3D'), 'R1 (008): App.jsx process section must describe step 2 "Impresión 3D"');
+assert(appContent.includes('Ensamblado y Prueba de Luz'), 'R1 (008): App.jsx process section must describe step 3 "Ensamblado y Prueba de Luz"');
+assert(appContent.includes('Entrega Asegurada a tu Puerta') || appContent.includes('Entrega Asegurada'), 'R1 (008): App.jsx process section must describe step 4 "Entrega Asegurada"');
+
+// R1: Footer con información de marca y redes oficiales
+assert(appContent.includes('footer') || appContent.includes('Footer') || appContent.includes('site-footer'), 'R1 (008): App.jsx must include structured site footer');
+assert(appContent.includes('@luminalab_co'), 'R1 (008): App.jsx footer must include official instagram handle @luminalab_co');
+
+// R2: Badges y muestras interactivas en tarjetas de producto
+assert(productCardContent.includes('color-swatch') || productCardContent.includes('color-swatches'), 'R2 (008): ProductCard.jsx must have color swatch classes');
+assert(productCardContent.includes('Bajo demanda') || productCardContent.includes('Bajo Demanda'), 'R2 (008): ProductCard.jsx must display on-demand badge');
+assert(productCardContent.includes('formatCOP') || productCardContent.includes('COP'), 'R2 (008): ProductCard.jsx must format prices in COP');
+
+// R3: Carrito y Checkout con embudo de WhatsApp
+assert(cartDrawerContent.includes('whatsapp') || cartDrawerContent.includes('WhatsApp'), 'R3 (008): CartDrawer must have WhatsApp button');
+assert(checkoutModalContent.includes('WhatsApp') || checkoutModalContent.includes('wa.me'), 'R3 (008): CheckoutModal must provide WhatsApp order action');
+
 console.log('All frontend verification tests passed successfully!');

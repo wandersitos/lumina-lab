@@ -39,7 +39,10 @@ export default function ProductCard({ product, onSelectDetail }) {
           className="product-card-image"
           loading="lazy"
         />
-        <span className="product-badge-ondemand">Bajo demanda</span>
+        <div className="product-card-badges">
+          <span className="product-badge-ondemand">Bajo demanda</span>
+          <span className="product-badge-custom">Personalizable</span>
+        </div>
       </div>
 
       <div className="product-card-content">
@@ -55,7 +58,7 @@ export default function ProductCard({ product, onSelectDetail }) {
             <span className="color-label">
               Color: <strong>{selectedColor || 'No seleccionado'}</strong>
             </span>
-            <div className="color-options" role="radiogroup" aria-label="Colores de filamento">
+            <div className="color-options color-swatches" role="radiogroup" aria-label="Colores de filamento">
               {product.colors.map((color) => {
                 const hex = COLOR_HEX_MAP[color] || '#CCCCCC';
                 const isSelected = selectedColor === color;
@@ -66,7 +69,7 @@ export default function ProductCard({ product, onSelectDetail }) {
                     role="radio"
                     aria-checked={isSelected}
                     title={color}
-                    className={`color-swatch-btn ${isSelected ? 'active' : ''}`}
+                    className={`color-swatch-btn color-swatch ${isSelected ? 'active' : ''}`}
                     onClick={() => setSelectedColor(color)}
                     style={{ backgroundColor: hex }}
                   >

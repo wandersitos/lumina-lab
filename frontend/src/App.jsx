@@ -85,7 +85,7 @@ function MainApp() {
       {/* Hero Section: Escaparate y propuesta de valor de Lumina Lab */}
       <main>
         <section className="hero">
-          <span className="hero-badge">Tienda Oficial Lumina Lab</span>
+          <span className="hero-badge">Taller de Diseño 3D en Colombia</span>
           <h1 className="hero-title">
             Diseño e iluminación <span>impresa en 3D</span>
           </h1>
@@ -105,6 +105,73 @@ function MainApp() {
             >
               Pedir por WhatsApp
             </a>
+          </div>
+
+          {/* Píldoras de valor y compromiso de calidad */}
+          <div className="hero-value-pills" aria-label="Beneficios y garantía">
+            <div className="value-pill">
+              <span className="value-pill-icon">📦</span>
+              <span className="value-pill-text">Envío asegurado</span>
+            </div>
+            <div className="value-pill">
+              <span className="value-pill-icon">🌿</span>
+              <span className="value-pill-text">Filamento ecológico PLA</span>
+            </div>
+            <div className="value-pill">
+              <span className="value-pill-icon">💡</span>
+              <span className="value-pill-text">Iluminación LED incluida</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Sección de confianza y proceso artesanal 3D */}
+        <section className="process-section" id="proceso" aria-labelledby="process-title">
+          <div className="process-container">
+            <div className="section-header">
+              <span className="section-badge">Manufactura Consciente</span>
+              <h2 id="process-title" className="section-title">Del diseño 3D a tu espacio</h2>
+              <p className="section-subtitle">
+                Combinamos algoritmos de diseño geométrico con manufactura aditiva y acabados artesanales para crear piezas luminosas únicas.
+              </p>
+            </div>
+
+            <div className="process-grid">
+              <div className="process-card">
+                <div className="process-step-number">01</div>
+                <div className="process-card-icon">🎨</div>
+                <h3 className="process-card-title">Modelado Digital</h3>
+                <p className="process-card-desc">
+                  Geometría paramétrica calculada para dispersar la luz en ángulos suaves de 360°, optimizando la estética y la eficiencia luminosa.
+                </p>
+              </div>
+
+              <div className="process-card">
+                <div className="process-step-number">02</div>
+                <div className="process-card-icon">🖨️</div>
+                <h3 className="process-card-title">Impresión 3D Capa por Capa</h3>
+                <p className="process-card-desc">
+                  Más de 16 horas de impresión aditiva continua de alta resolución utilizando filamento PLA 100% biodegradable de origen botánico.
+                </p>
+              </div>
+
+              <div className="process-card">
+                <div className="process-step-number">03</div>
+                <div className="process-card-icon">⚡</div>
+                <h3 className="process-card-title">Ensamblado y Prueba de Luz</h3>
+                <p className="process-card-desc">
+                  Montaje minucioso del socket y cableado, pulido manual y prueba de emisión térmica con bombillas LED cálidas de bajo consumo.
+                </p>
+              </div>
+
+              <div className="process-card">
+                <div className="process-step-number">04</div>
+                <div className="process-card-icon">🚀</div>
+                <h3 className="process-card-title">Entrega Asegurada a tu Puerta</h3>
+                <p className="process-card-desc">
+                  Empaque acolchado con materiales reciclables y envíos cotizados con Envíoclick a cualquier rincón de Colombia con garantía de reposición.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -134,6 +201,69 @@ function MainApp() {
           </div>
         </section>
       </main>
+
+      {/* Footer editorial y de confianza */}
+      <footer className="site-footer" role="contentinfo">
+        <div className="footer-container">
+          <div className="footer-brand-col">
+            <div className="footer-brand-header">
+              <div className="brand-icon">L</div>
+              <span className="brand-name">{siteConfig.name}</span>
+            </div>
+            <p className="footer-brand-desc">
+              Taller de diseño y manufactura aditiva 3D en Colombia. Creando iluminación contemporánea, cálida y consciente para el hogar.
+            </p>
+            <div className="footer-social-links">
+              <a
+                href={siteConfig.social.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
+                Instagram {siteConfig.social.instagram.handle || '@luminalab_co'} (@luminalab_co)
+              </a>
+              <a
+                href={siteConfig.social.whatsapp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
+                WhatsApp de Atención
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-links-col">
+            <h4 className="footer-col-title">Compromiso Lumina</h4>
+            <ul className="footer-links-list">
+              <li>🌱 Filamento PLA ecológico biodegradable</li>
+              <li>💡 Bombillas LED de bajo consumo incluidas</li>
+              <li>📦 Envíos asegurados a toda Colombia</li>
+              <li>⚡ Fabricación artesanal bajo demanda</li>
+            </ul>
+          </div>
+
+          <div className="footer-links-col">
+            <h4 className="footer-col-title">Atención & Pedidos</h4>
+            <p className="footer-help-text">
+              ¿Deseas una personalización o color especial para tu espacio? Escríbenos directamente y la creamos para ti.
+            </p>
+            <a
+              href={siteConfig.social.whatsapp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-footer-whatsapp"
+            >
+              Contactar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Lumina Lab Colombia. Todos los derechos reservados.</p>
+          <p className="footer-designer-tag">Estudio de Diseño Nórdico y Fabricación 3D</p>
+        </div>
+      </footer>
 
       {/* Panel lateral deslizable del carrito (REC-2 / Unidad 004) */}
       <CartDrawer />

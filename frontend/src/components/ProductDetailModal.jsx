@@ -61,6 +61,10 @@ export default function ProductDetailModal({ product, onClose }) {
                 <span className="spec-value">{product.dimensions || '24 x 16 cm'}</span>
               </div>
               <div className="spec-item">
+                <span className="spec-label">Tipo de iluminación:</span>
+                <span className="spec-value">LED Cálida 2700K difusa (socket universal E27 incluida)</span>
+              </div>
+              <div className="spec-item">
                 <span className="spec-label">Material de impresión:</span>
                 <span className="spec-value">PLA biodegradable de origen vegetal de alta resistencia</span>
               </div>

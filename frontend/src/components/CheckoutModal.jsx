@@ -224,7 +224,7 @@ export default function CheckoutModal() {
                   rel="noopener noreferrer"
                   className="btn-whatsapp-confirm"
                 >
-                  <span>Enviar Pedido por WhatsApp</span>
+                  <span>Completar pedido por WhatsApp ✨</span>
                   <span className="btn-icon">💬</span>
                 </a>
               </div>
