@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Lámpara Eclipse Lunar 3D",
+    "slug": "lampara-eclipse-lunar-3d",
+    "price": 145000,
+    "description": "Lámpara decorativa con relieve de cráteres lunares y base magnética.",
+    "dimensions": "18cm x 18cm x 20cm",
+    "colors": ["Blanco Frío", "Ámbar Cálido"],
+    "images": ["/static/images/eclipse-1.jpg"],
+    "is_active": true
+  },
+  {
+    "name": "Lámpara Saturno con Anillos",
+    "slug": "lampara-saturno-con-anillos",
+    "price": 160000,
+    "description": "Modelo a escala de Saturno con anillos translúcidos iluminados por LED.",
+    "dimensions": "22cm x 22cm x 15cm",
+    "colors": ["Dorado", "Blanco Cálido"],
+    "images": ["/static/images/saturno.jpg"],
+    "is_active": true
+  }
+]
