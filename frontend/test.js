@@ -136,4 +136,70 @@ assert(productCardContent.includes('formatCOP') || productCardContent.includes('
 assert(cartDrawerContent.includes('whatsapp') || cartDrawerContent.includes('WhatsApp'), 'R3 (008): CartDrawer must have WhatsApp button');
 assert(checkoutModalContent.includes('WhatsApp') || checkoutModalContent.includes('wa.me'), 'R3 (008): CheckoutModal must provide WhatsApp order action');
 
+// =============================================================================
+// 7. R1-R4 (009-catalogo-astro-lumina): Catálogo Astro Lighting y Datos Lumina Lab
+// =============================================================================
+console.log('Verifying 009-catalogo-astro-lumina requirements (Astro Lighting & Lumina Catalog)...');
+
+const luminaProductsPath = path.join(__dirname, 'src/data/luminaProducts.js');
+const productFiltersPath = path.join(__dirname, 'src/components/ProductFilters.jsx');
+const homePagePath = path.join(__dirname, 'src/pages/HomePage.jsx');
+const productsPagePath = path.join(__dirname, 'src/pages/ProductsPage.jsx');
+
+// R1: Navegación limpia y archivos de páginas
+assert(fs.existsSync(homePagePath), 'R1 (009): src/pages/HomePage.jsx must exist');
+assert(fs.existsSync(productsPagePath), 'R1 (009): src/pages/ProductsPage.jsx must exist');
+assert(appContent.includes("onNavigate('/')") || appContent.includes("onNavigate('/products')"), 'R1 (009): App.jsx must support navigation between / and /products');
+assert(appContent.includes('Inicio'), 'R1 (009): App.jsx navbar must render "Inicio" option');
+assert(appContent.includes('Productos'), 'R1 (009): App.jsx navbar must render "Productos" option');
+assert(!appContent.includes('href="#bespoke"'), 'R1 (009): App.jsx navbar must not include obsolete bespoke link');
+
+// R2: Componente ProductFilters y vista ProductsPage estilo Astro Lighting
+assert(fs.existsSync(productFiltersPath), 'R2 (009): src/components/ProductFilters.jsx must exist');
+const productFiltersContent = fs.readFileSync(productFiltersPath, 'utf-8');
+assert(productFiltersContent.includes('Colección') || productFiltersContent.includes('coleccion'), 'R2 (009): ProductFilters must filter by collection');
+assert(productFiltersContent.includes('Categoría') || productFiltersContent.includes('categoria'), 'R2 (009): ProductFilters must filter by category');
+assert(productFiltersContent.includes('Disponibilidad') || productFiltersContent.includes('En Stock'), 'R2 (009): ProductFilters must filter by availability');
+assert(productFiltersContent.includes('Limpiar filtros') || productFiltersContent.includes('btn-clear-filters'), 'R2 (009): ProductFilters must provide clear filters button');
+
+const productsPageContent = fs.readFileSync(productsPagePath, 'utf-8');
+assert(productsPageContent.includes('ProductFilters'), 'R2 (009): ProductsPage must render ProductFilters');
+assert(productsPageContent.includes('products-count') || productsPageContent.includes('Mostrando'), 'R2 (009): ProductsPage must show dynamic products count');
+assert(productsPageContent.includes('sort') || productsPageContent.includes('Ordenar por'), 'R2 (009): ProductsPage must provide sorting');
+
+// R3: Catálogo oficial Lumina Lab importado desde lumina-lab
+assert(fs.existsSync(luminaProductsPath), 'R3 (009): src/data/luminaProducts.js must exist');
+const { products: luminaProducts, collections: luminaColls } = await import('./src/data/luminaProducts.js');
+assert(Array.isArray(luminaColls) && luminaColls.length >= 2, 'R3 (009): collections must contain Leora and Kumo');
+assert(luminaColls.some(c => c.id === 'leora'), 'R3 (009): collections must include leora');
+assert(luminaColls.some(c => c.id === 'kumo'), 'R3 (009): collections must include kumo');
+
+assert(Array.isArray(luminaProducts) && luminaProducts.length >= 35, 'R3 (009): catalog must contain at least 35 official products');
+
+// Validar lámparas emblemáticas de Leora
+const o1Gravity = luminaProducts.find(p => p.slug === 'o1-gravity-sculpted-lamp');
+assert(o1Gravity, 'R3 (009): O1 Gravity Sculpted Lamp must exist in catalog');
+assert.strictEqual(o1Gravity.price, 455000, 'R3 (009): O1 Gravity price must be 455.000 COP');
+assert.strictEqual(o1Gravity.category, 'Sculpted', 'R3 (009): O1 Gravity category must be Sculpted');
+assert.strictEqual(o1Gravity.collection, 'leora', 'R3 (009): O1 Gravity collection must be leora');
+
+const o11Ocean = luminaProducts.find(p => p.slug === 'o11-s-ocean-petals-sculpted-mini-lamp');
+assert(o11Ocean, 'R3 (009): O11-S Ocean Petals Mini Lamp must exist');
+assert.strictEqual(o11Ocean.price, 129000, 'R3 (009): O11-S price must be 129.000 COP');
+assert.strictEqual(o11Ocean.category, 'Mini', 'R3 (009): O11-S category must be Mini');
+
+const o12Fire = luminaProducts.find(p => p.slug === 'o12-s-fire-sculpted-mini-lamp');
+assert(o12Fire, 'R3 (009): O12-S Fire Mini Lamp must exist');
+assert.strictEqual(o12Fire.price, 125000, 'R3 (009): O12-S price must be 125.000 COP');
+
+// Validar productos Kumo
+const baseArch = luminaProducts.find(p => p.slug === 'base-arch');
+assert(baseArch, 'R3 (009): Base Arch must exist in Kumo series');
+assert.strictEqual(baseArch.price, 180000, 'R3 (009): Base Arch price must be 180.000 COP');
+
+// R4: Integración con Bolsa y WhatsApp
+assert(productCardContent.includes('addToCart'), 'R4 (009): ProductCard must connect to addToCart');
+assert(productCardContent.includes('WhatsApp') || productCardContent.includes('wa.me'), 'R4 (009): ProductCard must provide direct WhatsApp purchase option');
+assert(productsPageContent.includes('ProductCard'), 'R4 (009): ProductsPage must render ProductCard in catalog grid');
+
 console.log('All frontend verification tests passed successfully!');
