@@ -42,6 +42,7 @@ const FALLBACK_PRODUCTS = [
 export default function ProductGrid() {
   const [products, setProducts] = useState(FALLBACK_PRODUCTS);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('all');
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -66,27 +67,74 @@ export default function ProductGrid() {
   }, [apiUrl]);
 
   return (
-    <section className="catalog-section" id="catalogo">
-      <div className="catalog-container">
-        <div className="section-header">
-          <span className="section-badge">Colección Luminarias</span>
-          <h2 className="section-title">Nuestras Lámparas de Diseño 3D</h2>
-          <p className="section-subtitle">
+    <section className="py-20 px-6 max-w-7xl mx-auto catalog-section" id="catalogo">
+      {/* Section Header with Category Tabs */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-[#E8E6E1] gap-6">
+        <div className="space-y-2">
+          <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888]">
+            CATÁLOGO DE EDICIONES
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-serif-title font-normal text-[#121212]">
+            Colección de Iluminación 3D
+          </h2>
+          <p className="text-xs sm:text-sm text-[#666] font-light max-w-lg">
             Cada lámpara se imprime en filamento PLA ecológico bajo demanda. Selecciona tu modelo y tono favorito.
           </p>
         </div>
 
-        {loading && <p className="catalog-loading">Cargando catálogo oficial...</p>}
-
-        <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id || product.slug}
-              product={product}
-              onSelectDetail={(prod) => setActiveDetailProduct(prod)}
-            />
-          ))}
+        {/* Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 font-mono-tech text-[11px] uppercase tracking-wider">
+          <button
+            type="button"
+            onClick={() => setActiveFilter('all')}
+            className={`px-4 py-2 transition-colors ${
+              activeFilter === 'all'
+                ? 'bg-[#121212] text-white'
+                : 'bg-transparent text-[#666] hover:text-black border border-[#E0DED7]'
+            }`}
+          >
+            Todas las Piezas ({products.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveFilter('table')}
+            className={`px-4 py-2 transition-colors ${
+              activeFilter === 'table'
+                ? 'bg-[#121212] text-white'
+                : 'bg-transparent text-[#666] hover:text-black border border-[#E0DED7]'
+            }`}
+          >
+            Lámparas de Mesa
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveFilter('night')}
+            className={`px-4 py-2 transition-colors ${
+              activeFilter === 'night'
+                ? 'bg-[#121212] text-white'
+                : 'bg-transparent text-[#666] hover:text-black border border-[#E0DED7]'
+            }`}
+          >
+            Esculturas de Noche
+          </button>
         </div>
+      </div>
+
+      {loading && (
+        <p className="text-center py-12 text-xs font-mono-tech uppercase tracking-wider text-[#888] catalog-loading">
+          Cargando catálogo oficial...
+        </p>
+      )}
+
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 product-grid">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id || product.slug}
+            product={product}
+            onSelectDetail={(prod) => setActiveDetailProduct(prod)}
+          />
+        ))}
       </div>
 
       {activeDetailProduct && (
