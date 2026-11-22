@@ -17,4 +17,10 @@ class ProductSerializer(serializers.ModelSerializer):
             'colors',
             'is_active',
             'created_at',
+            'collection',
+            'category',
+            'in_stock',
+            'images',
+            'order',
+            'material',
         ]

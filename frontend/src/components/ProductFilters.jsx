@@ -46,15 +46,19 @@ export default function ProductFilters({
           ].map((item) => {
             const isChecked = selectedCollections.includes(item.id);
             const count = counts.collections?.[item.id] ?? 0;
+            const isDisabled = count === 0;
             return (
               <label
                 key={item.id}
-                className="flex items-start gap-3 cursor-pointer group py-1 text-xs select-none"
+                className={`flex items-start gap-3 py-1 text-xs select-none transition-opacity ${
+                  isDisabled ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'cursor-pointer group'
+                }`}
               >
                 <div className="pt-0.5">
                   <input
                     type="checkbox"
                     checked={isChecked}
+                    disabled={isDisabled}
                     onChange={() => onToggleCollection(item.id)}
                     className="sr-only"
                   />
@@ -62,6 +66,8 @@ export default function ProductFilters({
                     className={`w-4 h-4 border rounded-none transition-colors flex items-center justify-center ${
                       isChecked
                         ? 'bg-[#121212] border-[#121212] text-white'
+                        : isDisabled
+                        ? 'border-[#E0E0E0] bg-[#F5F5F5]'
                         : 'border-[#CCC] group-hover:border-black bg-white'
                     }`}
                   >
@@ -74,7 +80,7 @@ export default function ProductFilters({
                 </div>
                 <div className="flex-1 flex justify-between items-baseline">
                   <div>
-                    <span className={`block font-serif-title ${isChecked ? 'font-medium text-black' : 'text-[#333]'}`}>
+                    <span className={`block font-serif-title ${isChecked ? 'font-medium text-black' : isDisabled ? 'text-[#888]' : 'text-[#333]'}`}>
                       {item.label}
                     </span>
                     <span className="text-[10px] font-mono-tech text-[#888] tracking-wider uppercase">
@@ -105,14 +111,18 @@ export default function ProductFilters({
           ].map((item) => {
             const isChecked = selectedCategories.includes(item.id);
             const count = counts.categories?.[item.id] ?? 0;
+            const isDisabled = count === 0;
             return (
               <label
                 key={item.id}
-                className="flex items-center gap-3 cursor-pointer group py-1 text-xs select-none"
+                className={`flex items-center gap-3 py-1 text-xs select-none transition-opacity ${
+                  isDisabled ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'cursor-pointer group'
+                }`}
               >
                 <input
                   type="checkbox"
                   checked={isChecked}
+                  disabled={isDisabled}
                   onChange={() => onToggleCategory(item.id)}
                   className="sr-only"
                 />
@@ -120,6 +130,8 @@ export default function ProductFilters({
                   className={`w-4 h-4 border rounded-none transition-colors flex items-center justify-center ${
                     isChecked
                       ? 'bg-[#121212] border-[#121212] text-white'
+                      : isDisabled
+                      ? 'border-[#E0E0E0] bg-[#F5F5F5]'
                       : 'border-[#CCC] group-hover:border-black bg-white'
                   }`}
                 >
@@ -130,7 +142,7 @@ export default function ProductFilters({
                   )}
                 </div>
                 <div className="flex-1 flex justify-between items-center">
-                  <span className={`font-mono-tech text-[12px] uppercase tracking-wider ${isChecked ? 'font-semibold text-black' : 'text-[#444]'}`}>
+                  <span className={`font-mono-tech text-[12px] uppercase tracking-wider ${isChecked ? 'font-semibold text-black' : isDisabled ? 'text-[#888]' : 'text-[#444]'}`}>
                     {item.label}
                   </span>
                   <span className="text-[10px] font-mono-tech text-[#999]">
@@ -148,35 +160,46 @@ export default function ProductFilters({
         <h3 className="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-[#666] font-medium">
           Disponibilidad
         </h3>
-        <label className="flex items-center gap-3 cursor-pointer group py-1 text-xs select-none">
-          <input
-            type="checkbox"
-            checked={inStockOnly}
-            onChange={onToggleInStock}
-            className="sr-only"
-          />
-          <div
-            className={`w-4 h-4 border rounded-none transition-colors flex items-center justify-center ${
-              inStockOnly
-                ? 'bg-[#121212] border-[#121212] text-white'
-                : 'border-[#CCC] group-hover:border-black bg-white'
-            }`}
-          >
-            {inStockOnly && (
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-              </svg>
-            )}
-          </div>
-          <div className="flex-1 flex justify-between items-center">
-            <span className={`font-mono-tech text-[12px] uppercase tracking-wider ${inStockOnly ? 'font-semibold text-black' : 'text-[#444]'}`}>
-              En Stock
-            </span>
-            <span className="text-[10px] font-mono-tech text-[#999]">
-              ({counts.inStock ?? 0})
-            </span>
-          </div>
-        </label>
+        {(() => {
+          const inStockCount = counts.inStock ?? 0;
+          const isStockDisabled = inStockCount === 0;
+          return (
+            <label className={`flex items-center gap-3 py-1 text-xs select-none transition-opacity ${
+              isStockDisabled ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'cursor-pointer group'
+            }`}>
+              <input
+                type="checkbox"
+                checked={inStockOnly}
+                disabled={isStockDisabled}
+                onChange={onToggleInStock}
+                className="sr-only"
+              />
+              <div
+                className={`w-4 h-4 border rounded-none transition-colors flex items-center justify-center ${
+                  inStockOnly
+                    ? 'bg-[#121212] border-[#121212] text-white'
+                    : isStockDisabled
+                    ? 'border-[#E0E0E0] bg-[#F5F5F5]'
+                    : 'border-[#CCC] group-hover:border-black bg-white'
+                }`}
+              >
+                {inStockOnly && (
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </div>
+              <div className="flex-1 flex justify-between items-center">
+                <span className={`font-mono-tech text-[12px] uppercase tracking-wider ${inStockOnly ? 'font-semibold text-black' : isStockDisabled ? 'text-[#888]' : 'text-[#444]'}`}>
+                  En Stock
+                </span>
+                <span className="text-[10px] font-mono-tech text-[#999]">
+                  ({inStockCount})
+                </span>
+              </div>
+            </label>
+          );
+        })()}
       </div>
     </aside>
   );

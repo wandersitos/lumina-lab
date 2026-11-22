@@ -10,6 +10,14 @@ class Product(models.Model):
     colors = models.JSONField(default=list, blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    # Nuevos campos catálogo Lumina Lab
+    collection = models.CharField(max_length=50, blank=True, default='')
+    category = models.CharField(max_length=50, blank=True, default='')
+    in_stock = models.BooleanField(default=True)
+    images = models.JSONField(default=list, blank=True)
+    order = models.IntegerField(default=99)
+    material = models.CharField(max_length=150, blank=True, default='')
 
     def __str__(self):
         return self.name

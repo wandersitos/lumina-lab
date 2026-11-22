@@ -202,4 +202,21 @@ assert(productCardContent.includes('addToCart'), 'R4 (009): ProductCard must con
 assert(productCardContent.includes('WhatsApp') || productCardContent.includes('wa.me'), 'R4 (009): ProductCard must provide direct WhatsApp purchase option');
 assert(productsPageContent.includes('ProductCard'), 'R4 (009): ProductsPage must render ProductCard in catalog grid');
 
+// =============================================================================
+// 8. R1-R4 (010-catalogo-api-django): Catálogo y Filtros Servidos desde API Django
+// =============================================================================
+console.log('Verifying 010-catalogo-api-django requirements (API Django Catalog & Dynamic Filters)...');
+
+const updatedProductsPageContent = fs.readFileSync(productsPagePath, 'utf-8');
+const updatedProductFiltersContent = fs.readFileSync(productFiltersPath, 'utf-8');
+
+// R1/R3: ProductsPage debe conectarse a /api/products/ mediante fetch y manejar loading/error/fallback
+assert(updatedProductsPageContent.includes('/api/products/'), 'R3 (010): ProductsPage must fetch /api/products/');
+assert(updatedProductsPageContent.includes('loading') || updatedProductsPageContent.includes('isLoading'), 'R3 (010): ProductsPage must handle loading state');
+assert(updatedProductsPageContent.includes('officialProducts') || updatedProductsPageContent.includes('fallback') || updatedProductsPageContent.includes('luminaProducts'), 'R3 (010): ProductsPage must maintain fallback to luminaProducts for resilience');
+
+// R4: ProductFilters debe atenuar o deshabilitar opciones cuando el conteo es 0 (count === 0)
+assert(updatedProductFiltersContent.includes('count === 0') || updatedProductFiltersContent.includes('count <= 0'), 'R4 (010): ProductFilters must check if count === 0');
+assert(updatedProductFiltersContent.includes('opacity-') || updatedProductFiltersContent.includes('disabled') || updatedProductFiltersContent.includes('pointer-events-none'), 'R4 (010): ProductFilters must dim or disable options when count === 0');
+
 console.log('All frontend verification tests passed successfully!');

@@ -30,6 +30,55 @@ export default function ProductsPage({ onNavigate }) {
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  // Estado de carga y productos desde API Django con fallback a officialProducts
+  const [products, setProducts] = useState(officialProducts);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Conexión a la API de Django /api/products/
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    fetch('/api/products/')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (isMounted) {
+          if (Array.isArray(data) && data.length > 0) {
+            const normalized = data.map((item) => ({
+              ...item,
+              inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
+              image: item.image_url || (item.images && item.images[0]) || item.image || '',
+            }));
+            setProducts(normalized);
+            setError(null);
+          } else {
+            // Fallback resiliente a catálogo estático
+            setProducts(officialProducts);
+          }
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (isMounted) {
+          console.warn('API /api/products/ no disponible, usando catálogo local de respaldo:', err);
+          // Fallback resiliente
+          setProducts(officialProducts);
+          setError(err.message);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Sincronizar cambios en los filtros con la URL para enlaces compartibles
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -93,13 +142,13 @@ export default function ProductsPage({ onNavigate }) {
     selectedCategories.length > 0 ||
     inStockOnly;
 
-  // Conteo de elementos para cada filtro
+  // Conteo de elementos para cada filtro calculado dinámicamente según productos actuales
   const filterCounts = useMemo(() => {
     const collCounts = { leora: 0, kumo: 0 };
     const catCounts = { Sculpted: 0, Mini: 0, Bases: 0, Lampshades: 0 };
     let inStockCount = 0;
 
-    officialProducts.forEach((p) => {
+    products.forEach((p) => {
       if (p.collection && collCounts[p.collection] !== undefined) {
         collCounts[p.collection]++;
       }
@@ -116,11 +165,11 @@ export default function ProductsPage({ onNavigate }) {
       categories: catCounts,
       inStock: inStockCount,
     };
-  }, []);
+  }, [products]);
 
   // Filtrado y ordenamiento de productos
   const filteredProducts = useMemo(() => {
-    let result = officialProducts.filter((p) => {
+    let result = products.filter((p) => {
       // Filtro Colección
       if (selectedCollections.length > 0 && !selectedCollections.includes(p.collection)) {
         return false;
@@ -149,7 +198,7 @@ export default function ProductsPage({ onNavigate }) {
     }
 
     return result;
-  }, [selectedCollections, selectedCategories, inStockOnly, sortBy]);
+  }, [products, selectedCollections, selectedCategories, inStockOnly, sortBy]);
 
   return (
     <div className="products-page min-h-screen bg-[#FAF9F7] py-8 sm:py-12">
@@ -187,7 +236,7 @@ export default function ProductsPage({ onNavigate }) {
             Mostrando <span className="font-semibold text-black">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'producto' : 'productos'}
             {hasActiveFilters && (
               <span className="text-[#999] ml-1">
-                (filtrados de {officialProducts.length})
+                (filtrados de {products.length})
               </span>
             )}
           </div>
@@ -244,7 +293,14 @@ export default function ProductsPage({ onNavigate }) {
 
           {/* Grilla de Productos */}
           <div className="flex-1 w-full">
-            {filteredProducts.length === 0 ? (
+            {loading ? (
+              <div className="py-24 text-center space-y-4">
+                <div className="inline-block w-8 h-8 border-2 border-t-black border-r-transparent border-b-black border-l-transparent rounded-full animate-spin" />
+                <p className="text-xs font-mono-tech uppercase tracking-[0.2em] text-[#888]">
+                  Cargando catálogo Lumina Lab...
+                </p>
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <div className="py-20 text-center bg-white border border-[#E8E6E1] p-12 space-y-4">
                 <span className="text-3xl">💡</span>
                 <h3 className="font-serif-title text-xl text-[#121212]">
