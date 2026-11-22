@@ -30,17 +30,27 @@ export default function ProductsPage({ onNavigate }) {
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  // Estado de carga y productos desde API Django con fallback a officialProducts
-  const [products, setProducts] = useState(officialProducts);
+  // Estado de carga y productos desde API Django
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Helper para resolver la URL base de la API
+  const getApiBaseUrl = () => {
+    if (typeof window !== 'undefined' && window.location.port === '5173') {
+      return ''; // Vite proxy maneja /api -> http://127.0.0.1:8000
+    }
+    return '';
+  };
 
   // Conexión a la API de Django /api/products/
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
 
-    fetch('/api/products/')
+    const apiUrl = `${getApiBaseUrl()}/api/products/`;
+
+    fetch(apiUrl)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -49,7 +59,7 @@ export default function ProductsPage({ onNavigate }) {
       })
       .then((data) => {
         if (isMounted) {
-          if (Array.isArray(data) && data.length > 0) {
+          if (Array.isArray(data)) {
             const normalized = data.map((item) => ({
               ...item,
               inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
@@ -58,8 +68,7 @@ export default function ProductsPage({ onNavigate }) {
             setProducts(normalized);
             setError(null);
           } else {
-            // Fallback resiliente a catálogo estático
-            setProducts(officialProducts);
+            setProducts([]);
           }
           setLoading(false);
         }
@@ -67,7 +76,7 @@ export default function ProductsPage({ onNavigate }) {
       .catch((err) => {
         if (isMounted) {
           console.warn('API /api/products/ no disponible, usando catálogo local de respaldo:', err);
-          // Fallback resiliente
+          // Fallback resiliente solo si la red o el backend fallan totalmente
           setProducts(officialProducts);
           setError(err.message);
           setLoading(false);

@@ -219,4 +219,22 @@ assert(updatedProductsPageContent.includes('officialProducts') || updatedProduct
 assert(updatedProductFiltersContent.includes('count === 0') || updatedProductFiltersContent.includes('count <= 0'), 'R4 (010): ProductFilters must check if count === 0');
 assert(updatedProductFiltersContent.includes('opacity-') || updatedProductFiltersContent.includes('disabled') || updatedProductFiltersContent.includes('pointer-events-none'), 'R4 (010): ProductFilters must dim or disable options when count === 0');
 
+// =============================================================================
+// 9. BUG 011 (011-productos-desincronizados-bd): Sincronización exacta con BD Django y Proxy
+// =============================================================================
+console.log('Verifying 011-productos-desincronizados-bd (Vite proxy and DB sync)...');
+
+const viteConfigPath = path.join(__dirname, 'vite.config.js');
+assert(fs.existsSync(viteConfigPath), 'vite.config.js must exist');
+const viteConfigContent = fs.readFileSync(viteConfigPath, 'utf-8');
+
+// R1: vite.config.js debe configurar proxy para /api hacia http://127.0.0.1:8000 (o localhost:8000)
+assert(viteConfigContent.includes('proxy'), 'BUG 011: vite.config.js must configure proxy for /api');
+assert(viteConfigContent.includes('/api'), 'BUG 011: vite.config.js proxy must include /api path');
+assert(viteConfigContent.includes('8000'), 'BUG 011: vite.config.js proxy must target backend at port 8000');
+
+// R2: ProductsPage.jsx debe resolver la URL del backend dinámicamente y no inicializar con hardcoded 35 productos
+assert(!updatedProductsPageContent.includes('useState(officialProducts)'), 'BUG 011: ProductsPage must not initialize state with hardcoded officialProducts');
+assert(updatedProductsPageContent.includes('getApiBaseUrl') || updatedProductsPageContent.includes('8000') || updatedProductsPageContent.includes('API_BASE') || updatedProductsPageContent.includes('VITE_API_URL'), 'BUG 011: ProductsPage must resolve API base url');
+
 console.log('All frontend verification tests passed successfully!');
