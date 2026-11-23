@@ -25,11 +25,18 @@ elif not SECRET_KEY:
     SECRET_KEY = 'django-insecure-local-dev-key'
 
 default_allowed_hosts = '.luminalab-studio.com,luminalab-studio.com,.onrender.com,localhost,127.0.0.1'
-ALLOWED_HOSTS = [
-    h.strip()
-    for h in os.environ.get('ALLOWED_HOSTS', default_allowed_hosts).split(',')
-    if h.strip()
-]
+_env_allowed_hosts = os.environ.get('ALLOWED_HOSTS')
+if _env_allowed_hosts:
+    ALLOWED_HOSTS = [h.strip() for h in _env_allowed_hosts.split(',') if h.strip()]
+    for _fallback_host in ('.onrender.com', 'localhost', '127.0.0.1'):
+        if _fallback_host not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(_fallback_host)
+else:
+    ALLOWED_HOSTS = [
+        h.strip()
+        for h in default_allowed_hosts.split(',')
+        if h.strip()
+    ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -150,11 +157,18 @@ default_csrf_origins = (
     'https://*.onrender.com,'
     'https://*.vercel.app'
 )
-CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', default_csrf_origins).split(',')
-    if origin.strip()
-]
+_env_csrf_origins = os.environ.get('CSRF_TRUSTED_ORIGINS')
+if _env_csrf_origins:
+    CSRF_TRUSTED_ORIGINS = [o.strip() for o in _env_csrf_origins.split(',') if o.strip()]
+    for _base_origin in ('https://*.onrender.com', 'https://*.vercel.app'):
+        if _base_origin not in CSRF_TRUSTED_ORIGINS:
+            CSRF_TRUSTED_ORIGINS.append(_base_origin)
+else:
+    CSRF_TRUSTED_ORIGINS = [
+        origin.strip()
+        for origin in default_csrf_origins.split(',')
+        if origin.strip()
+    ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
