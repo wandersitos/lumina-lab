@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { siteConfig } from '../config/site.js';
 import { products as officialProducts } from '../data/luminaProducts.js';
 import ProductCard from '../components/ProductCard.jsx';
@@ -8,9 +8,38 @@ export default function HomePage({ onNavigate }) {
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
 
   // Seleccionar 3 productos destacados de la colección Leora para el preview de la Home
-  const featuredProducts = officialProducts
-    .filter((p) => p.collection === 'leora')
-    .slice(0, 3);
+  const [featuredProducts, setFeaturedProducts] = useState(() =>
+    officialProducts.filter((p) => p.collection === 'leora').slice(0, 3)
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+    const envUrl = import.meta.env.VITE_API_URL;
+    const baseUrl = envUrl ? envUrl.replace(/\/+$/, '') : '';
+    fetch(`${baseUrl}/api/products/`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          const normalized = data.map((item) => ({
+            ...item,
+            inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
+            image: item.image_url || (item.images && item.images[0]) || item.image || '',
+          }));
+          const leoraItems = normalized.filter((p) => p.collection === 'leora').slice(0, 3);
+          setFeaturedProducts(leoraItems.length > 0 ? leoraItems : normalized.slice(0, 3));
+        }
+      })
+      .catch((err) => {
+        console.warn('API /api/products/ no disponible para Home, usando respaldo local:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="home-page">

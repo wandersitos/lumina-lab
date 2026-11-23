@@ -37,8 +37,9 @@ export default function ProductsPage({ onNavigate }) {
 
   // Helper para resolver la URL base de la API
   const getApiBaseUrl = () => {
-    if (typeof window !== 'undefined' && window.location.port === '5173') {
-      return ''; // Vite proxy maneja /api -> http://127.0.0.1:8000
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl) {
+      return envUrl.replace(/\/+$/, '');
     }
     return '';
   };
