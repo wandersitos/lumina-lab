@@ -2,5 +2,7 @@
 set -e
 
 cd "$(dirname "$0")/../.."
-python api/manage.py check --deploy
+export DEBUG=False
+export SECRET_KEY="${SECRET_KEY:-ci-security-check-placeholder-key-at-least-50-chars-long-0123456789}"
+python api/manage.py check --deploy --fail-level WARNING
 

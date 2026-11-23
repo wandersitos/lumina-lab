@@ -1,13 +1,35 @@
 import os
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-test-key')
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ('true', '1', 'yes')
+_CMD = sys.argv[1] if len(sys.argv) > 1 and sys.argv[0].endswith('manage.py') else ''
+_IS_TEST_RUN = _CMD == 'test' or 'pytest' in sys.modules
 
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
+
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+if not DEBUG:
+    if not SECRET_KEY or SECRET_KEY.startswith('django-insecure-'):
+        # Allow manage.py test without explicit env vars while keeping runtime fail-closed.
+        if _IS_TEST_RUN and 'DEBUG' not in os.environ:
+            SECRET_KEY = 'django-insecure-test-key'
+        else:
+            raise ImproperlyConfigured(
+                'SECRET_KEY environment variable must be set to a secure value when DEBUG is False.'
+            )
+elif not SECRET_KEY:
+    SECRET_KEY = 'django-insecure-local-dev-key'
+
+default_allowed_hosts = '.luminalab-studio.com,luminalab-studio.com,.onrender.com,localhost,127.0.0.1'
+ALLOWED_HOSTS = [
+    h.strip()
+    for h in os.environ.get('ALLOWED_HOSTS', default_allowed_hosts).split(',')
+    if h.strip()
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'config',
     'products',
     'shipping',
     'orders.apps.OrdersConfig',
@@ -27,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,10 +114,58 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': (
+            'whitenoise.storage.CompressedStaticFilesStorage'
+            if _IS_TEST_RUN
+            else 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        ),
+    },
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins.split(',') if origin.strip()]
 CORS_ALLOW_ALL_ORIGINS = DEBUG
+default_cors_origins = (
+    'http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173'
+    if DEBUG
+    else 'https://www.luminalab-studio.com,https://luminalab-studio.com'
+)
+cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', default_cors_origins)
+CORS_ALLOWED_ORIGINS = [
+    origin.strip() for origin in cors_origins.split(',') if origin.strip()
+]
+if not DEBUG:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r'^https://.*\.vercel\.app$',
+    ]
 
+default_csrf_origins = (
+    'https://www.luminalab-studio.com,'
+    'https://luminalab-studio.com,'
+    'https://*.onrender.com,'
+    'https://*.vercel.app'
+)
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', default_csrf_origins).split(',')
+    if origin.strip()
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = (
+        False
+        if (_IS_TEST_RUN and 'SECURE_SSL_REDIRECT' not in os.environ)
+        else os.environ.get('SECURE_SSL_REDIRECT', 'True').lower() in ('true', '1', 'yes')
+    )
+    SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', 31536000))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True

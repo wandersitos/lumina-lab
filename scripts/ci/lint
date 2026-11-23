@@ -2,5 +2,6 @@
 set -e
 
 cd "$(dirname "$0")/../.."
+export DEBUG="${DEBUG:-True}"
 python api/manage.py check
 
