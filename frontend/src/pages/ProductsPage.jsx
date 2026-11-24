@@ -191,13 +191,24 @@ export default function ProductsPage({ onNavigate }) {
     selectedCategories.length > 0 ||
     inStockOnly;
 
-  // Conteo de elementos para cada filtro calculado dinámicamente según productos actuales
+  // Excluir colecciones y componentes no vigentes (Serie Kumo, Bases y Pantallas)
+  const isExcludedItem = (p) => {
+    const coll = (p.collection || '').toLowerCase();
+    const cat = (p.category || '').toLowerCase();
+    return coll === 'kumo' || cat === 'bases' || cat === 'lampshades';
+  };
+
+  const activeCatalogProducts = useMemo(() => {
+    return products.filter((p) => !isExcludedItem(p));
+  }, [products]);
+
+  // Conteo de elementos para cada filtro calculado dinámicamente según productos vigentes
   const filterCounts = useMemo(() => {
-    const collCounts = { leora: 0, kumo: 0 };
-    const catCounts = { Sculpted: 0, Mini: 0, Bases: 0, Lampshades: 0 };
+    const collCounts = { leora: 0 };
+    const catCounts = { Sculpted: 0, Mini: 0 };
     let inStockCount = 0;
 
-    products.forEach((p) => {
+    activeCatalogProducts.forEach((p) => {
       if (p.collection && collCounts[p.collection] !== undefined) {
         collCounts[p.collection]++;
       }
@@ -214,11 +225,11 @@ export default function ProductsPage({ onNavigate }) {
       categories: catCounts,
       inStock: inStockCount,
     };
-  }, [products]);
+  }, [activeCatalogProducts]);
 
   // Filtrado y ordenamiento de productos
   const filteredProducts = useMemo(() => {
-    let result = products.filter((p) => {
+    let result = activeCatalogProducts.filter((p) => {
       // Filtro Colección
       if (selectedCollections.length > 0 && !selectedCollections.includes(p.collection)) {
         return false;
@@ -247,7 +258,7 @@ export default function ProductsPage({ onNavigate }) {
     }
 
     return result;
-  }, [products, selectedCollections, selectedCategories, inStockOnly, sortBy]);
+  }, [activeCatalogProducts, selectedCollections, selectedCategories, inStockOnly, sortBy]);
 
   return (
     <div className="products-page min-h-screen bg-[#FAF9F7] py-8 sm:py-12">
@@ -274,7 +285,7 @@ export default function ProductsPage({ onNavigate }) {
             Catálogo de Iluminación 3D
           </h1>
           <p className="text-sm sm:text-base text-[#666] font-light max-w-2xl leading-relaxed">
-            Explora las colecciones Leora y Kumo. Diseños arquitectónicos modelados digitalmente y fabricados capa por capa con biopolímeros botánicos y tecnología LED cálida.
+            Explora la colección Leora. Diseños escultóricos modelados digitalmente y fabricados capa por capa con biopolímeros botánicos y tecnología LED cálida.
           </p>
         </header>
 
@@ -285,7 +296,7 @@ export default function ProductsPage({ onNavigate }) {
             Mostrando <span className="font-semibold text-black">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'producto' : 'productos'}
             {hasActiveFilters && (
               <span className="text-[#999] ml-1">
-                (filtrados de {products.length})
+                (filtrados de {activeCatalogProducts.length})
               </span>
             )}
           </div>

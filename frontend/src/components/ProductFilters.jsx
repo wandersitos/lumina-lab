@@ -42,7 +42,6 @@ export default function ProductFilters({
         <div className="space-y-2">
           {[
             { id: 'leora', label: 'Colección Leora', subtitle: 'Lámparas Esculpidas' },
-            { id: 'kumo', label: 'Serie Kumo', subtitle: 'Bases y Pantallas' },
           ].map((item) => {
             const isChecked = selectedCollections.includes(item.id);
             const count = counts.collections?.[item.id] ?? 0;
@@ -106,8 +105,6 @@ export default function ProductFilters({
           {[
             { id: 'Sculpted', label: 'Sculpted' },
             { id: 'Mini', label: 'Mini' },
-            { id: 'Bases', label: 'Bases' },
-            { id: 'Lampshades', label: 'Pantallas' },
           ].map((item) => {
             const isChecked = selectedCategories.includes(item.id);
             const count = counts.categories?.[item.id] ?? 0;
