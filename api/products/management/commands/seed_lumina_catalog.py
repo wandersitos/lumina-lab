@@ -20,7 +20,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o1-gravity-sculpted-lamp",
     "inStock": false,
     "order": 1,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -50,7 +50,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 2,
     "deliveryTime": "7-10 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -79,7 +79,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 3,
     "deliveryTime": "7-10 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "169 x 170 x 161 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -109,7 +109,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o4-flow-sculpted-lamp",
     "inStock": false,
     "order": 4,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "169 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -138,7 +138,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o5-wind-sculpted-lamp",
     "inStock": false,
     "order": 5,
-    "dimensions": "30 x 35 x 35 cm",
+    "dimensions": "170 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -168,7 +168,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 6,
     "deliveryTime": "10-12 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 158 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -201,7 +201,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 7,
     "deliveryTime": "15-20 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "168 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -231,7 +231,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o8-river-sculpted-lamp",
     "inStock": false,
     "order": 8,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -261,7 +261,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o9-reef-sculpted-lamp",
     "inStock": false,
     "order": 9,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 169 x 166 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -289,7 +289,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "slug": "o10-growth-sculpted-lamp",
     "inStock": false,
     "order": 10,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 168 x 163 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -319,7 +319,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 11,
     "deliveryTime": "5-7 Días",
-    "dimensions": "13 x 14.8 x 14.3 cm",
+    "dimensions": "148 x 158 x 130 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -357,7 +357,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 12,
     "deliveryTime": "3-5 Días",
-    "dimensions": "11.8 x 14 x 15 cm",
+    "dimensions": "150 x 145 x 120 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -391,7 +391,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 13,
     "deliveryTime": "3-5 Días",
-    "dimensions": "14 x 15 x 15 cm",
+    "dimensions": "150 x 150 x 140 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -422,7 +422,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 14,
     "deliveryTime": "3-5 Días",
-    "dimensions": "14 x 15 x 15 cm",
+    "dimensions": "180 x 179 x 138 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -453,7 +453,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 15,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "149 x 149 x 135 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -485,7 +485,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 16,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "120 x 181 x 173 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -516,7 +516,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 17,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13 x 14 x 14 cm",
+    "dimensions": "145 x 145 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -547,7 +547,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 18,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13 x 14 x 14 cm",
+    "dimensions": "150 x 149 x 139 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -576,7 +576,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 19,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "150 x 150 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -607,7 +607,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "inStock": true,
     "order": 20,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "133 x 149 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -620,554 +620,48 @@ LUMINA_PRODUCTS = json.loads("""[
       "Alimentación USB 5V"
     ],
     "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg"
-  },
-  {
-    "id": "13",
-    "name": "BASE ARCH",
-    "price": 180000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "A solid architectural base with a smooth arch design, providing stability and style.",
-    "image": "/Kumo/Bases/Arch.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Arch.png"
-    ],
-    "slug": "base-arch",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Arch.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "14",
-    "name": "BASE CLOUD",
-    "price": 195000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "Inspired by soft cloud formations, this base adds a dreamy touch to your custom lamp.",
-    "image": "/Kumo/Bases/Cloud.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Cloud.png"
-    ],
-    "slug": "base-cloud",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Cloud.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "15",
-    "name": "BASE CONE WIDE",
-    "price": 175000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "A wide conical base designed for stability and a modern geometric aesthetic.",
-    "image": "/Kumo/Bases/Cone Wide.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Cone%20Wide.png",
-      "https://www.luminalab-studio.com/Kumo/Bases/Cone Wide.png"
-    ],
-    "slug": "base-cone-wide",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Cone%20Wide.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "16",
-    "name": "BASE CONE",
-    "price": 165000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "A classic cone shape that serves as a versatile foundation for various lampshades.",
-    "image": "/Kumo/Bases/Cone.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Cone.png"
-    ],
-    "slug": "base-cone",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Cone.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "17",
-    "name": "BASE CYLINDER",
-    "price": 155000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "A minimalist cylinder base, perfect for those who appreciate clean lines and simplicity.",
-    "image": "/Kumo/Bases/Cylinder.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Cylinder.png"
-    ],
-    "slug": "base-cylinder",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Cylinder.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "18",
-    "name": "BASE EDAMAME",
-    "price": 185000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "An organic, curved base inspired by natural forms, adding a soft touch to your space.",
-    "image": "/Kumo/Bases/Edamame.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Edamame.png"
-    ],
-    "slug": "base-edamame",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Edamame.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "19",
-    "name": "BASE TOTEM D150",
-    "price": 210000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "Part of the Totem series, this D150 base offers a robust and sculptural foundation.",
-    "image": "/Kumo/Bases/Totem D150.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D150.png",
-      "https://www.luminalab-studio.com/Kumo/Bases/Totem D150.png"
-    ],
-    "slug": "base-totem-d150",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D150.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "20",
-    "name": "BASE TOTEM D200",
-    "price": 230000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "The larger D200 Totem base makes a bold statement with its substantial presence.",
-    "image": "/Kumo/Bases/Totem D200.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D200.png",
-      "https://www.luminalab-studio.com/Kumo/Bases/Totem D200.png"
-    ],
-    "slug": "base-totem-d200",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D200.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "21",
-    "name": "BASE TOTEM",
-    "price": 200000,
-    "category": "Bases",
-    "collection": "kumo",
-    "description": "The classic Totem base, blending ancient forms with modern manufacturing.",
-    "image": "/Kumo/Bases/Totem.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Bases/Totem.png"
-    ],
-    "slug": "base-totem",
-    "inStock": true,
-    "dimensions": "15 x 15 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Bases/Totem.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "22",
-    "name": "LAMPSHADE EDAMAME",
-    "price": 140000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "A softly curved lampshade that diffuses light gently, matching the Edamame base.",
-    "image": "/Kumo/Lampshades/Edamame.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Edamame.png"
-    ],
-    "slug": "lampshade-edamame",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Edamame.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "23",
-    "name": "LAMPSHADE HONEYCOMB TALL",
-    "price": 160000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Elongated honeycomb pattern creates a mesmerizing vertical light display.",
-    "image": "/Kumo/Lampshades/Honeycomb Tall.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb%20Tall.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb Tall.png"
-    ],
-    "slug": "lampshade-honeycomb-tall",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb%20Tall.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "24",
-    "name": "LAMPSHADE HONEYCOMB",
-    "price": 150000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Intricate geometric honeycomb structure for complex light and shadow play.",
-    "image": "/Kumo/Lampshades/Honeycomb.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb.png"
-    ],
-    "slug": "lampshade-honeycomb",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "25",
-    "name": "LAMPSHADE SQUASH",
-    "price": 135000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "A rounded, organic shape reminiscent of nature, providing warm, even illumination.",
-    "image": "/Kumo/Lampshades/Squash.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Squash.png"
-    ],
-    "slug": "lampshade-squash",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Squash.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "26",
-    "name": "LAMPSHADE TOTEM D130",
-    "price": 145000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Compact Totem shade, perfect for smaller lamp configurations.",
-    "image": "/Kumo/Lampshades/Totem D130.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20D130.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem D130.png"
-    ],
-    "slug": "lampshade-totem-d130",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20D130.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "27",
-    "name": "LAMPSHADE TOTEM TALL D200",
-    "price": 180000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "A tall, commanding shade from the Totem series for significant light coverage.",
-    "image": "/Kumo/Lampshades/Totem Tall D200.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Tall%20D200.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Tall D200.png"
-    ],
-    "slug": "lampshade-totem-tall-d200",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Tall%20D200.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "28",
-    "name": "LAMPSHADE TOTEM THIN D150",
-    "price": 155000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Slender profile Totem shade for a refined, elegant look.",
-    "image": "/Kumo/Lampshades/Totem Thin D150.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Thin%20D150.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Thin D150.png"
-    ],
-    "slug": "lampshade-totem-thin-d150",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Thin%20D150.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "29",
-    "name": "LAMPSHADE TOTEM WIDE D175",
-    "price": 165000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Wider profile Totem shade allowing for broader light distribution.",
-    "image": "/Kumo/Lampshades/Totem Wide D175.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Wide%20D175.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Wide D175.png"
-    ],
-    "slug": "lampshade-totem-wide-d175",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Wide%20D175.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "30",
-    "name": "LAMPSHADE TREE D175",
-    "price": 160000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Branch-like patterns inspired by trees create a natural woodland atmosphere.",
-    "image": "/Kumo/Lampshades/Tree D175.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20D175.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree D175.png"
-    ],
-    "slug": "lampshade-tree-d175",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20D175.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "31",
-    "name": "LAMPSHADE TREE INVERTED 3 SEGMENTS D175",
-    "price": 170000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Unique inverted tree design with three distinct segments.",
-    "image": "/Kumo/Lampshades/Tree Inverted 3 Segments D175.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%203%20Segments%20D175.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted 3 Segments D175.png"
-    ],
-    "slug": "lampshade-tree-inverted-3-segments-d175",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%203%20Segments%20D175.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "32",
-    "name": "LAMPSHADE TREE INVERTED TALL D200",
-    "price": 190000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Tall inverted tree design for a dramatic lighting effect.",
-    "image": "/Kumo/Lampshades/Tree Inverted Tall D200.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Tall%20D200.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted Tall D200.png"
-    ],
-    "slug": "lampshade-tree-inverted-tall-d200",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Tall%20D200.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "33",
-    "name": "LAMPSHADE TREE INVERTED WIDE 4 SEGMENTS D240",
-    "price": 210000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Large, wide inverted tree shade with four segments for maximum impact.",
-    "image": "/Kumo/Lampshades/Tree Inverted Wide 4 Segments D240.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Wide%204%20Segments%20D240.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted Wide 4 Segments D240.png"
-    ],
-    "slug": "lampshade-tree-inverted-wide-4-segments-d240",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Wide%204%20Segments%20D240.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "34",
-    "name": "LAMPSHADE TREE TALL D220",
-    "price": 200000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Extra tall tree pattern shade for high ceilings and open spaces.",
-    "image": "/Kumo/Lampshades/Tree Tall D220.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Tall%20D220.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Tall D220.png"
-    ],
-    "slug": "lampshade-tree-tall-d220",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Tall%20D220.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
-  },
-  {
-    "id": "35",
-    "name": "LAMPSHADE TREE WIDE 4 SEGMENTS D240",
-    "price": 205000,
-    "category": "Lampshades",
-    "collection": "kumo",
-    "description": "Wide tree pattern shade with four segments, providing expansive illumination.",
-    "image": "/Kumo/Lampshades/Tree Wide 4 Segments D240.png",
-    "images": [
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Wide%204%20Segments%20D240.png",
-      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Wide 4 Segments D240.png"
-    ],
-    "slug": "lampshade-tree-wide-4-segments-d240",
-    "inStock": true,
-    "dimensions": "20 x 20 cm",
-    "material": "Filamento PLA Biodegradable",
-    "image_url": "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Wide%204%20Segments%20D240.png",
-    "colors": [
-      "Blanco Cálido",
-      "Gris Ceniza",
-      "Negro Mate"
-    ]
   }
 ]""")
 
 class Command(BaseCommand):
-    help = "Puebla los productos oficiales de Lumina Lab (Colecciones Leora y Serie Kumo)"
+    help = "Puebla los productos oficiales de Lumina Lab (Coleccion Leora)"
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--only-if-empty',
+            action='store_true',
+            help='Solo puebla si no existen productos en la base de datos'
+        )
 
     def handle(self, *args, **options):
-        self.stdout.write("Iniciando población de catálogo Lumina Lab...")
+        only_if_empty = options.get('only_if_empty', False)
+        if only_if_empty and Product.objects.exists():
+            self.stdout.write(self.style.WARNING(
+                'La base de datos ya contiene productos. Se omite la poblacion automatica para preservar cambios manuales.'
+            ))
+            return
+
+        self.stdout.write('Iniciando poblacion de catalogo Lumina Lab (Coleccion Leora)...')
         created_count = 0
         updated_count = 0
 
         for item in LUMINA_PRODUCTS:
             obj, created = Product.objects.update_or_create(
-                slug=item["slug"],
+                slug=item['slug'],
                 defaults={
-                    "name": item.get("name", ""),
-                    "description": item.get("description", ""),
-                    "price": item.get("price", 0),
-                    "collection": item.get("collection", ""),
-                    "category": item.get("category", ""),
-                    "in_stock": item.get("inStock", True),
-                    "images": item.get("images", []),
-                    "order": item.get("order", 99),
-                    "dimensions": item.get("dimensions", ""),
-                    "material": item.get("material", ""),
-                    "image_url": item.get("image_url") or item.get("alternativeImage") or item.get("image", ""),
-                    "colors": item.get("colors", []),
-                    "is_active": True,
+                    'name': item.get('name', ''),
+                    'description': item.get('description', ''),
+                    'price': item.get('price', 0),
+                    'collection': item.get('collection', 'leora'),
+                    'category': item.get('category', 'Sculpted'),
+                    'in_stock': item.get('inStock', True),
+                    'images': item.get('images', []),
+                    'order': item.get('order', 99),
+                    'dimensions': item.get('dimensions', ''),
+                    'material': item.get('material', 'PLA Biodegradable'),
+                    'image_url': item.get('image_url') or item.get('alternativeImage') or item.get('image', ''),
+                    'colors': item.get('colors', []),
+                    'is_active': True,
                 }
             )
             if created:
@@ -1176,5 +670,5 @@ class Command(BaseCommand):
                 updated_count += 1
 
         self.stdout.write(self.style.SUCCESS(
-            f"Catálogo Lumina Lab procesado: {created_count} creados, {updated_count} actualizados. Total: {len(LUMINA_PRODUCTS)}."
+            f'Catalogo Lumina Lab Leora procesado: {created_count} creados, {updated_count} actualizados. Total: {len(LUMINA_PRODUCTS)}.'
         ))

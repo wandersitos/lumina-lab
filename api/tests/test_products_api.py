@@ -105,12 +105,10 @@ class ProductsApiIntegrationTests(TestCase):
             self.assertFalse(item['in_stock'])
 
     def test_r1_seed_lumina_catalog_command(self):
-        """R1: Comando seed_lumina_catalog puebla los 35 productos Lumina Lab."""
+        """R1: Comando seed_lumina_catalog puebla las 20 lámparas Leora Lumina Lab."""
         call_command('seed_lumina_catalog')
         total = Product.objects.filter(is_active=True).count()
-        # Debe haber al menos 35 productos Lumina
-        self.assertGreaterEqual(total, 35)
-        kumo_count = Product.objects.filter(collection='kumo').count()
-        leora_count = Product.objects.filter(collection='leora').count()
-        self.assertGreaterEqual(kumo_count, 20)
-        self.assertGreaterEqual(leora_count, 12)
+        # Debe haber 20 lámparas oficiales Leora (más la lámpara creada en setUp)
+        leora_seeded = Product.objects.filter(collection='leora').exclude(slug='lampara-leora-test').count()
+        self.assertEqual(leora_seeded, 20)
+        self.assertGreaterEqual(total, 20)

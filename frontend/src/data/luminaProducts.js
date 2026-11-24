@@ -42,7 +42,7 @@ export const products = [
     "slug": "o1-gravity-sculpted-lamp",
     "inStock": false,
     "order": 1,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -72,7 +72,7 @@ export const products = [
     "inStock": true,
     "order": 2,
     "deliveryTime": "7-10 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -101,7 +101,7 @@ export const products = [
     "inStock": true,
     "order": 3,
     "deliveryTime": "7-10 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "169 x 170 x 161 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -131,7 +131,7 @@ export const products = [
     "slug": "o4-flow-sculpted-lamp",
     "inStock": false,
     "order": 4,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "169 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -160,7 +160,7 @@ export const products = [
     "slug": "o5-wind-sculpted-lamp",
     "inStock": false,
     "order": 5,
-    "dimensions": "30 x 35 x 35 cm",
+    "dimensions": "170 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -190,7 +190,7 @@ export const products = [
     "inStock": true,
     "order": 6,
     "deliveryTime": "10-12 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 158 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -223,7 +223,7 @@ export const products = [
     "inStock": true,
     "order": 7,
     "deliveryTime": "15-20 Días",
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "168 x 170 x 159 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -253,7 +253,7 @@ export const products = [
     "slug": "o8-river-sculpted-lamp",
     "inStock": false,
     "order": 8,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 170 x 160 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -283,7 +283,7 @@ export const products = [
     "slug": "o9-reef-sculpted-lamp",
     "inStock": false,
     "order": 9,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 169 x 166 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -311,7 +311,7 @@ export const products = [
     "slug": "o10-growth-sculpted-lamp",
     "inStock": false,
     "order": 10,
-    "dimensions": "24 x 25 x 25 cm",
+    "dimensions": "170 x 168 x 163 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -341,7 +341,7 @@ export const products = [
     "inStock": true,
     "order": 11,
     "deliveryTime": "5-7 Días",
-    "dimensions": "13 x 14.8 x 14.3 cm",
+    "dimensions": "148 x 158 x 130 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -379,7 +379,7 @@ export const products = [
     "inStock": true,
     "order": 12,
     "deliveryTime": "3-5 Días",
-    "dimensions": "11.8 x 14 x 15 cm",
+    "dimensions": "150 x 145 x 120 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -413,7 +413,7 @@ export const products = [
     "inStock": true,
     "order": 13,
     "deliveryTime": "3-5 Días",
-    "dimensions": "14 x 15 x 15 cm",
+    "dimensions": "150 x 150 x 140 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -444,7 +444,7 @@ export const products = [
     "inStock": true,
     "order": 14,
     "deliveryTime": "3-5 Días",
-    "dimensions": "14 x 15 x 15 cm",
+    "dimensions": "180 x 179 x 138 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -475,7 +475,7 @@ export const products = [
     "inStock": true,
     "order": 15,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "149 x 149 x 135 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -507,7 +507,7 @@ export const products = [
     "inStock": true,
     "order": 16,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "120 x 181 x 173 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -538,7 +538,7 @@ export const products = [
     "inStock": true,
     "order": 17,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13 x 14 x 14 cm",
+    "dimensions": "145 x 145 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -569,7 +569,7 @@ export const products = [
     "inStock": true,
     "order": 18,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13 x 14 x 14 cm",
+    "dimensions": "150 x 149 x 139 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -598,7 +598,7 @@ export const products = [
     "inStock": true,
     "order": 19,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "150 x 150 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -629,7 +629,7 @@ export const products = [
     "inStock": true,
     "order": 20,
     "deliveryTime": "3-5 Días",
-    "dimensions": "13.5 x 14.9 x 14.7 cm",
+    "dimensions": "133 x 149 x 141 mm",
     "material": "PLA Biodegradable",
     "colors": [
       "Blanco Cálido",
@@ -1164,5 +1164,3 @@ export const products = [
     ]
   }
 ];
-
-export default products;
