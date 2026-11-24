@@ -47,6 +47,11 @@ export function updateSiteConfigFromContent(content) {
   }
   if (content.instagram_url) {
     siteConfig.social.instagram.url = content.instagram_url;
+  } else if (content.instagram_handle) {
+    const cleanHandle = content.instagram_handle.replace(/^@+/, '').trim();
+    if (cleanHandle) {
+      siteConfig.social.instagram.url = `https://www.instagram.com/${cleanHandle}/`;
+    }
   }
   if (content.hero_image_url) {
     siteConfig.heroImageUrl = content.hero_image_url;

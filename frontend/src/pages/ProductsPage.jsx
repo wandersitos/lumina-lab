@@ -8,24 +8,21 @@ export default function ProductsPage({ onNavigate }) {
   // Inicialización de filtros desde query params de la URL si existen
   const getInitialFilters = () => {
     if (typeof window === 'undefined') {
-      return { collections: [], categories: [], inStock: false };
+      return { collections: [], categories: [] };
     }
     const params = new URLSearchParams(window.location.search);
     const collParam = params.get('collection');
     const catParam = params.get('category');
-    const inStockParam = params.get('in_stock');
 
     return {
       collections: collParam ? collParam.split(',').filter(Boolean) : [],
       categories: catParam ? catParam.split(',').filter(Boolean) : [],
-      inStock: inStockParam === 'true',
     };
   };
 
   const initial = getInitialFilters();
   const [selectedCollections, setSelectedCollections] = useState(initial.collections);
   const [selectedCategories, setSelectedCategories] = useState(initial.categories);
-  const [inStockOnly, setInStockOnly] = useState(initial.inStock);
   const [sortBy, setSortBy] = useState('featured');
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -148,12 +145,6 @@ export default function ProductsPage({ onNavigate }) {
       params.delete('category');
     }
 
-    if (inStockOnly) {
-      params.set('in_stock', 'true');
-    } else {
-      params.delete('in_stock');
-    }
-
     if (currentView) {
       params.set('view', currentView);
     }
@@ -161,7 +152,7 @@ export default function ProductsPage({ onNavigate }) {
     const newQuery = params.toString() ? `?${params.toString()}` : '';
     const newPath = window.location.pathname + newQuery;
     window.history.replaceState(null, '', newPath);
-  }, [selectedCollections, selectedCategories, inStockOnly]);
+  }, [selectedCollections, selectedCategories]);
 
   // Manejadores de toggle de filtros
   const handleToggleCollection = (id) => {
@@ -176,20 +167,14 @@ export default function ProductsPage({ onNavigate }) {
     );
   };
 
-  const handleToggleInStock = () => {
-    setInStockOnly((prev) => !prev);
-  };
-
   const handleClearFilters = () => {
     setSelectedCollections([]);
     setSelectedCategories([]);
-    setInStockOnly(false);
   };
 
   const hasActiveFilters =
     selectedCollections.length > 0 ||
-    selectedCategories.length > 0 ||
-    inStockOnly;
+    selectedCategories.length > 0;
 
   // Excluir colecciones y componentes no vigentes (Serie Kumo, Bases y Pantallas)
   const isExcludedItem = (p) => {
@@ -206,7 +191,6 @@ export default function ProductsPage({ onNavigate }) {
   const filterCounts = useMemo(() => {
     const collCounts = { leora: 0 };
     const catCounts = { Sculpted: 0, Mini: 0 };
-    let inStockCount = 0;
 
     activeCatalogProducts.forEach((p) => {
       if (p.collection && collCounts[p.collection] !== undefined) {
@@ -215,15 +199,11 @@ export default function ProductsPage({ onNavigate }) {
       if (p.category && catCounts[p.category] !== undefined) {
         catCounts[p.category]++;
       }
-      if (p.inStock) {
-        inStockCount++;
-      }
     });
 
     return {
       collections: collCounts,
       categories: catCounts,
-      inStock: inStockCount,
     };
   }, [activeCatalogProducts]);
 
@@ -236,10 +216,6 @@ export default function ProductsPage({ onNavigate }) {
       }
       // Filtro Categoría
       if (selectedCategories.length > 0 && !selectedCategories.includes(p.category)) {
-        return false;
-      }
-      // Filtro En Stock
-      if (inStockOnly && !p.inStock) {
         return false;
       }
       return true;
@@ -258,7 +234,7 @@ export default function ProductsPage({ onNavigate }) {
     }
 
     return result;
-  }, [activeCatalogProducts, selectedCollections, selectedCategories, inStockOnly, sortBy]);
+  }, [activeCatalogProducts, selectedCollections, selectedCategories, sortBy]);
 
   return (
     <div className="products-page min-h-screen bg-[#FAF9F7] py-8 sm:py-12">
@@ -311,7 +287,7 @@ export default function ProductsPage({ onNavigate }) {
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
               </svg>
-              <span>Filtros {hasActiveFilters ? `(${selectedCollections.length + selectedCategories.length + (inStockOnly ? 1 : 0)})` : ''}</span>
+              <span>Filtros {hasActiveFilters ? `(${selectedCollections.length + selectedCategories.length})` : ''}</span>
             </button>
 
             {/* Controles: Refrescar Caché y Ordenamiento */}
@@ -362,8 +338,6 @@ export default function ProductsPage({ onNavigate }) {
               onToggleCollection={handleToggleCollection}
               selectedCategories={selectedCategories}
               onToggleCategory={handleToggleCategory}
-              inStockOnly={inStockOnly}
-              onToggleInStock={handleToggleInStock}
               onClearFilters={handleClearFilters}
               hasActiveFilters={hasActiveFilters}
               counts={filterCounts}
@@ -446,8 +420,6 @@ export default function ProductsPage({ onNavigate }) {
                 onToggleCollection={handleToggleCollection}
                 selectedCategories={selectedCategories}
                 onToggleCategory={handleToggleCategory}
-                inStockOnly={inStockOnly}
-                onToggleInStock={handleToggleInStock}
                 onClearFilters={handleClearFilters}
                 hasActiveFilters={hasActiveFilters}
                 counts={filterCounts}

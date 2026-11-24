@@ -156,7 +156,6 @@ assert(fs.existsSync(productFiltersPath), 'R2 (009): src/components/ProductFilte
 const productFiltersContent = fs.readFileSync(productFiltersPath, 'utf-8');
 assert(productFiltersContent.includes('Colección') || productFiltersContent.includes('coleccion'), 'R2 (009): ProductFilters must filter by collection');
 assert(productFiltersContent.includes('Categoría') || productFiltersContent.includes('categoria'), 'R2 (009): ProductFilters must filter by category');
-assert(productFiltersContent.includes('Disponibilidad') || productFiltersContent.includes('En Stock'), 'R2 (009): ProductFilters must filter by availability');
 assert(productFiltersContent.includes('Limpiar filtros') || productFiltersContent.includes('btn-clear-filters'), 'R2 (009): ProductFilters must provide clear filters button');
 
 const productsPageContent = fs.readFileSync(productsPagePath, 'utf-8');
@@ -281,5 +280,45 @@ assert(/3\s*temperaturas/i.test(homePageContent) && /RGB/i.test(homePageContent)
 
 // R4: index.html debe incluir <meta name="description">
 assert(/<meta\s+name=["']description["']\s+content=/i.test(indexHtml), 'R4 (015): index.html must include <meta name="description">');
+
+// =============================================================================
+// 11. R1-R3 (016-ajustes-envio-stock-social): Sin envío gratis, sin filtro de stock y redes dinámicas
+// =============================================================================
+console.log('Verifying 016-ajustes-envio-stock-social requirements...');
+
+// R1: App.jsx no debe contener ENVÍO SIN COSTO ni 180.000 en la barra superior
+assert(!/ENV[IÍ]O\s+SIN\s+COSTO/i.test(appContent), 'R1 (016): App.jsx must not contain ENVÍO SIN COSTO');
+assert(!appContent.includes('180.000'), 'R1 (016): App.jsx must not contain 180.000 in top bar');
+
+// R2: ProductFilters.jsx y ProductsPage.jsx no deben contener En Stock, Disponibilidad ni inStockOnly
+assert(!updatedProductFiltersContent.includes('Disponibilidad'), 'R2 (016): ProductFilters.jsx must not contain Disponibilidad');
+assert(!updatedProductFiltersContent.includes('En Stock'), 'R2 (016): ProductFilters.jsx must not contain En Stock');
+assert(!updatedProductFiltersContent.includes('inStockOnly'), 'R2 (016): ProductFilters.jsx must not contain inStockOnly');
+assert(!updatedProductsPageContent.includes('inStockOnly'), 'R2 (016): ProductsPage.jsx must not contain inStockOnly');
+assert(!updatedProductsPageContent.includes("params.get('in_stock')") && !updatedProductsPageContent.includes("params.set('in_stock'"), 'R2 (016): ProductsPage.jsx must not contain in_stock query param');
+
+// R3: updateSiteConfigFromContent debe actualizar WhatsApp e Instagram (y derivar instagram.url si solo llega instagram_handle)
+const { updateSiteConfigFromContent } = await import('./src/config/site.js');
+assert(typeof updateSiteConfigFromContent === 'function', 'R3 (016): updateSiteConfigFromContent must be exported');
+
+updateSiteConfigFromContent({
+  whatsapp_number: '+573119998877',
+  instagram_handle: '@test_lumina',
+  instagram_url: 'https://www.instagram.com/test_lumina/',
+});
+assert.strictEqual(siteConfig.social.whatsapp.number, '+573119998877', 'R3 (016): whatsapp.number must update from content');
+assert(siteConfig.social.whatsapp.url.includes('573119998877'), 'R3 (016): whatsapp.url must update from content');
+assert.strictEqual(siteConfig.social.instagram.handle, '@test_lumina', 'R3 (016): instagram.handle must update from content');
+assert.strictEqual(siteConfig.social.instagram.url, 'https://www.instagram.com/test_lumina/', 'R3 (016): instagram.url must update from content');
+
+// Si solo llega instagram_handle, debe derivar instagram.url
+updateSiteConfigFromContent({
+  instagram_handle: '@otro_estudio',
+});
+assert.strictEqual(siteConfig.social.instagram.handle, '@otro_estudio', 'R3 (016): instagram.handle must update when only handle is provided');
+assert.strictEqual(siteConfig.social.instagram.url, 'https://www.instagram.com/otro_estudio/', 'R3 (016): instagram.url must be derived from instagram_handle when instagram_url is omitted');
+
+// App.jsx (incluyendo menú móvil) no debe hardcodear Instagram @luminalab_co
+assert(!appContent.includes('Instagram @luminalab_co'), 'R3 (016): App.jsx mobile menu must use siteConfig.social.instagram.handle instead of hardcoded @luminalab_co');
 
 console.log('All frontend verification tests passed successfully!');

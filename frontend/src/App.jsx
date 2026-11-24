@@ -23,8 +23,6 @@ function NavbarContent({ currentView, onNavigate }) {
     <>
       {/* Top Announcement Bar */}
       <div className="bg-[#121212] text-white text-[11px] font-mono-tech tracking-[0.2em] py-2 px-4 text-center uppercase border-b border-white/10 flex flex-wrap justify-center items-center gap-2 sm:gap-3">
-        <span>ENVÍO SIN COSTO EN COLOMBIA POR COMPRAS DESDE $180.000</span>
-        <span className="opacity-40">•</span>
         <a
           href={siteConfig.social.instagram.url}
           target="_blank"
@@ -156,7 +154,7 @@ function NavbarContent({ currentView, onNavigate }) {
               rel="noopener noreferrer"
               className="block py-2.5 text-[#555] hover:text-black border-b border-[#E8E6E1]/60"
             >
-              Instagram @luminalab_co
+              Instagram {siteConfig.social.instagram.handle}
             </a>
             <a
               href={siteConfig.social.whatsapp.url}
