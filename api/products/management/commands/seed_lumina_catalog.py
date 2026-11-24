@@ -14,9 +14,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
-      "/Photos/O1 Gravity Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O1 Gravity Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O1 Gravity Sculpted Lamp/Photos/Size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/Size-reference.jpg"
     ],
     "slug": "o1-gravity-sculpted-lamp",
     "inStock": false,
@@ -42,11 +41,10 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/03.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/03.jpg",
-      "/Photos/O2 Landscape Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O2 Landscape Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O2 Landscape Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O2 Landscape Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O2 Landscape Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o2-landscape-sculpted-lamp",
     "inStock": true,
@@ -73,10 +71,9 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/01.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/01.jpg",
-      "/Photos/O3 Dune Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O3 Dune Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O3 Dune Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O3 Dune Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o3-dune-sculpted-lamp",
     "inStock": true,
@@ -103,12 +100,11 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/01.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/01.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/05.jpg",
-      "/Photos/O4 Flow Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o4-flow-sculpted-lamp",
     "inStock": false,
@@ -134,11 +130,10 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/01.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/01.jpg",
-      "/Photos/O5 Wind-Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O5 Wind-Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O5 Wind-Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O5 Wind-Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O5 Wind-Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o5-wind-sculpted-lamp",
     "inStock": false,
@@ -164,11 +159,10 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/01.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/01.jpg",
-      "/Photos/O6 Lava Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O6 Lava Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O6 Lava Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O6 Lava Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O6 Lava Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o6-lava-sculpted-lamp",
     "inStock": true,
@@ -195,14 +189,13 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/02.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/02.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/05.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/06.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/07.jpg",
-      "/Photos/O7 Coral Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/06.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/07.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o7-coral-sculpted-lamp",
     "inStock": true,
@@ -229,12 +222,11 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/02.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/02.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/05.jpg",
-      "/Photos/O8 River Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o8-river-sculpted-lamp",
     "inStock": false,
@@ -260,12 +252,11 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/01.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/01.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/04.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/05.jpg",
-      "/Photos/O9 Reef Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o9-reef-sculpted-lamp",
     "inStock": false,
@@ -291,10 +282,9 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/02.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/02.jpg",
-      "/Photos/O10 Growth Sculpted Lamp/Photos/01.jpg",
-      "/Photos/O10 Growth Sculpted Lamp/Photos/02.jpg",
-      "/Photos/O10 Growth Sculpted Lamp/Photos/03.jpg",
-      "/Photos/O10 Growth Sculpted Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o10-growth-sculpted-lamp",
     "inStock": false,
@@ -320,11 +310,10 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/03.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/03.jpg",
-      "/Photos/O11-s Ocean Petals Sculpted Mini Lamp/Photos/01.jpg",
-      "/Photos/O11-s Ocean Petals Sculpted Mini Lamp/Photos/02.jpg",
-      "/Photos/O11-s Ocean Petals Sculpted Mini Lamp/Photos/03.jpg",
-      "/Photos/O11-s Ocean Petals Sculpted Mini Lamp/Photos/04.jpg",
-      "/Photos/O11-s Ocean Petals Sculpted Mini Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/size-reference.jpg"
     ],
     "slug": "o11-s-ocean-petals-sculpted-mini-lamp",
     "inStock": true,
@@ -355,14 +344,14 @@ LUMINA_PRODUCTS = json.loads("""[
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/O12-s-V2-03.jpg",
     "images": [
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/O12-s-V2-03.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/01.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/02.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/03.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/04.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/05.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/06.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/07.jpg",
-      "/Photos/O12-s Fire Sculpted Mini Lamp/Photos/size-reference.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/06.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/07.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/size-reference.jpg"
     ],
     "slug": "o12-s-fire-sculpted-mini-lamp",
     "inStock": true,
@@ -392,10 +381,10 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209549/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-11.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209551/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-12.jpg",
     "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209551/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-12.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209549/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-11.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209548/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-01.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209548/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-02.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209551/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-12.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774210024/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-size-reference.webp"
     ],
     "slug": "o13-s-erosion-sculpted-mini-lamp",
@@ -426,8 +415,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209552/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-02.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-03.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209552/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-02.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-03.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209552/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-02.jpg"
     ],
     "slug": "o14-s-plate-coral-mini-lamp",
     "inStock": true,
@@ -457,8 +446,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-02.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209554/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-03.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-02.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209554/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-03.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209554/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-02.jpg"
     ],
     "slug": "o15-s-biomorphic-mini-lamp",
     "inStock": true,
@@ -488,8 +477,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209555/lumina-lab/Leora/O16-s%20Underwater/O16-s-02.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-03.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209555/lumina-lab/Leora/O16-s%20Underwater/O16-s-02.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209555/lumina-lab/Leora/O16-s%20Underwater/O16-s-02.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-04.jpg"
     ],
     "slug": "o16-s-underwater-bloom-mini-lamp",
@@ -551,8 +540,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-02.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-03.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-02.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-03.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-02.jpg"
     ],
     "slug": "o18-s-self-organized-mini-lamp",
     "inStock": true,
@@ -611,8 +600,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "image": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209561/lumina-lab/Leora/O20-s%20Magma/Lamp-20-02.jpg",
     "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209561/lumina-lab/Leora/O20-s%20Magma/Lamp-20-02.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg"
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209561/lumina-lab/Leora/O20-s%20Magma/Lamp-20-02.jpg"
     ],
     "slug": "o20-s-magma-mini-lamp",
     "inStock": true,
@@ -641,7 +630,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A solid architectural base with a smooth arch design, providing stability and style.",
     "image": "/Kumo/Bases/Arch.png",
     "images": [
-      "/Kumo/Bases/Arch.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Arch.png"
     ],
     "slug": "base-arch",
     "inStock": true,
@@ -663,7 +652,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Inspired by soft cloud formations, this base adds a dreamy touch to your custom lamp.",
     "image": "/Kumo/Bases/Cloud.png",
     "images": [
-      "/Kumo/Bases/Cloud.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Cloud.png"
     ],
     "slug": "base-cloud",
     "inStock": true,
@@ -685,7 +674,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A wide conical base designed for stability and a modern geometric aesthetic.",
     "image": "/Kumo/Bases/Cone Wide.png",
     "images": [
-      "/Kumo/Bases/Cone Wide.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Cone%20Wide.png",
+      "https://www.luminalab-studio.com/Kumo/Bases/Cone Wide.png"
     ],
     "slug": "base-cone-wide",
     "inStock": true,
@@ -707,7 +697,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A classic cone shape that serves as a versatile foundation for various lampshades.",
     "image": "/Kumo/Bases/Cone.png",
     "images": [
-      "/Kumo/Bases/Cone.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Cone.png"
     ],
     "slug": "base-cone",
     "inStock": true,
@@ -729,7 +719,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A minimalist cylinder base, perfect for those who appreciate clean lines and simplicity.",
     "image": "/Kumo/Bases/Cylinder.png",
     "images": [
-      "/Kumo/Bases/Cylinder.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Cylinder.png"
     ],
     "slug": "base-cylinder",
     "inStock": true,
@@ -751,7 +741,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "An organic, curved base inspired by natural forms, adding a soft touch to your space.",
     "image": "/Kumo/Bases/Edamame.png",
     "images": [
-      "/Kumo/Bases/Edamame.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Edamame.png"
     ],
     "slug": "base-edamame",
     "inStock": true,
@@ -773,7 +763,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Part of the Totem series, this D150 base offers a robust and sculptural foundation.",
     "image": "/Kumo/Bases/Totem D150.png",
     "images": [
-      "/Kumo/Bases/Totem D150.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D150.png",
+      "https://www.luminalab-studio.com/Kumo/Bases/Totem D150.png"
     ],
     "slug": "base-totem-d150",
     "inStock": true,
@@ -795,7 +786,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "The larger D200 Totem base makes a bold statement with its substantial presence.",
     "image": "/Kumo/Bases/Totem D200.png",
     "images": [
-      "/Kumo/Bases/Totem D200.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Totem%20D200.png",
+      "https://www.luminalab-studio.com/Kumo/Bases/Totem D200.png"
     ],
     "slug": "base-totem-d200",
     "inStock": true,
@@ -817,7 +809,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "The classic Totem base, blending ancient forms with modern manufacturing.",
     "image": "/Kumo/Bases/Totem.png",
     "images": [
-      "/Kumo/Bases/Totem.png"
+      "https://www.luminalab-studio.com/Kumo/Bases/Totem.png"
     ],
     "slug": "base-totem",
     "inStock": true,
@@ -839,7 +831,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A softly curved lampshade that diffuses light gently, matching the Edamame base.",
     "image": "/Kumo/Lampshades/Edamame.png",
     "images": [
-      "/Kumo/Lampshades/Edamame.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Edamame.png"
     ],
     "slug": "lampshade-edamame",
     "inStock": true,
@@ -861,7 +853,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Elongated honeycomb pattern creates a mesmerizing vertical light display.",
     "image": "/Kumo/Lampshades/Honeycomb Tall.png",
     "images": [
-      "/Kumo/Lampshades/Honeycomb Tall.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb%20Tall.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb Tall.png"
     ],
     "slug": "lampshade-honeycomb-tall",
     "inStock": true,
@@ -883,7 +876,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Intricate geometric honeycomb structure for complex light and shadow play.",
     "image": "/Kumo/Lampshades/Honeycomb.png",
     "images": [
-      "/Kumo/Lampshades/Honeycomb.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Honeycomb.png"
     ],
     "slug": "lampshade-honeycomb",
     "inStock": true,
@@ -905,7 +898,7 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A rounded, organic shape reminiscent of nature, providing warm, even illumination.",
     "image": "/Kumo/Lampshades/Squash.png",
     "images": [
-      "/Kumo/Lampshades/Squash.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Squash.png"
     ],
     "slug": "lampshade-squash",
     "inStock": true,
@@ -927,7 +920,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Compact Totem shade, perfect for smaller lamp configurations.",
     "image": "/Kumo/Lampshades/Totem D130.png",
     "images": [
-      "/Kumo/Lampshades/Totem D130.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20D130.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem D130.png"
     ],
     "slug": "lampshade-totem-d130",
     "inStock": true,
@@ -949,7 +943,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "A tall, commanding shade from the Totem series for significant light coverage.",
     "image": "/Kumo/Lampshades/Totem Tall D200.png",
     "images": [
-      "/Kumo/Lampshades/Totem Tall D200.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Tall%20D200.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Tall D200.png"
     ],
     "slug": "lampshade-totem-tall-d200",
     "inStock": true,
@@ -971,7 +966,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Slender profile Totem shade for a refined, elegant look.",
     "image": "/Kumo/Lampshades/Totem Thin D150.png",
     "images": [
-      "/Kumo/Lampshades/Totem Thin D150.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Thin%20D150.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Thin D150.png"
     ],
     "slug": "lampshade-totem-thin-d150",
     "inStock": true,
@@ -993,7 +989,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Wider profile Totem shade allowing for broader light distribution.",
     "image": "/Kumo/Lampshades/Totem Wide D175.png",
     "images": [
-      "/Kumo/Lampshades/Totem Wide D175.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem%20Wide%20D175.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Totem Wide D175.png"
     ],
     "slug": "lampshade-totem-wide-d175",
     "inStock": true,
@@ -1015,7 +1012,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Branch-like patterns inspired by trees create a natural woodland atmosphere.",
     "image": "/Kumo/Lampshades/Tree D175.png",
     "images": [
-      "/Kumo/Lampshades/Tree D175.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20D175.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree D175.png"
     ],
     "slug": "lampshade-tree-d175",
     "inStock": true,
@@ -1037,7 +1035,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Unique inverted tree design with three distinct segments.",
     "image": "/Kumo/Lampshades/Tree Inverted 3 Segments D175.png",
     "images": [
-      "/Kumo/Lampshades/Tree Inverted 3 Segments D175.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%203%20Segments%20D175.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted 3 Segments D175.png"
     ],
     "slug": "lampshade-tree-inverted-3-segments-d175",
     "inStock": true,
@@ -1059,7 +1058,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Tall inverted tree design for a dramatic lighting effect.",
     "image": "/Kumo/Lampshades/Tree Inverted Tall D200.png",
     "images": [
-      "/Kumo/Lampshades/Tree Inverted Tall D200.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Tall%20D200.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted Tall D200.png"
     ],
     "slug": "lampshade-tree-inverted-tall-d200",
     "inStock": true,
@@ -1081,7 +1081,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Large, wide inverted tree shade with four segments for maximum impact.",
     "image": "/Kumo/Lampshades/Tree Inverted Wide 4 Segments D240.png",
     "images": [
-      "/Kumo/Lampshades/Tree Inverted Wide 4 Segments D240.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Inverted%20Wide%204%20Segments%20D240.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Inverted Wide 4 Segments D240.png"
     ],
     "slug": "lampshade-tree-inverted-wide-4-segments-d240",
     "inStock": true,
@@ -1103,7 +1104,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Extra tall tree pattern shade for high ceilings and open spaces.",
     "image": "/Kumo/Lampshades/Tree Tall D220.png",
     "images": [
-      "/Kumo/Lampshades/Tree Tall D220.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Tall%20D220.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Tall D220.png"
     ],
     "slug": "lampshade-tree-tall-d220",
     "inStock": true,
@@ -1125,7 +1127,8 @@ LUMINA_PRODUCTS = json.loads("""[
     "description": "Wide tree pattern shade with four segments, providing expansive illumination.",
     "image": "/Kumo/Lampshades/Tree Wide 4 Segments D240.png",
     "images": [
-      "/Kumo/Lampshades/Tree Wide 4 Segments D240.png"
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree%20Wide%204%20Segments%20D240.png",
+      "https://www.luminalab-studio.com/Kumo/Lampshades/Tree Wide 4 Segments D240.png"
     ],
     "slug": "lampshade-tree-wide-4-segments-d240",
     "inStock": true,

@@ -6,6 +6,20 @@ import { useCart } from '../context/CartContext.jsx';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80';
 
+export function resolveGalleryUrl(img, product) {
+  if (!img || typeof img !== 'string') return '';
+  if (img.startsWith('http')) return img;
+
+  // Si es una ruta relativa "/Photos/...", la resolvemos a su URL directa en Cloudinary
+  const baseCandidate = product?.image_url || product?.alternativeImage || '';
+  if (baseCandidate.startsWith('http') && baseCandidate.includes('/')) {
+    const baseDir = baseCandidate.substring(0, baseCandidate.lastIndexOf('/') + 1);
+    const filename = img.substring(img.lastIndexOf('/') + 1);
+    return baseDir + filename;
+  }
+  return img;
+}
+
 export default function ProductDetailPage({ slug, onNavigate }) {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(() => {
@@ -108,12 +122,35 @@ export default function ProductDetailPage({ slug, onNavigate }) {
     );
   }
 
-  // Lista de imágenes para la galería
-  const galleryImages = Array.isArray(product.images) && product.images.length > 0
-    ? product.images
-    : [product.image_url || product.image || FALLBACK_IMAGE];
+  // Construir la lista única y sin duplicados de imágenes reales resueltas
+  const galleryImages = React.useMemo(() => {
+    if (!product) return [];
+    const rawList = Array.isArray(product.images) && product.images.length > 0
+      ? product.images
+      : [product.image_url || product.alternativeImage || product.image || FALLBACK_IMAGE];
 
-  const currentDisplayImage = activeImage || product.image_url || product.image || FALLBACK_IMAGE;
+    const list = [];
+    const seen = new Set();
+
+    // La foto de portada seleccionada va de primera en la galería
+    const primaryCover = resolveGalleryUrl(product.image_url || product.alternativeImage || product.image, product);
+    if (primaryCover) {
+      seen.add(primaryCover);
+      list.push(primaryCover);
+    }
+
+    for (const rawImg of rawList) {
+      const resolved = resolveGalleryUrl(rawImg, product);
+      if (resolved && !seen.has(resolved)) {
+        seen.add(resolved);
+        list.push(resolved);
+      }
+    }
+
+    return list;
+  }, [product]);
+
+  const currentDisplayImage = activeImage || (galleryImages.length > 0 ? galleryImages[0] : (product.image_url || FALLBACK_IMAGE));
 
   // Productos relacionados de la misma colección o categoría (excluyendo el actual)
   const relatedProducts = officialProducts
@@ -187,11 +224,8 @@ export default function ProductDetailPage({ slug, onNavigate }) {
             {/* Tira de Miniaturas si hay múltiples fotos */}
             {galleryImages.length > 1 && (
               <div className="flex items-center gap-3 overflow-x-auto pb-2 pt-1">
-                {galleryImages.map((img, index) => {
-                  const resolvedImg = img.startsWith('http')
-                    ? img
-                    : (product.alternativeImage && index === 0 ? product.alternativeImage : product.image_url || img);
-                  const isSelected = activeImage === resolvedImg || activeImage === img;
+                {galleryImages.map((resolvedImg, index) => {
+                  const isSelected = currentDisplayImage === resolvedImg;
 
                   return (
                     <button
