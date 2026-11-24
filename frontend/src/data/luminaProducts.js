@@ -33,11 +33,10 @@ export const products = [
     "collection": "leora",
     "description": "Moldeada por simulaciones de fuerzas gravitatorias espaciales. Crea curvas únicas que filtran la luz.",
     "image": "/Photos/O1 Gravity Sculpted Lamp/Photos/01.jpg",
-    "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg",
+    "alternativeImage": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/01.jpg",
     "images": [
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg",
-      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
       "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/Size-reference.jpg"
     ],
     "slug": "o1-gravity-sculpted-lamp",
@@ -51,7 +50,7 @@ export const products = [
       "Verde Salvia",
       "Negro Mate"
     ],
-    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg"
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/01.jpg"
   },
   {
     "id": "5",
