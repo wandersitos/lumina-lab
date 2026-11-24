@@ -124,36 +124,19 @@ export default function HomePage({ onNavigate }) {
             </div>
           </div>
 
-          {/* Right Column: Visual Lamp Showcase with Glow */}
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="absolute inset-0 bg-[#F5C28C]/20 blur-[80px] rounded-full transform scale-90 pointer-events-none"></div>
+          {/* Right Column: Hero Visual Showcase (Fotografía editorial limpia sin formato de card) */}
+          <div className="lg:col-span-5 relative flex justify-center items-center">
+            {/* Ambient warm lighting glow */}
+            <div className="absolute inset-0 bg-[#F5C28C]/25 blur-[90px] rounded-full transform scale-90 pointer-events-none"></div>
 
-            <div className="relative w-full max-w-md aspect-[4/5] bg-gradient-to-b from-[#F2EFE9] to-[#E5E0D5] border border-black/10 rounded-sm p-8 flex flex-col justify-between overflow-hidden shadow-2xl">
-              <div className="flex justify-between items-start z-10">
-                <span className="text-[10px] font-mono-tech uppercase tracking-[0.25em] text-[#666]">COLECCIÓN LEORA • N° 01</span>
-                <span className="px-2 py-0.5 bg-black text-white text-[9px] font-mono-tech tracking-widest uppercase">DISPONIBLE</span>
-              </div>
-
-              <div className="my-auto flex justify-center items-center relative py-4">
-                <div className="absolute w-36 h-36 rounded-full bg-[#FFB86A] blur-2xl opacity-40 pointer-events-none"></div>
-                
-                <div className="relative z-10 w-64 h-64 rounded-xl overflow-hidden shadow-lg border border-black/5 bg-[#FAF9F7] flex items-center justify-center transition-transform duration-700 hover:scale-105">
-                  <img
-                    src={siteConfig.heroImageUrl || "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg"}
-                    alt="O1 Gravity Sculpted Lamp - Colección Leora"
-                    className="w-full h-full object-cover object-center"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-between items-end border-t border-black/10 pt-4 z-10">
-                <div>
-                  <h4 className="font-serif-title text-lg text-[#121212]">O1 Gravity Sculpted Lamp</h4>
-                  <p className="text-[11px] font-mono-tech text-[#666]">Luz Ambiental Cálida • Biopolímero PLA</p>
-                </div>
-                <span className="font-mono-tech font-medium text-sm text-[#121212]">$455.000 COP</span>
-              </div>
+            {/* Imagen principal limpia y elegante */}
+            <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-black/10 bg-[#FAF9F7] group">
+              <img
+                src={siteConfig.heroImageUrl || "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg"}
+                alt="Colección Leora - Lumina Lab 3D Lighting"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="eager"
+              />
             </div>
           </div>
 
