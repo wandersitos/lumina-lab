@@ -31,8 +31,6 @@ export default function ProductsPage({ onNavigate }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
-  const [refreshSuccess, setRefreshSuccess] = useState(false);
 
   // Helper para resolver la URL base de la API
   const getApiBaseUrl = () => {
@@ -65,11 +63,7 @@ export default function ProductsPage({ onNavigate }) {
       }
     }
 
-    if (forceRefresh) {
-      setRefreshing(true);
-    } else {
-      setLoading(true);
-    }
+    setLoading(true);
 
     const apiUrl = `${getApiBaseUrl()}/api/products/${forceRefresh ? '?refresh=true' : ''}`;
 
@@ -100,22 +94,16 @@ export default function ProductsPage({ onNavigate }) {
             console.warn('Error guardando en caché:', e);
           }
 
-          if (forceRefresh) {
-            setRefreshSuccess(true);
-            setTimeout(() => setRefreshSuccess(false), 4000);
-          }
         } else {
           setProducts([]);
         }
         setLoading(false);
-        setRefreshing(false);
       })
       .catch((err) => {
         console.warn('API /api/products/ no disponible, usando catálogo local de respaldo:', err);
         setProducts(officialProducts);
         setError(err.message);
         setLoading(false);
-        setRefreshing(false);
       });
   };
 
@@ -290,27 +278,8 @@ export default function ProductsPage({ onNavigate }) {
               <span>Filtros {hasActiveFilters ? `(${selectedCollections.length + selectedCategories.length})` : ''}</span>
             </button>
 
-            {/* Controles: Refrescar Caché y Ordenamiento */}
+            {/* Controles: Ordenamiento */}
             <div className="flex items-center gap-3">
-              {refreshSuccess && (
-                <span className="text-[10px] font-mono-tech text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-1 border border-emerald-200 rounded">
-                  ✓ Catálogo Actualizado
-                </span>
-              )}
-
-              <button
-                type="button"
-                onClick={() => fetchCatalogFromApi(true)}
-                disabled={refreshing}
-                title="Refrescar catálogo y textos desde la base de datos"
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E0DED7] bg-white text-xs font-mono-tech tracking-wider uppercase text-[#555] hover:text-black hover:border-black transition-colors"
-              >
-                <svg className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span>{refreshing ? 'Actualizando...' : 'Refrescar'}</span>
-              </button>
-
               <label htmlFor="sortSelect" className="text-[#888] uppercase tracking-wider hidden sm:inline text-xs font-mono-tech">
                 Ordenar por:
               </label>
