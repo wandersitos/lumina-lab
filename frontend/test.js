@@ -179,13 +179,13 @@ assert(Array.isArray(luminaProducts) && luminaProducts.length >= 35, 'R3 (009): 
 // Validar lámparas emblemáticas de Leora
 const o1Gravity = luminaProducts.find(p => p.slug === 'o1-gravity-sculpted-lamp');
 assert(o1Gravity, 'R3 (009): O1 Gravity Sculpted Lamp must exist in catalog');
-assert.strictEqual(o1Gravity.price, 455000, 'R3 (009): O1 Gravity price must be 455.000 COP');
+assert.strictEqual(o1Gravity.price, 150000, 'R3 (009): O1 Gravity price must be 150.000 COP');
 assert.strictEqual(o1Gravity.category, 'Sculpted', 'R3 (009): O1 Gravity category must be Sculpted');
 assert.strictEqual(o1Gravity.collection, 'leora', 'R3 (009): O1 Gravity collection must be leora');
 
 const o11Ocean = luminaProducts.find(p => p.slug === 'o11-s-ocean-petals-sculpted-mini-lamp');
 assert(o11Ocean, 'R3 (009): O11-S Ocean Petals Mini Lamp must exist');
-assert.strictEqual(o11Ocean.price, 129000, 'R3 (009): O11-S price must be 129.000 COP');
+assert.strictEqual(o11Ocean.price, 150000, 'R3 (009): O11-S price must be 150.000 COP');
 assert.strictEqual(o11Ocean.category, 'Mini', 'R3 (009): O11-S category must be Mini');
 
 const o12Fire = luminaProducts.find(p => p.slug === 'o12-s-fire-sculpted-mini-lamp');
