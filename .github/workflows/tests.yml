@@ -17,5 +17,5 @@ jobs:
           pip install -r api/requirements.txt
           pip install -r api/requirements-dev.txt
       - name: Run full suite
-        run: ./scripts/ci/full-suite
+        run: bash ./scripts/ci/full-suite
 

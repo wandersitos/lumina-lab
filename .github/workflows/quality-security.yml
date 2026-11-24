@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install -r api/requirements.txt
       - name: Run lint
-        run: ./scripts/ci/lint
+        run: bash ./scripts/ci/lint
 
   security:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
         run: |
           pip install -r api/requirements.txt
       - name: Run security check
-        run: ./scripts/ci/security
+        run: bash ./scripts/ci/security
 
   quality-security:
     runs-on: ubuntu-latest
