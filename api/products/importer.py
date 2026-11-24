@@ -181,6 +181,36 @@ class CatalogImporter:
         else:
             is_active = True
 
+        collection = str(item.get('collection', '') or '').strip()
+        category = str(item.get('category', '') or '').strip()
+
+        in_stock_raw = item.get('in_stock', item.get('instock', True))
+        if isinstance(in_stock_raw, bool):
+            in_stock = in_stock_raw
+        elif isinstance(in_stock_raw, str):
+            in_stock = in_stock_raw.strip().lower() in ('true', '1', 'yes', 't', 'si', 'sí')
+        elif isinstance(in_stock_raw, (int, float)):
+            in_stock = bool(in_stock_raw)
+        else:
+            in_stock = True
+
+        images_raw = item.get('images', [])
+        if isinstance(images_raw, list):
+            images = [str(img).strip() for img in images_raw if str(img).strip()]
+        elif isinstance(images_raw, str) and images_raw.strip():
+            images = [img.strip() for img in images_raw.split(',') if img.strip()]
+        else:
+            images = []
+        if not images and image_url:
+            images = [image_url]
+
+        try:
+            order = int(item.get('order', 99) or 99)
+        except Exception:
+            order = 99
+
+        material = str(item.get('material', 'PLA Biodegradable') or 'PLA Biodegradable').strip()
+
         defaults = {
             'name': name,
             'price': price,
@@ -189,6 +219,12 @@ class CatalogImporter:
             'image_url': image_url,
             'colors': colors,
             'is_active': is_active,
+            'collection': collection,
+            'category': category,
+            'in_stock': in_stock,
+            'images': images,
+            'order': order,
+            'material': material,
         }
 
         product, created = Product.objects.update_or_create(slug=slug, defaults=defaults)

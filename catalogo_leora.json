@@ -1,0 +1,528 @@
+[
+  {
+    "name": "O1 GRAVITY SCULPTED LAMP",
+    "slug": "o1-gravity-sculpted-lamp",
+    "price": 150000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Moldeada por simulaciones de fuerzas gravitatorias espaciales. Crea curvas únicas que filtran la luz.",
+    "dimensions": "170 x 170 x 159 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209531/lumina-lab/Leora/O1%20Gravity%20Sculpted%20Lamp/Photos/Size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 1,
+    "is_active": true
+  },
+  {
+    "name": "O2 LANDSCAPE SCULPTED LAMP",
+    "slug": "o2-landscape-sculpted-lamp",
+    "price": 100000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Presenta contornos fluidos que evocan colinas y valles ondulados.",
+    "dimensions": "170 x 170 x 159 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 2,
+    "is_active": true
+  },
+  {
+    "name": "O3 DUNE SCULPTED LAMP",
+    "slug": "o3-dune-sculpted-lamp",
+    "price": 100000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Inspirada en las dunas de arena esculpidas por el viento; transforma una esfera en curvas suaves.",
+    "dimensions": "169 x 170 x 161 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O3%20Dune%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 3,
+    "is_active": true
+  },
+  {
+    "name": "O4 FLOW SCULPTED LAMP",
+    "slug": "o4-flow-sculpted-lamp",
+    "price": 100000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Captura el movimiento fluido del agua con líneas suaves y superficies onduladas.",
+    "dimensions": "169 x 170 x 160 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 4,
+    "is_active": true
+  },
+  {
+    "name": "O5 WIND-SCULPTED LAMP",
+    "slug": "o5-wind-sculpted-lamp",
+    "price": 150000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Diseño de mayor escala inspirado en la fuerza erosiva del viento sobre la materia.",
+    "dimensions": "170 x 170 x 160 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209569/lumina-lab/Leora/O5%20Wind-Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 5,
+    "is_active": true
+  },
+  {
+    "name": "O6 LAVA SCULPTED LAMP",
+    "slug": "o6-lava-sculpted-lamp",
+    "price": 125000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Evolución de una esfera hacia contornos estratificados que suavizan la luz ambiental.",
+    "dimensions": "170 x 170 x 158 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209574/lumina-lab/Leora/O6%20Lava%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 6,
+    "is_active": true
+  },
+  {
+    "name": "O7 CORAL SCULPTED LAMP",
+    "slug": "o7-coral-sculpted-lamp",
+    "price": 150000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Mezcla ramificaciones orgánicas con curvas fluidas, imitando la complejidad del coral.",
+    "dimensions": "168 x 170 x 159 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/02.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/06.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/07.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209578/lumina-lab/Leora/O7%20Coral%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 7,
+    "is_active": true
+  },
+  {
+    "name": "O8 RIVER SCULPTED LAMP",
+    "slug": "o8-river-sculpted-lamp",
+    "price": 100000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Inspirada en el curso de un río, con crestas fluidas y patrones de sombras rítmicos.",
+    "dimensions": "170 x 170 x 160 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/02.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209585/lumina-lab/Leora/O8%20River%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 8,
+    "is_active": true
+  },
+  {
+    "name": "O9 REEF SCULPTED LAMP",
+    "slug": "o9-reef-sculpted-lamp",
+    "price": 125000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Evoca formaciones de arrecifes oceánicos con formas convergentes que difunden la luz.",
+    "dimensions": "170 x 169 x 166 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209590/lumina-lab/Leora/O9%20Reef%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 9,
+    "is_active": true
+  },
+  {
+    "name": "O10 GROWTH SCULPTED LAMP",
+    "slug": "o10-growth-sculpted-lamp",
+    "price": 125000.0,
+    "category": "Sculpted",
+    "collection": "leora",
+    "description": "Basada en simulaciones de crecimiento natural, con crestas orgánicas que nacen de una esfera.",
+    "dimensions": "170 x 168 x 163 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/02.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209533/lumina-lab/Leora/O10%20Growth%20Sculpted%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": false,
+    "order": 10,
+    "is_active": true
+  },
+  {
+    "name": "O11-S OCEAN PETALS SCULPTED MINI LAMP",
+    "slug": "o11-s-ocean-petals-sculpted-mini-lamp",
+    "price": 150000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Capas onduladas que parecen haber sido divididas por una ola.",
+    "dimensions": "148 x 158 x 130 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209537/lumina-lab/Leora/O11-s%20Ocean%20Petals%20Sculpted%20Mini%20Lamp/Photos/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 11,
+    "is_active": true
+  },
+  {
+    "name": "O12-S FIRE SCULPTED MINI LAMP",
+    "slug": "o12-s-fire-sculpted-mini-lamp",
+    "price": 125000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Usa dos tipos de PLA (negro/naranja) para crear un brillo cálido focalizado.",
+    "dimensions": "150 x 145 x 120 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/O12-s-V2-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/O12-s-V2-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/04.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/05.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/06.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/07.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209540/lumina-lab/Leora/O12-s%20Fire%20Sculpted%20Mini%20Lamp/size-reference.jpg"
+    ],
+    "in_stock": true,
+    "order": 12,
+    "is_active": true
+  },
+  {
+    "name": "O13-S EROSION SCULPTED MINI LAMP",
+    "slug": "o13-s-erosion-sculpted-mini-lamp",
+    "price": 100000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Inspirada en formaciones rocosas milenarias con múltiples capas de sombra.",
+    "dimensions": "150 x 150 x 140 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209551/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-12.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209551/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-12.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209549/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-11.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209548/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209548/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774210024/lumina-lab/Leora/O13-s%20Erosion%20Sculpted%20Mini%20Lamp/Lamp-13-size-reference.webp"
+    ],
+    "in_stock": true,
+    "order": 13,
+    "is_active": true
+  },
+  {
+    "name": "O14-S PLATE CORAL MINI LAMP",
+    "slug": "o14-s-plate-coral-mini-lamp",
+    "price": 125000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Inspirada en las formaciones planas y extendidas del coral de placa, esta lámpara crea un hermoso patrón de luz ambiental.",
+    "dimensions": "180 x 179 x 138 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209552/lumina-lab/Leora/O14s%20Plate%20Coral/O14-s-02.jpg"
+    ],
+    "in_stock": true,
+    "order": 14,
+    "is_active": true
+  },
+  {
+    "name": "O15-S BIOMORPHIC MINI LAMP",
+    "slug": "o15-s-biomorphic-mini-lamp",
+    "price": 125000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Cada unidad es única; el diseño computacional se genera individualmente para cada pedido.",
+    "dimensions": "149 x 149 x 135 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209554/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209554/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-02.jpg"
+    ],
+    "in_stock": true,
+    "order": 15,
+    "is_active": true
+  },
+  {
+    "name": "O16-S UNDERWATER BLOOM MINI LAMP",
+    "slug": "o16-s-underwater-bloom-mini-lamp",
+    "price": 150000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Captura la magia de un florecimiento submarino con esta delicada lámpara que difunde la luz como rayos de sol en el océano.",
+    "dimensions": "120 x 181 x 173 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209555/lumina-lab/Leora/O16-s%20Underwater/O16-s-02.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209556/lumina-lab/Leora/O16-s%20Underwater/O16-s-04.jpg"
+    ],
+    "in_stock": true,
+    "order": 16,
+    "is_active": true
+  },
+  {
+    "name": "O17-S BEEHIVE SCULPTED MINI LAMP",
+    "slug": "o17-s-beehive-sculpted-mini-lamp",
+    "price": 150000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Inspirada en la intrincada geometría de un panal, esta lámpara aporta calidez y orden natural a tu hogar.",
+    "dimensions": "145 x 145 x 141 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209527/lumina-lab/Leora/017-s%20Beehive%20Mini%20Lamp/O17-s-01.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209527/lumina-lab/Leora/017-s%20Beehive%20Mini%20Lamp/O17-s-01.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774210026/lumina-lab/Leora/017-s%20Beehive%20Mini%20Lamp/photo_02.png",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774210027/lumina-lab/Leora/017-s%20Beehive%20Mini%20Lamp/photo_03.png"
+    ],
+    "in_stock": true,
+    "order": 17,
+    "is_active": true
+  },
+  {
+    "name": "O18-S SELF ORGANIZED MINI LAMP",
+    "slug": "o18-s-self-organized-mini-lamp",
+    "price": 100000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Un tributo a la belleza de la auto-organización en la naturaleza, creando patrones complejos pero armoniosos.",
+    "dimensions": "150 x 149 x 139 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209529/lumina-lab/Leora/018-s%20Self%20Sculpted%20Mini%20Lamp/O18-s-02.jpg"
+    ],
+    "in_stock": true,
+    "order": 18,
+    "is_active": true
+  },
+  {
+    "name": "O19-S FROST MINI LAMP",
+    "slug": "o19-s-frost-mini-lamp",
+    "price": 100000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "Patrones de escarcha cristalina renderizados en forma escultórica, proyectando un brillo frío y etéreo.",
+    "dimensions": "150 x 150 x 141 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209557/lumina-lab/Leora/O19-s%20Frost/Lamp-19-02.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209557/lumina-lab/Leora/O19-s%20Frost/Lamp-19-02.jpg"
+    ],
+    "in_stock": true,
+    "order": 19,
+    "is_active": true
+  },
+  {
+    "name": "O20-S MAGMA MINI LAMP",
+    "slug": "o20-s-magma-mini-lamp",
+    "price": 125000.0,
+    "category": "Mini",
+    "collection": "leora",
+    "description": "El poder bruto del magma volcánico capturado en forma esculpida: texturas fundidas que brillan con calor interno.",
+    "dimensions": "133 x 149 x 141 mm",
+    "material": "PLA Biodegradable",
+    "colors": [
+      "Blanco Cálido",
+      "Terracota",
+      "Verde Salvia",
+      "Negro Mate"
+    ],
+    "image_url": "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg",
+    "images": [
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209562/lumina-lab/Leora/O20-s%20Magma/Lamp-20-03.jpg",
+      "https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209561/lumina-lab/Leora/O20-s%20Magma/Lamp-20-02.jpg"
+    ],
+    "in_stock": true,
+    "order": 20,
+    "is_active": true
+  }
+]
