@@ -34,7 +34,7 @@ export default function CartDrawer() {
   const generateWhatsAppMessage = () => {
     let msg = `¡Hola Lumina Lab! Deseo realizar el siguiente pedido de lámparas 3D:\n\n`;
     items.forEach((item, index) => {
-      msg += `${index + 1}. ${item.name} (${item.color}) x ${item.quantity} = ${formatCOP(
+      msg += `${index + 1}. ${item.name}${item.dimensions ? ` (${item.dimensions})` : ''} x ${item.quantity} = ${formatCOP(
         item.price * item.quantity
       )} COP\n`;
     });
@@ -126,9 +126,11 @@ export default function CartDrawer() {
                       </span>
                     </div>
 
-                    <p className="text-[11px] font-mono-tech text-[#777]">
-                      Color: {item.color}
-                    </p>
+                    {item.dimensions && (
+                      <p className="text-[11px] font-mono-tech text-[#777]">
+                        {item.dimensions}
+                      </p>
+                    )}
 
                     <div className="flex items-center justify-between pt-2">
                       <div className="inline-flex items-center border border-[#DDD] bg-white rounded-sm">

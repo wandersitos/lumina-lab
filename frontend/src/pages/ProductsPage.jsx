@@ -333,7 +333,13 @@ export default function ProductsPage({ onNavigate }) {
                   <ProductCard
                     key={product.id || product.slug}
                     product={product}
-                    onSelectDetail={(prod) => setActiveDetailProduct(prod)}
+                    onSelectDetail={(prod) => {
+                      if (onNavigate) {
+                        onNavigate(`/product/${prod.slug}`);
+                      } else {
+                        setActiveDetailProduct(prod);
+                      }
+                    }}
                   />
                 ))}
               </div>

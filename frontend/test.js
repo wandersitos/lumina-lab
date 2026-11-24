@@ -127,8 +127,8 @@ assert(appContent.includes('Entrega Asegurada a tu Puerta') || appContent.includ
 assert(appContent.includes('footer') || appContent.includes('Footer') || appContent.includes('site-footer'), 'R1 (008): App.jsx must include structured site footer');
 assert(appContent.includes('@luminalab_co'), 'R1 (008): App.jsx footer must include official instagram handle @luminalab_co');
 
-// R2: Badges y muestras interactivas en tarjetas de producto
-assert(productCardContent.includes('color-swatch') || productCardContent.includes('color-swatches'), 'R2 (008): ProductCard.jsx must have color swatch classes');
+// R2: Badges y estética en tarjetas de producto (opción de colores eliminada por requerimiento)
+assert(!productCardContent.includes('color-swatch-btn'), 'R2 (008): ProductCard.jsx must not render color swatches per user request');
 assert(productCardContent.includes('Bajo demanda') || productCardContent.includes('Bajo Demanda'), 'R2 (008): ProductCard.jsx must display on-demand badge');
 assert(productCardContent.includes('formatCOP') || productCardContent.includes('COP'), 'R2 (008): ProductCard.jsx must format prices in COP');
 
@@ -145,11 +145,13 @@ const luminaProductsPath = path.join(__dirname, 'src/data/luminaProducts.js');
 const productFiltersPath = path.join(__dirname, 'src/components/ProductFilters.jsx');
 const homePagePath = path.join(__dirname, 'src/pages/HomePage.jsx');
 const productsPagePath = path.join(__dirname, 'src/pages/ProductsPage.jsx');
+const productDetailPagePath = path.join(__dirname, 'src/pages/ProductDetailPage.jsx');
 
 // R1: Navegación limpia y archivos de páginas
 assert(fs.existsSync(homePagePath), 'R1 (009): src/pages/HomePage.jsx must exist');
 assert(fs.existsSync(productsPagePath), 'R1 (009): src/pages/ProductsPage.jsx must exist');
-assert(appContent.includes("onNavigate('/')") || appContent.includes("onNavigate('/products')"), 'R1 (009): App.jsx must support navigation between / and /products');
+assert(fs.existsSync(productDetailPagePath), 'R1 (009): src/pages/ProductDetailPage.jsx must exist');
+assert(appContent.includes("onNavigate") || appContent.includes("handleNavigate"), 'R1 (009): App.jsx must support navigation between / and /products');
 assert(appContent.includes('Inicio'), 'R1 (009): App.jsx navbar must render "Inicio" option');
 assert(appContent.includes('Productos'), 'R1 (009): App.jsx navbar must render "Productos" option');
 assert(!appContent.includes('href="#bespoke"'), 'R1 (009): App.jsx navbar must not include obsolete bespoke link');

@@ -66,16 +66,21 @@ export default function HomePage({ onNavigate }) {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                type="button"
-                onClick={() => onNavigate && onNavigate('/products')}
+              <a
+                href="/products"
+                onClick={(e) => {
+                  if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    onNavigate && onNavigate('/products');
+                  }
+                }}
                 className="px-8 py-4 bg-[#121212] hover:bg-[#2A2A2A] text-white text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-smooth inline-flex items-center gap-3 shadow-md"
               >
                 Explorar Catálogo
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
-              </button>
+              </a>
               <a
                 href={siteConfig.social.whatsapp.url}
                 target="_blank"
@@ -267,13 +272,18 @@ export default function HomePage({ onNavigate }) {
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => onNavigate && onNavigate('/products')}
+          <a
+            href="/products"
+            onClick={(e) => {
+              if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                onNavigate && onNavigate('/products');
+              }
+            }}
             className="px-6 py-3 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[11px] font-mono-tech tracking-[0.2em] uppercase transition-all"
           >
             Ver Todo el Catálogo →
-          </button>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -281,7 +291,13 @@ export default function HomePage({ onNavigate }) {
             <ProductCard
               key={product.id || product.slug}
               product={product}
-              onSelectDetail={(prod) => setActiveDetailProduct(prod)}
+              onSelectDetail={(prod) => {
+                if (onNavigate) {
+                  onNavigate(`/product/${prod.slug}`);
+                } else {
+                  setActiveDetailProduct(prod);
+                }
+              }}
             />
           ))}
         </div>

@@ -18,14 +18,13 @@ export default function ProductDetailModal({ product, onClose }) {
 
   if (!product) return null;
 
-  const colorText = product.selectedColor ? ` en color ${product.selectedColor}` : '';
   const message = encodeURIComponent(
-    `¡Hola! Estoy interesado en ordenar la ${product.name}${colorText} (${product.dimensions}) por ${formatCOP(product.price)} COP de Lumina Lab.`
+    `¡Hola! Estoy interesado en ordenar la ${product.name} (${product.dimensions || ''}) por ${formatCOP(product.price)} COP de Lumina Lab.`
   );
   const whatsappUrl = `https://wa.me/${siteConfig.social.whatsapp.number.replace(/[^0-9]/g, '')}?text=${message}`;
 
   const handleAddToCart = () => {
-    addToCart(product, product.selectedColor, 1);
+    addToCart(product, null, 1);
     onClose();
   };
 
@@ -68,12 +67,6 @@ export default function ProductDetailModal({ product, onClose }) {
                 <span className="spec-label">Material de impresión:</span>
                 <span className="spec-value">PLA biodegradable de origen vegetal de alta resistencia</span>
               </div>
-              {product.selectedColor && (
-                <div className="spec-item">
-                  <span className="spec-label">Color seleccionado:</span>
-                  <span className="spec-value">{product.selectedColor}</span>
-                </div>
-              )}
             </div>
 
             <div className="modal-ondemand-notice">

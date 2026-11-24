@@ -5,9 +5,19 @@ import CheckoutModal from './components/CheckoutModal.jsx';
 import { CartProvider, useCart } from './context/CartContext.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProductsPage from './pages/ProductsPage.jsx';
+import ProductDetailPage from './pages/ProductDetailPage.jsx';
 
 function NavbarContent({ currentView, onNavigate }) {
   const { totalItems, setIsCartOpen } = useCart();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLinkClick = (e, path) => {
+    setMobileMenuOpen(false);
+    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      onNavigate(path);
+    }
+  };
 
   return (
     <>
@@ -27,15 +37,35 @@ function NavbarContent({ currentView, onNavigate }) {
         </a>
       </div>
 
-      {/* Header / Navigation Simplificada: Inicio y Productos */}
+      {/* Header / Navigation Totalmente Responsivo */}
       <header className="sticky top-0 z-40 bg-[#FAF9F7]/95 backdrop-blur-md border-b border-[#E8E6E1]">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           
-          {/* Navegación Principal: Exclusivamente Inicio y Productos */}
-          <nav className="flex items-center gap-6 sm:gap-8 text-[12px] font-mono-tech tracking-[0.18em] uppercase main-nav">
+          {/* Botón Menú Móvil (Hamburger) en pantallas pequeñas */}
+          <div className="flex items-center md:hidden">
             <button
               type="button"
-              onClick={() => onNavigate('/')}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 -ml-2 text-[#121212] hover:text-black focus:outline-none"
+              aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú de navegación'}
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          {/* Navegación Principal Escritorio: Inicio y Productos con tags <a> nativos */}
+          <nav className="hidden md:flex items-center gap-6 sm:gap-8 text-[12px] font-mono-tech tracking-[0.18em] uppercase main-nav">
+            <a
+              href="/"
+              onClick={(e) => handleLinkClick(e, '/')}
               className={`transition-colors py-2 border-b-2 ${
                 currentView === 'home'
                   ? 'border-black text-black font-semibold'
@@ -43,10 +73,10 @@ function NavbarContent({ currentView, onNavigate }) {
               }`}
             >
               Inicio
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('/products')}
+            </a>
+            <a
+              href="/products"
+              onClick={(e) => handleLinkClick(e, '/products')}
               className={`transition-colors py-2 border-b-2 ${
                 currentView === 'products'
                   ? 'border-black text-black font-semibold'
@@ -54,26 +84,30 @@ function NavbarContent({ currentView, onNavigate }) {
               }`}
             >
               Productos
-            </button>
+            </a>
           </nav>
 
-          {/* Logo Central */}
-          <div className="flex flex-col items-center cursor-pointer" onClick={() => onNavigate('/')}>
-            <span className="text-xl sm:text-2xl font-serif-title tracking-[0.25em] font-medium text-[#121212]">
+          {/* Logo Central (sin colisión en mobile) */}
+          <a
+            href="/"
+            onClick={(e) => handleLinkClick(e, '/')}
+            className="flex flex-col items-center cursor-pointer text-center"
+          >
+            <span className="text-lg sm:text-2xl font-serif-title tracking-[0.25em] font-medium text-[#121212]">
               {siteConfig.name.toUpperCase()}
             </span>
-            <span className="text-[9px] font-mono-tech tracking-[0.35em] text-[#888884] uppercase -mt-0.5">
+            <span className="text-[8px] sm:text-[9px] font-mono-tech tracking-[0.35em] text-[#888884] uppercase -mt-0.5">
               STUDIO • 3D LIGHTING
             </span>
-          </div>
+          </a>
 
           {/* Acciones Derecha: Instagram y Bolsa */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
             <a
               href={siteConfig.social.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-[11px] font-mono-tech uppercase tracking-wider text-[#666] hover:text-black transition-colors"
+              className="hidden lg:flex items-center gap-1.5 text-[11px] font-mono-tech uppercase tracking-wider text-[#666] hover:text-black transition-colors"
             >
               <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -85,7 +119,7 @@ function NavbarContent({ currentView, onNavigate }) {
               id="cartBtn"
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-2.5 px-4 py-2 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[11px] font-mono-tech tracking-[0.18em] uppercase transition-all shadow-sm"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[10px] sm:text-[11px] font-mono-tech tracking-[0.18em] uppercase transition-all shadow-sm"
               aria-label="Abrir bolsa de compra"
             >
               <span>Bolsa</span>
@@ -96,23 +130,73 @@ function NavbarContent({ currentView, onNavigate }) {
           </div>
 
         </div>
+
+        {/* Desplegable de Navegación Móvil */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-[#FAF9F7] border-t border-[#E8E6E1] px-6 py-4 space-y-3 font-mono-tech text-xs uppercase tracking-[0.2em] shadow-lg">
+            <a
+              href="/"
+              onClick={(e) => handleLinkClick(e, '/')}
+              className={`block py-2.5 border-b border-[#E8E6E1]/60 ${
+                currentView === 'home' ? 'font-bold text-black' : 'text-[#555]'
+              }`}
+            >
+              Inicio
+            </a>
+            <a
+              href="/products"
+              onClick={(e) => handleLinkClick(e, '/products')}
+              className={`block py-2.5 border-b border-[#E8E6E1]/60 ${
+                currentView === 'products' ? 'font-bold text-black' : 'text-[#555]'
+              }`}
+            >
+              Productos
+            </a>
+            <a
+              href={siteConfig.social.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block py-2.5 text-[#555] hover:text-black border-b border-[#E8E6E1]/60"
+            >
+              Instagram @luminalab_co
+            </a>
+            <a
+              href={siteConfig.social.whatsapp.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block py-2.5 text-[#25D366] font-semibold"
+            >
+              Asesoría por WhatsApp
+            </a>
+          </div>
+        )}
       </header>
     </>
   );
 }
 
-function MainApp() {
-  const [currentPath, setCurrentPath] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname;
-      const search = window.location.search;
-      if (path === '/products' || path.startsWith('/products') || search.includes('view=products')) {
-        return 'products';
-      }
-    }
-    return 'home';
-  });
+function parseCurrentRoute() {
+  if (typeof window === 'undefined') {
+    return { view: 'home', slug: null };
+  }
+  const path = window.location.pathname;
+  const search = window.location.search;
 
+  // Ruta detalle de producto: /product/:slug o /producto/:slug o /products/:slug (cuando slug no está vacío)
+  const productMatch = path.match(/^\/(?:product|producto|products)\/([a-zA-Z0-9_-]+)\/?$/);
+  if (productMatch && productMatch[1]) {
+    return { view: 'product-detail', slug: productMatch[1] };
+  }
+
+  if (path === '/products' || path === '/products/' || search.includes('view=products')) {
+    return { view: 'products', slug: null };
+  }
+
+  return { view: 'home', slug: null };
+}
+
+function MainApp() {
+  const [route, setRoute] = useState(parseCurrentRoute);
   const [healthStatus, setHealthStatus] = useState('Conectando...');
   const [errorDetails, setErrorDetails] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -120,13 +204,7 @@ function MainApp() {
   // Manejo de historial del navegador (popstate)
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname;
-      const search = window.location.search;
-      if (path === '/products' || path.startsWith('/products') || search.includes('view=products')) {
-        setCurrentPath('products');
-      } else {
-        setCurrentPath('home');
-      }
+      setRoute(parseCurrentRoute());
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -135,11 +213,17 @@ function MainApp() {
 
   // Navegación entre vistas
   const handleNavigate = (targetPath) => {
-    if (targetPath === '/products' || targetPath === 'products') {
-      setCurrentPath('products');
+    if (!targetPath) return;
+
+    const productMatch = targetPath.match(/^\/(?:product|producto|products)\/([a-zA-Z0-9_-]+)\/?$/);
+    if (productMatch && productMatch[1]) {
+      setRoute({ view: 'product-detail', slug: productMatch[1] });
+      window.history.pushState(null, '', `/product/${productMatch[1]}`);
+    } else if (targetPath === '/products' || targetPath === 'products') {
+      setRoute({ view: 'products', slug: null });
       window.history.pushState(null, '', '/products');
     } else {
-      setCurrentPath('home');
+      setRoute({ view: 'home', slug: null });
       window.history.pushState(null, '', '/');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -167,12 +251,14 @@ function MainApp() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F7] text-[#121212]">
-      {/* Header con Navbar exclusiva Inicio y Productos */}
-      <NavbarContent currentView={currentPath} onNavigate={handleNavigate} />
+      {/* Header con Navbar responsiva Inicio y Productos */}
+      <NavbarContent currentView={route.view} onNavigate={handleNavigate} />
 
-      {/* Contenido Principal según la vista seleccionada */}
+      {/* Contenido Principal según la ruta activa */}
       <main className="flex-1">
-        {currentPath === 'products' ? (
+        {route.view === 'product-detail' ? (
+          <ProductDetailPage slug={route.slug} onNavigate={handleNavigate} />
+        ) : route.view === 'products' ? (
           <ProductsPage onNavigate={handleNavigate} />
         ) : (
           <HomePage onNavigate={handleNavigate} />
@@ -208,14 +294,32 @@ function MainApp() {
             <h4 className="text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#AAA]">NAVEGACIÓN</h4>
             <ul className="text-xs space-y-2 text-[#777] font-light">
               <li>
-                <button type="button" onClick={() => handleNavigate('/')} className="hover:text-white transition-colors">
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+                      e.preventDefault();
+                      handleNavigate('/');
+                    }
+                  }}
+                  className="hover:text-white transition-colors"
+                >
                   Inicio
-                </button>
+                </a>
               </li>
               <li>
-                <button type="button" onClick={() => handleNavigate('/products')} className="hover:text-white transition-colors">
+                <a
+                  href="/products"
+                  onClick={(e) => {
+                    if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+                      e.preventDefault();
+                      handleNavigate('/products');
+                    }
+                  }}
+                  className="hover:text-white transition-colors"
+                >
                   Productos
-                </button>
+                </a>
               </li>
               <li>
                 <a href={siteConfig.social.whatsapp.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
