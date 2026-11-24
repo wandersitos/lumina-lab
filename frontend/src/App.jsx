@@ -273,7 +273,7 @@ function MainApp() {
             <p className="text-xs text-[#888] font-light max-w-sm leading-relaxed">
               Atelier de iluminación y decoración 3D contemporánea. Fabricación aditiva de alta precisión bajo demanda en Colombia.
             </p>
-            <span className="text-[11px] font-mono-tech text-[#AAA] block">Bogotá D.C., Colombia</span>
+            <span className="text-[11px] font-mono-tech text-[#AAA] block">Medellín, Colombia</span>
           </div>
 
           <div className="md:col-span-2 space-y-3">

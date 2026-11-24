@@ -18,8 +18,8 @@ class EnvioclickAdapter(ShippingRateService):
     """
     Adaptador de cotización de Envíoclick calibrado para Colombia.
     Tarifas base en COP:
-    - Bogotá: $10.000 (Coordinadora, 1-2 días)
-    - Medellín: $13.500 (Servientrega, 2-3 días)
+    - Medellín: $10.000 (Coordinadora, 1-2 días)
+    - Bogotá: $13.500 (Servientrega, 2-3 días)
     - Cali: $14.000 (Envía, 2-3 días)
     - Barranquilla: $16.000 (Coordinadora, 3-4 días)
     - Bucaramanga: $14.500 (Servientrega, 2-3 días)
@@ -29,8 +29,8 @@ class EnvioclickAdapter(ShippingRateService):
     """
 
     BASE_RATES = {
-        'bogota': {'base': 10000, 'carrier': 'Coordinadora', 'days': '1-2 días hábiles'},
-        'medellin': {'base': 13500, 'carrier': 'Servientrega', 'days': '2-3 días hábiles'},
+        'medellin': {'base': 10000, 'carrier': 'Coordinadora', 'days': '1-2 días hábiles'},
+        'bogota': {'base': 13500, 'carrier': 'Servientrega', 'days': '2-3 días hábiles'},
         'cali': {'base': 14000, 'carrier': 'Envía', 'days': '2-3 días hábiles'},
         'barranquilla': {'base': 16000, 'carrier': 'Coordinadora', 'days': '3-4 días hábiles'},
         'bucaramanga': {'base': 14500, 'carrier': 'Servientrega', 'days': '2-3 días hábiles'},

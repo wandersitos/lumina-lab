@@ -32,7 +32,7 @@ class AdminPanelTestCase(TestCase):
             customer_email='laura@example.com',
             customer_phone='3001234567',
             shipping_address='Cra 15 # 85-20',
-            shipping_city='Bogotá',
+            shipping_city='Medellín',
             items_summary=[{'name': 'Lámpara Vórtice 3D', 'quantity': 1, 'price': 125000}],
             subtotal=125000,
             shipping_cost=12000,

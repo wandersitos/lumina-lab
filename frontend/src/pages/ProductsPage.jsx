@@ -279,7 +279,7 @@ export default function ProductsPage({ onNavigate }) {
         {/* Encabezado Principal estilo Astro Lighting */}
         <header className="mb-10 pb-8 border-b border-[#E8E6E1]">
           <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888] block mb-2">
-            ATELIER BOGOTÁ • CATÁLOGO COMPLETO
+            ATELIER MEDELLÍN • CATÁLOGO COMPLETO
           </span>
           <h1 className="text-3xl sm:text-5xl font-serif-title font-normal text-[#121212] mb-4">
             Catálogo de Iluminación 3D

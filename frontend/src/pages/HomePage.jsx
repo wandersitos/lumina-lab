@@ -62,7 +62,7 @@ export default function HomePage({ onNavigate }) {
             </h1>
 
             <p className="text-base sm:text-lg text-[#55524E] max-w-xl font-light leading-relaxed">
-              Diseño contemporáneo que desafía las formas tradicionales. Piezas arquitectónicas fabricadas capa por capa en nuestro atelier de Bogotá con biopolímeros ecológicos y tecnología LED de luz cálida.
+              Diseño contemporáneo que desafía las formas tradicionales. Piezas arquitectónicas fabricadas capa por capa en nuestro atelier de Medellín con biopolímeros ecológicos y tecnología LED de luz cálida.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">

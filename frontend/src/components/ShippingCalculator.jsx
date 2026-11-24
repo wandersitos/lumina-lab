@@ -3,8 +3,8 @@ import { useCart } from '../context/CartContext.jsx';
 import { formatCOP } from './ProductCard.jsx';
 
 const COLOMBIAN_CITIES = [
-  { city: 'Bogotá', department: 'Cundinamarca', defaultCarrier: 'Coordinadora', baseRate: 10000, days: '1-2 días hábiles' },
-  { city: 'Medellín', department: 'Antioquia', defaultCarrier: 'Servientrega', baseRate: 13500, days: '2-3 días hábiles' },
+  { city: 'Medellín', department: 'Antioquia', defaultCarrier: 'Coordinadora', baseRate: 10000, days: '1-2 días hábiles' },
+  { city: 'Bogotá', department: 'Cundinamarca', defaultCarrier: 'Servientrega', baseRate: 13500, days: '2-3 días hábiles' },
   { city: 'Cali', department: 'Valle del Cauca', defaultCarrier: 'Envía', baseRate: 14000, days: '2-3 días hábiles' },
   { city: 'Barranquilla', department: 'Atlántico', defaultCarrier: 'Coordinadora', baseRate: 16000, days: '3-4 días hábiles' },
   { city: 'Bucaramanga', department: 'Santander', defaultCarrier: 'Servientrega', baseRate: 14500, days: '2-3 días hábiles' },
