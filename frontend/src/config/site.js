@@ -4,8 +4,8 @@
  */
 export const siteConfig = {
   name: 'Lumina Lab',
-  tagline: 'Lámparas de diseño y piezas 3D que transforman tus espacios',
-  description: 'Tienda online oficial de Lumina Lab. Lámparas de diseño y figuras exclusivas impresas en 3D.',
+  tagline: 'Estudio de Iluminación contemporánea de formas escultóricas',
+  description: 'Lumina Lab — Estudio de Iluminación. Lámparas de diseño contemporáneo y formas escultóricas con iluminación inalámbrica recargable.',
   colors: {
     primary: '#E07A5F',     // Terracota / luz cálida
     secondary: '#3D405B',   // Azul noche elegante

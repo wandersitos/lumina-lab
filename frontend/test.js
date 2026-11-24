@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('Running frontend verification tests (004-carrito-envios)...');
+console.log('Running frontend verification tests (015-home-estudio-iluminacion)...');
 
 const appJsxPath = path.join(__dirname, 'src/App.jsx');
 const mainJsxPath = path.join(__dirname, 'src/main.jsx');
@@ -26,7 +26,9 @@ assert(fs.existsSync(siteConfigPath), 'R1: src/config/site.js must exist');
 const { siteConfig } = await import('./src/config/site.js');
 assert(siteConfig, 'R1: siteConfig must be exported');
 assert.strictEqual(siteConfig.name, 'Lumina Lab', 'R1: site name must be Lumina Lab');
-assert(siteConfig.tagline?.includes('Lámparas de diseño y piezas 3D'), 'R1: tagline must match Lumina Lab');
+assert(siteConfig.tagline?.includes('Estudio de Iluminación') || siteConfig.tagline?.includes('Iluminación contemporánea'), 'R1/R4 (015): tagline must reflect Estudio de Iluminación without 3D');
+assert(!/3D|PLA|filamento/i.test(siteConfig.tagline || ''), 'R4 (015): siteConfig.tagline must not mention 3D, PLA or filamento');
+assert(!/3D|PLA|filamento/i.test(siteConfig.description || ''), 'R4 (015): siteConfig.description must not mention 3D, PLA or filamento');
 assert.strictEqual(siteConfig.colors?.primary?.toUpperCase(), '#E07A5F', 'R1: primary color token must be #E07A5F');
 assert.strictEqual(siteConfig.colors?.secondary?.toUpperCase(), '#3D405B', 'R1: secondary color token must be #3D405B');
 assert.strictEqual(siteConfig.colors?.background?.toUpperCase(), '#FAF9F6', 'R1: background color token must be #FAF9F6');
@@ -110,18 +112,11 @@ assert(indexCssContent.includes('backdrop-filter') && indexCssContent.includes('
 assert(indexCssContent.includes('--color-primary: #E07A5F') || indexCssContent.includes('#E07A5F'), 'R1 (008): index.css must define warm terracotta primary color');
 assert(indexCssContent.includes('16px'), 'R1 (008): index.css must include 16px soft border-radius scale');
 
-// R1: Hero editorial con badge artesanal y píldoras de valor en App.jsx
-assert(appContent.includes('Taller de Diseño 3D en Colombia'), 'R1 (008): App.jsx must render hero badge "Taller de Diseño 3D en Colombia"');
-assert(appContent.includes('Envío asegurado'), 'R1 (008): App.jsx must render "Envío asegurado" value pill');
-assert(appContent.includes('Filamento ecológico PLA'), 'R1 (008): App.jsx must render "Filamento ecológico PLA" value pill');
-assert(appContent.includes('Iluminación LED incluida'), 'R1 (008): App.jsx must render "Iluminación LED incluida" value pill');
-
-// R1: Sección de confianza y proceso de fabricación en App.jsx
-assert(appContent.includes('Del diseño 3D a tu espacio'), 'R1 (008): App.jsx must render process section "Del diseño 3D a tu espacio"');
-assert(appContent.includes('Modelado Digital'), 'R1 (008): App.jsx process section must describe step 1 "Modelado Digital"');
-assert(appContent.includes('Impresión 3D'), 'R1 (008): App.jsx process section must describe step 2 "Impresión 3D"');
-assert(appContent.includes('Ensamblado y Prueba de Luz'), 'R1 (008): App.jsx process section must describe step 3 "Ensamblado y Prueba de Luz"');
-assert(appContent.includes('Entrega Asegurada a tu Puerta') || appContent.includes('Entrega Asegurada'), 'R1 (008): App.jsx process section must describe step 4 "Entrega Asegurada"');
+// R1-R3 (015-home-estudio-iluminacion): Navbar, Footer y Home Editorial Estudio de Iluminación
+assert(appContent.includes('ESTUDIO DE ILUMINACIÓN') || appContent.includes('Estudio de Iluminación'), 'R3 (015): App.jsx must brand as Estudio de Iluminación');
+assert(!appContent.includes('EDICIONES 3D LIMITADAS'), 'R3 (015): App.jsx topbar must not mention EDICIONES 3D LIMITADAS');
+assert(!appContent.includes('STUDIO • 3D LIGHTING'), 'R3 (015): App.jsx navbar must not mention STUDIO • 3D LIGHTING');
+assert(appContent.includes('Bolsa'), 'R3 (015): App.jsx navbar must include Bolsa button');
 
 // R1: Footer con información de marca y redes oficiales
 assert(appContent.includes('footer') || appContent.includes('Footer') || appContent.includes('site-footer'), 'R1 (008): App.jsx must include structured site footer');
@@ -238,5 +233,53 @@ assert(viteConfigContent.includes('8000'), 'BUG 011: vite.config.js proxy must t
 // R2: ProductsPage.jsx debe resolver la URL del backend dinámicamente y no inicializar con hardcoded 35 productos
 assert(!updatedProductsPageContent.includes('useState(officialProducts)'), 'BUG 011: ProductsPage must not initialize state with hardcoded officialProducts');
 assert(updatedProductsPageContent.includes('getApiBaseUrl') || updatedProductsPageContent.includes('8000') || updatedProductsPageContent.includes('API_BASE') || updatedProductsPageContent.includes('VITE_API_URL'), 'BUG 011: ProductsPage must resolve API base url');
+
+// =============================================================================
+// 10. R1-R4 (015-home-estudio-iluminacion): Rediseño Editorial Estudio de Iluminación
+// =============================================================================
+console.log('Verifying 015-home-estudio-iluminacion requirements...');
+
+const homePageContent = fs.readFileSync(homePagePath, 'utf-8');
+const siteConfigContent = fs.readFileSync(siteConfigPath, 'utf-8');
+
+// R1 & R3: Eliminación total de referencias a 3D, PLA, filamento, 2700K, almidón de maíz u origen vegetal
+const forbiddenTerms = [
+  /impresi[oó]n\s*3d/i,
+  /impresas\s*en\s*3d/i,
+  /\bpla\b/i,
+  /filamento/i,
+  /2700k/i,
+  /almid[oó]n\s*de\s*ma[ií]z/i,
+  /origen\s*vegetal/i,
+];
+
+for (const [fileName, content] of [
+  ['HomePage.jsx', homePageContent],
+  ['App.jsx', appContent],
+  ['site.js', siteConfigContent],
+]) {
+  for (const term of forbiddenTerms) {
+    assert(!term.test(content), `R1/R3 (015): ${fileName} must not contain forbidden term ${term}`);
+  }
+}
+
+// R1: Hero con galería en grid de 3 fotos y título editorial
+assert(homePageContent.includes('Leora-Floral-May-2025_4_ue6skw.jpg'), 'R1 (015): HomePage.jsx must include first Hero photo');
+assert(homePageContent.includes('Leora-Floral-May-2025_14_sx1wrx.jpg'), 'R1 (015): HomePage.jsx must include second Hero photo');
+assert(homePageContent.includes('Leora-Floral-May-2025_41_fd1yxk.jpg'), 'R1 (015): HomePage.jsx must include third Hero photo');
+assert(homePageContent.includes('Iluminación contemporánea de formas escultóricas.'), 'R1 (015): HomePage.jsx must include new Hero title');
+
+// R2: Secciones de portada y FAQ de bombillo inalámbrico recargable (3 temperaturas o RGB)
+assert(homePageContent.includes('Lámparas de Mesa'), 'R2 (015): HomePage.jsx must include Lámparas de Mesa section');
+assert(homePageContent.includes('Línea Sculpted'), 'R2 (015): HomePage.jsx must include Línea Sculpted');
+assert(homePageContent.includes('Línea Mini'), 'R2 (015): HomePage.jsx must include Línea Mini');
+assert(homePageContent.includes('Proyectos y asesoría'), 'R2 (015): HomePage.jsx must include Proyectos y asesoría section');
+assert(homePageContent.includes('Iluminación Inalámbrica'), 'R2 (015): HomePage.jsx must include Iluminación Inalámbrica pillar');
+assert(homePageContent.includes('<details'), 'R2 (015): HomePage.jsx must include <details> FAQ accordion');
+assert(/inal[aá]mbrico\s+recargable/i.test(homePageContent), 'R2 (015): HomePage.jsx FAQ must mention bombillo inalámbrico recargable');
+assert(/3\s*temperaturas/i.test(homePageContent) && /RGB/i.test(homePageContent), 'R2 (015): HomePage.jsx FAQ must mention 3 temperaturas and RGB');
+
+// R4: index.html debe incluir <meta name="description">
+assert(/<meta\s+name=["']description["']\s+content=/i.test(indexHtml), 'R4 (015): index.html must include <meta name="description">');
 
 console.log('All frontend verification tests passed successfully!');

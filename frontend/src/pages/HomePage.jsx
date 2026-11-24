@@ -4,12 +4,33 @@ import { products as officialProducts } from '../data/luminaProducts.js';
 import ProductCard from '../components/ProductCard.jsx';
 import ProductDetailModal from '../components/ProductDetailModal.jsx';
 
+const HERO_GALLERY = [
+  {
+    src: 'https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg',
+    alt: 'Lámpara escultórica Lumina Lab — vista frontal',
+  },
+  {
+    src: 'https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_14_sx1wrx.jpg',
+    alt: 'Lámpara escultórica Lumina Lab — detalle de textura y luz',
+  },
+  {
+    src: 'https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_41_fd1yxk.jpg',
+    alt: 'Lámpara escultórica Lumina Lab — ambiente contemporáneo',
+  },
+];
+
+const O4_FLOW_IMG =
+  'https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209565/lumina-lab/Leora/O4%20Flow%20Sculpted%20Lamp/Photos/01.jpg';
+const O15_MINI_IMG =
+  'https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209553/lumina-lab/Leora/O15-s%20Biomorphic/O15-s-V2-02.jpg';
+const O2_LANDSCAPE_IMG =
+  'https://res.cloudinary.com/dja3bhm9j/image/upload/v1774209559/lumina-lab/Leora/O2%20Landscape%20Sculpted%20Lamp/Photos/03.jpg';
+
 export default function HomePage({ onNavigate }) {
   const [activeDetailProduct, setActiveDetailProduct] = useState(null);
 
-  // Seleccionar 3 productos destacados de la colección Leora para el preview de la Home
   const [featuredProducts, setFeaturedProducts] = useState(() =>
-    officialProducts.filter((p) => p.collection === 'leora').slice(0, 3)
+    officialProducts.filter((p) => p.collection === 'leora').slice(0, 4)
   );
 
   useEffect(() => {
@@ -28,8 +49,8 @@ export default function HomePage({ onNavigate }) {
             inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
             image: item.image_url || (item.images && item.images[0]) || item.image || '',
           }));
-          const leoraItems = normalized.filter((p) => p.collection === 'leora').slice(0, 3);
-          setFeaturedProducts(leoraItems.length > 0 ? leoraItems : normalized.slice(0, 3));
+          const leoraItems = normalized.filter((p) => p.collection === 'leora').slice(0, 4);
+          setFeaturedProducts(leoraItems.length > 0 ? leoraItems : normalized.slice(0, 4));
         }
       })
       .catch((err) => {
@@ -41,223 +62,94 @@ export default function HomePage({ onNavigate }) {
     };
   }, []);
 
+  const handleNavClick = (e, path) => {
+    if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+      e.preventDefault();
+      onNavigate && onNavigate(path);
+    }
+  };
+
   return (
     <div className="home-page">
-      {/* Hero Section Editorial (Tom Dixon / Houseof / Astro Lighting) */}
-      <section className="relative border-b border-[#E8E6E1] overflow-hidden bg-gradient-to-b from-[#FAF9F7] via-[#F4F2ED] to-[#EFECE6]">
-        <div className="max-w-7xl mx-auto px-6 py-16 sm:py-24 lg:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Typography & Concept */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 bg-white border border-[#E0DED7] text-[10px] font-mono-tech uppercase tracking-[0.22em] text-[#555]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E58A4E]"></span>
-              <span className="hero-badge font-semibold text-[#121212]">Taller de Diseño 3D en Colombia</span>
-              <span className="opacity-40">•</span>
-              <span>COLECCIÓN ESCULTURAL</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-normal leading-[1.12] text-[#111111]">
-              Esculturas de luz <br />
-              <span className="italic font-light text-[#3A3835]">impresas en 3D.</span>
+      {/* 1. Hero Editorial con Galería en Grid de 3 Fotos */}
+      <section className="relative border-b border-[#E8E6E1] bg-[#FAF9F7]">
+        <div className="max-w-7xl mx-auto px-6 py-14 sm:py-20 lg:py-24 space-y-12">
+          <div className="max-w-3xl space-y-6">
+            <span className="inline-block text-[11px] font-mono-tech uppercase tracking-[0.28em] text-[#777]">
+              ESTUDIO DE ILUMINACIÓN • MEDELLÍN, COLOMBIA
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-title font-normal leading-[1.08] text-[#111111]">
+              Iluminación contemporánea de formas escultóricas.
             </h1>
-
-            <p className="text-base sm:text-lg text-[#55524E] max-w-xl font-light leading-relaxed">
-              Diseño contemporáneo que desafía las formas tradicionales. Piezas arquitectónicas fabricadas capa por capa en nuestro atelier de Medellín con biopolímeros ecológicos y tecnología LED de luz cálida.
+            <p className="text-base sm:text-lg text-[#55524E] max-w-2xl font-light leading-relaxed">
+              Lámparas de mesa de líneas orgánicas diseñadas para transformar la atmósfera de hogares, estudios y proyectos con luz inalámbrica sin cables.
             </p>
-
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="/products"
-                onClick={(e) => {
-                  if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
-                    e.preventDefault();
-                    onNavigate && onNavigate('/products');
-                  }
-                }}
-                className="px-8 py-4 bg-[#121212] hover:bg-[#2A2A2A] text-white text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-smooth inline-flex items-center gap-3 shadow-md"
+                onClick={(e) => handleNavClick(e, '/products')}
+                className="px-8 py-4 bg-[#121212] hover:bg-[#2A2A2A] text-white text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-all inline-flex items-center gap-3"
               >
-                Explorar Catálogo
+                Explorar Productos
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
               <a
                 href={siteConfig.social.whatsapp.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-4 bg-transparent hover:bg-black/5 border border-[#121212] text-[#121212] text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-smooth"
+                className="px-7 py-4 bg-transparent hover:bg-black/5 border border-[#121212] text-[#121212] text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-all"
               >
-                Asesoría WhatsApp
+                Asesoría Directa
               </a>
             </div>
-
-            {/* Píldoras de valor requeridas */}
-            <div className="pt-4 flex flex-wrap items-center gap-3 text-xs font-mono-tech uppercase tracking-wider text-[#555]">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E8E6E1] rounded-sm">
-                <span>📦</span>
-                <span>Envío asegurado</span>
-              </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E8E6E1] rounded-sm">
-                <span>🌿</span>
-                <span>Filamento ecológico PLA</span>
-              </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E8E6E1] rounded-sm">
-                <span>💡</span>
-                <span>Iluminación LED incluida</span>
-              </div>
-            </div>
-
-            {/* Micro specs arquitectónicos */}
-            <div className="pt-6 grid grid-cols-3 gap-6 border-t border-[#E2DFD7] text-left">
-              <div>
-                <span className="block text-xl font-mono-tech font-medium text-[#121212]">100%</span>
-                <span className="text-[11px] font-mono-tech tracking-wider uppercase text-[#777]">Biopolímero PLA</span>
-              </div>
-              <div>
-                <span className="block text-xl font-mono-tech font-medium text-[#121212]">2700K</span>
-                <span className="text-[11px] font-mono-tech tracking-wider uppercase text-[#777]">Luz Cálida Zen</span>
-              </div>
-              <div>
-                <span className="block text-xl font-mono-tech font-medium text-[#121212]">0.16mm</span>
-                <span className="text-[11px] font-mono-tech tracking-wider uppercase text-[#777]">Resolución de Capa</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right Column: Hero Visual Showcase (Fotografía editorial limpia sin formato de card) */}
-          <div className="lg:col-span-5 relative flex justify-center items-center">
-            {/* Ambient warm lighting glow */}
-            <div className="absolute inset-0 bg-[#F5C28C]/25 blur-[90px] rounded-full transform scale-90 pointer-events-none"></div>
-
-            {/* Imagen principal limpia y elegante */}
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-black/10 bg-[#FAF9F7] group">
-              <img
-                src={siteConfig.heroImageUrl || "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg"}
-                alt="Colección Leora - Lumina Lab 3D Lighting"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading="eager"
-              />
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Brand Architectural Pillars (Astro Lighting Minimal Grid) */}
-      <section className="border-b border-[#E8E6E1] bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E8E6E1]">
-          <div className="p-8 space-y-2">
-            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">01 / ARQUITECTURA</span>
-            <h3 className="font-serif-title text-base font-medium">Geometría Paramétrica</h3>
-            <p className="text-xs text-[#666] font-light leading-relaxed">
-              Diseños computacionales complejos que difunden la luz en patrones orgánicos imposibles en cerámica tradicional.
-            </p>
-          </div>
-          <div className="p-8 space-y-2">
-            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">02 / SOSTENIBILIDAD</span>
-            <h3 className="font-serif-title text-base font-medium">Biopolímero PLA Puro</h3>
-            <p className="text-xs text-[#666] font-light leading-relaxed">
-              Filamentos biodegradables derivados de recursos botánicos renovables (almidón de maíz), libres de toxinas y de tacto mate.
-            </p>
-          </div>
-          <div className="p-8 space-y-2">
-            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">03 / CONEXIÓN</span>
-            <h3 className="font-serif-title text-base font-medium">Iluminación LED Certificada</h3>
-            <p className="text-xs text-[#666] font-light leading-relaxed">
-              Cada lámpara incluye bombillo LED cálido de alta eficiencia, con socket universal y cable textil de seguridad.
-            </p>
-          </div>
-          <div className="p-8 space-y-2">
-            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">04 / CONCIERGE</span>
-            <h3 className="font-serif-title text-base font-medium">Despacho y WhatsApp</h3>
-            <p className="text-xs text-[#666] font-light leading-relaxed">
-              Empaque acolchado protector, cálculo de tarifas con Envíoclick y acompañamiento personalizado directo.
-            </p>
+          {/* Grid de 3 Fotografías Editoriales */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            {HERO_GALLERY.map((photo, index) => (
+              <div
+                key={photo.src}
+                className="relative aspect-[4/5] overflow-hidden bg-[#EFECE6] border border-[#E8E6E1] group"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Sección de Confianza y Proceso: Del diseño 3D a tu espacio */}
-      <section className="py-20 px-6 border-b border-[#E8E6E1] bg-[#FAF9F7]" id="proceso">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="max-w-2xl space-y-3">
-            <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888]">
-              PROCESO DE MANUFACTURA CONSCIENTE
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif-title font-normal text-[#121212]">
-              Del diseño 3D a tu espacio
-            </h2>
-            <p className="text-sm text-[#666] font-light leading-relaxed">
-              Combinamos algoritmos de diseño geométrico con manufactura aditiva y acabados artesanales para dar vida a piezas de iluminación de autor.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white border border-[#E8E6E1] p-6 space-y-3 rounded-sm shadow-sm">
-              <span className="text-[12px] font-mono-tech text-[#E58A4E] font-semibold tracking-wider">PASO 01</span>
-              <h3 className="font-serif-title text-lg font-medium text-[#121212]">Modelado Digital</h3>
-              <p className="text-xs text-[#666] font-light leading-relaxed">
-                Geometría paramétrica calculada para dispersar la luz en ángulos suaves de 360°, optimizando la estética y la dispersión luminosa.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E8E6E1] p-6 space-y-3 rounded-sm shadow-sm">
-              <span className="text-[12px] font-mono-tech text-[#E58A4E] font-semibold tracking-wider">PASO 02</span>
-              <h3 className="font-serif-title text-lg font-medium text-[#121212]">Impresión 3D</h3>
-              <p className="text-xs text-[#666] font-light leading-relaxed">
-                Más de 16 horas de manufactura aditiva continua capa por capa con filamento PLA ecológico de alta definición botánica.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E8E6E1] p-6 space-y-3 rounded-sm shadow-sm">
-              <span className="text-[12px] font-mono-tech text-[#E58A4E] font-semibold tracking-wider">PASO 03</span>
-              <h3 className="font-serif-title text-lg font-medium text-[#121212]">Ensamblado y Prueba de Luz</h3>
-              <p className="text-xs text-[#666] font-light leading-relaxed">
-                Montaje eléctrico minucioso con socket certificado, pulido manual y prueba de emisión térmica con bombillas LED cálidas.
-              </p>
-            </div>
-
-            <div className="bg-white border border-[#E8E6E1] p-6 space-y-3 rounded-sm shadow-sm">
-              <span className="text-[12px] font-mono-tech text-[#E58A4E] font-semibold tracking-wider">PASO 04</span>
-              <h3 className="font-serif-title text-lg font-medium text-[#121212]">Entrega Asegurada a tu Puerta</h3>
-              <p className="text-xs text-[#666] font-light leading-relaxed">
-                Empaque acolchado con materiales reciclables y envíos cotizados a toda Colombia con Envíoclick y reposición garantizada.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Preview de Colección Destacada */}
+      {/* 2. Colección Destacada: Lámparas de Mesa */}
       <section className="py-20 px-6 max-w-7xl mx-auto border-b border-[#E8E6E1]" id="destacados">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-[#E8E6E1] gap-6">
           <div className="space-y-2">
             <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888]">
-              EDICIONES SELECCIONADAS
+              COLECCIÓN DESTACADA
             </span>
             <h2 className="text-3xl sm:text-4xl font-serif-title font-normal text-[#121212]">
-              Lámparas Esculpidas Leora
+              Lámparas de Mesa
             </h2>
             <p className="text-xs sm:text-sm text-[#666] font-light max-w-lg">
-              Piezas icónicas inspiradas en fuerzas naturales, diseñadas para transformar la atmósfera de tus espacios.
+              Piezas icónicas pensadas para mesas auxiliares, escritorios y mesas de noche con iluminación ambiental suave.
             </p>
           </div>
 
           <a
             href="/products"
-            onClick={(e) => {
-              if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
-                e.preventDefault();
-                onNavigate && onNavigate('/products');
-              }
-            }}
-            className="px-6 py-3 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[11px] font-mono-tech tracking-[0.2em] uppercase transition-all"
+            onClick={(e) => handleNavClick(e, '/products')}
+            className="px-6 py-3 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[11px] font-mono-tech tracking-[0.2em] uppercase transition-all self-start md:self-auto"
           >
             Ver Todo el Catálogo →
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id || product.slug}
@@ -274,70 +166,200 @@ export default function HomePage({ onNavigate }) {
         </div>
       </section>
 
-      {/* Sección Oscura Editorial: Filosofía del Atelier 3D */}
-      <section id="filosofia" className="bg-[#121212] text-white py-24 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-5 space-y-6">
+      {/* 3. Formatos: Dos escalas para cada espacio */}
+      <section className="py-20 px-6 bg-white border-b border-[#E8E6E1]" id="formatos">
+        <div className="max-w-7xl mx-auto space-y-12">
+          <div className="max-w-2xl space-y-2">
+            <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888]">
+              FORMATOS Y PROPORCIONES
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif-title font-normal text-[#121212]">
+              Dos escalas para cada espacio
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <a
+              href="/products"
+              onClick={(e) => handleNavClick(e, '/products')}
+              className="group block border border-[#E8E6E1] bg-[#FAF9F7] overflow-hidden"
+            >
+              <div className="aspect-[16/10] overflow-hidden bg-[#EFECE6]">
+                <img
+                  src={O4_FLOW_IMG}
+                  alt="Línea Sculpted — O4 Flow"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-8 space-y-3">
+                <span className="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-[#888]">
+                  PROTAGONISMO VISUAL
+                </span>
+                <h3 className="text-2xl font-serif-title text-[#121212]">Línea Sculpted</h3>
+                <p className="text-sm text-[#666] font-light leading-relaxed">
+                  Formato de presencia amplia para salas, consolas, aparadores y rincones principales. Referencia destacada: O4 Flow.
+                </p>
+                <span className="inline-block pt-2 text-[11px] font-mono-tech uppercase tracking-[0.2em] text-[#121212] underline">
+                  Explorar Línea Sculpted →
+                </span>
+              </div>
+            </a>
+
+            <a
+              href="/products"
+              onClick={(e) => handleNavClick(e, '/products')}
+              className="group block border border-[#E8E6E1] bg-[#FAF9F7] overflow-hidden"
+            >
+              <div className="aspect-[16/10] overflow-hidden bg-[#EFECE6]">
+                <img
+                  src={O15_MINI_IMG}
+                  alt="Línea Mini — O15-S Biomorphic"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-8 space-y-3">
+                <span className="text-[11px] font-mono-tech uppercase tracking-[0.2em] text-[#888]">
+                  VERSATILIDAD COMPACTA
+                </span>
+                <h3 className="text-2xl font-serif-title text-[#121212]">Línea Mini</h3>
+                <p className="text-sm text-[#666] font-light leading-relaxed">
+                  Escala compacta ideal para mesas de noche, repisas, escritorios y nichos. Referencia destacada: O15-S Biomorphic.
+                </p>
+                <span className="inline-block pt-2 text-[11px] font-mono-tech uppercase tracking-[0.2em] text-[#121212] underline">
+                  Explorar Línea Mini →
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Bloque Oscuro Editorial: Proyectos y asesoría */}
+      <section id="proyectos" className="bg-[#121212] text-white py-24 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-6 space-y-6">
             <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#A0A09C]">
-              FILOSOFÍA DEL ATELIER
+              PROYECTOS Y ASESORÍA
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif-title font-normal leading-tight">
-              La precisión digital se encuentra con la luz cálida.
+              Iluminación para hogares, estudios y proyectos.
             </h2>
             <p className="text-[#A5A5A0] font-light leading-relaxed text-sm sm:text-base">
-              En lugar de recurrir a la producción masiva en serie, cada pieza de Lumina Lab se produce bajo demanda en nuestro taller. La impresión 3D nos permite esculpir ranuras micrométricas que modulan el haz luminoso, generando texturas que proyectan sombras suaves y acogedoras en tus paredes.
+              Acompañamos a interioristas, arquitectos y clientes particulares en la selección de piezas, escalas y temperaturas de luz para espacios residenciales, hotelería y locales comerciales.
             </p>
-
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <div className="flex items-start gap-4">
-                <span className="text-xs font-mono-tech text-[#E8A868] mt-1">01.</span>
-                <div>
-                  <h4 className="font-medium text-sm">Producción Cero Residuos</h4>
-                  <p className="text-xs text-[#888] font-light">Solo consumimos el filamento exacto que compone la geometría de tu lámpara.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-xs font-mono-tech text-[#E8A868] mt-1">02.</span>
-                <div>
-                  <h4 className="font-medium text-sm">Control Eléctrico Seguro</h4>
-                  <p className="text-xs text-[#888] font-light">Instalación probada contra calentamiento, sockets universales y switch de paso.</p>
-                </div>
-              </div>
-            </div>
-
             <div className="pt-4">
               <a
-                href={siteConfig.social.instagram.url}
+                href={siteConfig.social.whatsapp.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono-tech uppercase tracking-[0.2em] text-[#E8A868] hover:underline"
+                className="inline-flex items-center gap-3 px-7 py-4 bg-white text-[#121212] hover:bg-neutral-200 text-[12px] font-mono-tech uppercase tracking-[0.2em] transition-colors"
               >
-                Ver videos del proceso en {siteConfig.social.instagram.handle} →
+                Consultar por WhatsApp →
               </a>
             </div>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-2 gap-4">
-            <div className="bg-[#1C1C1C] border border-white/10 aspect-square p-6 flex flex-col justify-between">
-              <span className="text-[10px] font-mono-tech tracking-widest text-[#777]">DETALLE DE ESTRÍAS 3D</span>
-              <div className="space-y-1.5 opacity-60">
-                <div className="h-0.5 w-full bg-white/20"></div>
-                <div className="h-0.5 w-full bg-white/30"></div>
-                <div className="h-0.5 w-full bg-white/40"></div>
-                <div className="h-0.5 w-full bg-white/50"></div>
-                <div className="h-0.5 w-full bg-white/60"></div>
-                <div className="h-0.5 w-full bg-white/80"></div>
-              </div>
-              <span className="text-xs font-serif-title italic text-[#CCC]">Difusión lumínica sin deslumbramiento</span>
+          <div className="lg:col-span-6">
+            <div className="aspect-[4/3] overflow-hidden border border-white/10 bg-[#1C1C1C]">
+              <img
+                src={O2_LANDSCAPE_IMG}
+                alt="O2 Landscape — Iluminación para proyectos y espacios"
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
+              />
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="bg-[#242220] border border-white/10 aspect-square p-6 flex flex-col justify-between">
-              <span className="text-[10px] font-mono-tech tracking-widest text-[#E8A868]">ORIGEN BIOLÓGICO</span>
-              <div className="flex justify-center items-center my-auto">
-                <span className="text-4xl">🌿</span>
-              </div>
-              <span className="text-xs font-serif-title text-[#EEE]">Polímero de maíz 100% biodegradable</span>
-            </div>
+      {/* 5. Franja de 4 Pilares */}
+      <section className="border-b border-[#E8E6E1] bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E8E6E1]">
+          <div className="p-8 space-y-2">
+            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">01 / DISEÑO</span>
+            <h3 className="font-serif-title text-base font-medium text-[#121212]">Piezas Escultóricas</h3>
+            <p className="text-xs text-[#666] font-light leading-relaxed">
+              Volúmenes orgánicos pensados para proyectar luz ambiental uniforme y aportar carácter arquitectónico incluso apagadas.
+            </p>
+          </div>
+          <div className="p-8 space-y-2">
+            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">02 / LIBERTAD</span>
+            <h3 className="font-serif-title text-base font-medium text-[#121212]">Iluminación Inalámbrica</h3>
+            <p className="text-xs text-[#666] font-light leading-relaxed">
+              Bombillo inalámbrico recargable incluido, sin cables a la vista, disponible en versión de 3 temperaturas o RGB.
+            </p>
+          </div>
+          <div className="p-8 space-y-2">
+            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">03 / LOGÍSTICA</span>
+            <h3 className="font-serif-title text-base font-medium text-[#121212]">Envío Asegurado</h3>
+            <p className="text-xs text-[#666] font-light leading-relaxed">
+              Empaque protector a medida y envíos cotizados a toda Colombia con cobertura total hasta la puerta de tu espacio.
+            </p>
+          </div>
+          <div className="p-8 space-y-2">
+            <span className="text-[11px] font-mono-tech tracking-[0.2em] text-[#888] uppercase">04 / ACOMPAÑAMIENTO</span>
+            <h3 className="font-serif-title text-base font-medium text-[#121212]">Atención Directa</h3>
+            <p className="text-xs text-[#666] font-light leading-relaxed">
+              Asesoría personalizada por WhatsApp para elegir escala, colección y acabado según la ubicación de cada lámpara.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Preguntas Frecuentes (FAQ con <details>) */}
+      <section className="py-20 px-6 bg-[#FAF9F7] border-b border-[#E8E6E1]" id="faq">
+        <div className="max-w-3xl mx-auto space-y-10">
+          <div className="space-y-2 text-center">
+            <span className="text-[11px] font-mono-tech uppercase tracking-[0.25em] text-[#888]">
+              PREGUNTAS FRECUENTES
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif-title font-normal text-[#121212]">
+              Detalles de uso y envío
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[#E8E6E1] border-y border-[#E8E6E1] bg-white px-6">
+            <details className="group py-5">
+              <summary className="flex cursor-pointer items-center justify-between font-serif-title text-lg text-[#121212] list-none">
+                <span>¿Qué incluye cada lámpara?</span>
+                <span className="text-xs font-mono-tech text-[#888] group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-[#666] font-light leading-relaxed">
+                Cada pieza incluye la lámpara escultórica, un bombillo inalámbrico recargable y su cable de carga USB. Puedes elegir la versión de 3 temperaturas de luz (cálida, neutra y fría) o la versión RGB multicolor según el ambiente que quieras crear.
+              </p>
+            </details>
+
+            <details className="group py-5">
+              <summary className="flex cursor-pointer items-center justify-between font-serif-title text-lg text-[#121212] list-none">
+                <span>¿Cómo funciona el bombillo inalámbrico?</span>
+                <span className="text-xs font-mono-tech text-[#888] group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-[#666] font-light leading-relaxed">
+                El bombillo inalámbrico recargable se carga fácilmente con el cable incluido y te permite ubicar la lámpara en mesas auxiliares, repisas o centros de mesa sin depender de tomas cercanas ni cables visibles. Permite alternar entre sus modos de 3 temperaturas o colores RGB y regular la intensidad.
+              </p>
+            </details>
+
+            <details className="group py-5">
+              <summary className="flex cursor-pointer items-center justify-between font-serif-title text-lg text-[#121212] list-none">
+                <span>¿Cómo se limpia y cuida la pieza?</span>
+                <span className="text-xs font-mono-tech text-[#888] group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-[#666] font-light leading-relaxed">
+                Recomendamos limpiar el polvo con un paño seco de microfibra o un plumero suave. Evita el contacto directo con agua, solventes abrasivos o la exposición prolongada a fuentes de calor intenso.
+              </p>
+            </details>
+
+            <details className="group py-5">
+              <summary className="flex cursor-pointer items-center justify-between font-serif-title text-lg text-[#121212] list-none">
+                <span>¿Cuáles son los tiempos de entrega y garantía?</span>
+                <span className="text-xs font-mono-tech text-[#888] group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-[#666] font-light leading-relaxed">
+                Las piezas en stock se despachan en 1 a 2 días hábiles y las referencias bajo pedido entre 3 y 5 días hábiles. Todos los envíos viajan asegurados a cualquier ciudad de Colombia y cuentan con garantía por defectos de fábrica o daños durante el transporte.
+              </p>
+            </details>
           </div>
         </div>
       </section>

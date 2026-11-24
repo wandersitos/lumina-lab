@@ -23,9 +23,7 @@ function NavbarContent({ currentView, onNavigate }) {
     <>
       {/* Top Announcement Bar */}
       <div className="bg-[#121212] text-white text-[11px] font-mono-tech tracking-[0.2em] py-2 px-4 text-center uppercase border-b border-white/10 flex flex-wrap justify-center items-center gap-2 sm:gap-3">
-        <span>LUMINA LAB • EDICIONES 3D LIMITADAS</span>
-        <span className="opacity-40 hidden sm:inline">•</span>
-        <span className="hidden sm:inline">ENVÍO SIN COSTO EN COLOMBIA POR COMPRAS SUPERIORES A $180.000</span>
+        <span>ENVÍO SIN COSTO EN COLOMBIA POR COMPRAS DESDE $180.000</span>
         <span className="opacity-40">•</span>
         <a
           href={siteConfig.social.instagram.url}
@@ -97,7 +95,7 @@ function NavbarContent({ currentView, onNavigate }) {
               {siteConfig.name.toUpperCase()}
             </span>
             <span className="text-[8px] sm:text-[9px] font-mono-tech tracking-[0.35em] text-[#888884] uppercase -mt-0.5">
-              STUDIO • 3D LIGHTING
+              ESTUDIO DE ILUMINACIÓN
             </span>
           </a>
 
@@ -271,7 +269,7 @@ function MainApp() {
               {siteConfig.name.toUpperCase()}
             </h3>
             <p className="text-xs text-[#888] font-light max-w-sm leading-relaxed">
-              Atelier de iluminación y decoración 3D contemporánea. Fabricación aditiva de alta precisión bajo demanda en Colombia.
+              Estudio de iluminación contemporánea. Piezas escultóricas con iluminación inalámbrica recargable diseñadas para transformar tus espacios.
             </p>
             <span className="text-[11px] font-mono-tech text-[#AAA] block">Medellín, Colombia</span>
           </div>
@@ -309,26 +307,26 @@ function MainApp() {
               </li>
               <li>
                 <a href={siteConfig.social.whatsapp.url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  Proyectos a Medida
+                  Proyectos y asesoría
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#AAA]">COMPROMISO LUMINA</h4>
+            <h4 className="text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#AAA]">ESTUDIO DE ILUMINACIÓN</h4>
             <ul className="text-xs space-y-2 text-[#777] font-light">
-              <li>🌱 Filamento ecológico PLA biodegradable</li>
-              <li>💡 Iluminación LED incluida de bajo consumo</li>
-              <li>📦 Envío asegurado a toda Colombia</li>
-              <li>⚡ Taller de Diseño 3D en Colombia</li>
+              <li>Piezas escultóricas de mesa</li>
+              <li>Bombillo inalámbrico recargable incluido</li>
+              <li>Envío asegurado a toda Colombia</li>
+              <li>Atención directa y asesoría en espacios</li>
             </ul>
           </div>
 
           <div className="md:col-span-3 space-y-4">
             <h4 className="text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#AAA]">CANAL DIRECTO</h4>
             <p className="text-xs text-[#888] font-light">
-              Síguenos en Instagram para ver nuevos lanzamientos y pruebas de filamentos en el taller.
+              Síguenos en Instagram para ver nuevas colecciones y proyectos de iluminación.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
@@ -353,7 +351,7 @@ function MainApp() {
 
         <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] font-mono-tech text-[#666] tracking-wider uppercase gap-4">
           <span>&copy; {new Date().getFullYear()} Lumina Lab Colombia. Todos los derechos reservados.</span>
-          <span>Del diseño 3D a tu espacio • Modelado Digital • Impresión 3D • Ensamblado y Prueba de Luz • Entrega Asegurada a tu Puerta</span>
+          <span>Estudio de Iluminación • Medellín, Colombia</span>
         </div>
       </footer>
 
