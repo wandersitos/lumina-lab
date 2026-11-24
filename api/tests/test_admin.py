@@ -127,3 +127,17 @@ class AdminPanelTestCase(TestCase):
         admin_home = self.client.get('/admin/')
         self.assertEqual(admin_home.status_code, 200)
         self.assertContains(admin_home, "Lumina Lab — Control de Pedidos e Impresión 3D")
+
+    def test_r4_seleccionar_portada_un_clic(self):
+        """R4: Endpoint AJAX para cambiar foto de portada con un solo clic."""
+        self.client.force_login(self.staff_user)
+        url = reverse('admin:products_product_set_cover', args=[self.product.pk])
+        new_cover = 'https://res.cloudinary.com/demo/image/upload/sample_03.jpg'
+        
+        response = self.client.get(f'{url}?url={new_cover}')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data.get('status'), 'ok')
+        
+        self.product.refresh_from_db()
+        self.assertEqual(self.product.image_url, new_cover)
