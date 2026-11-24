@@ -197,9 +197,6 @@ function parseCurrentRoute() {
 
 function MainApp() {
   const [route, setRoute] = useState(parseCurrentRoute);
-  const [healthStatus, setHealthStatus] = useState('Conectando...');
-  const [errorDetails, setErrorDetails] = useState(null);
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
   // Manejo de historial del navegador (popstate)
   useEffect(() => {
@@ -229,26 +226,6 @@ function MainApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    fetch(`${apiUrl}/api/health/`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        if (data.status === 'OK') {
-          setHealthStatus('OK');
-        } else {
-          setHealthStatus('Error');
-          setErrorDetails(data.detail || 'Respuesta inesperada');
-        }
-      })
-      .catch((err) => {
-        setHealthStatus('Error');
-        setErrorDetails(err.message);
-      });
-  }, [apiUrl]);
-
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F7] text-[#121212]">
       {/* Header con Navbar responsiva Inicio y Productos */}
@@ -263,18 +240,6 @@ function MainApp() {
         ) : (
           <HomePage onNavigate={handleNavigate} />
         )}
-
-        {/* Sección de estado del servicio backend */}
-        <section className="py-6 px-6 bg-[#FAF9F7] border-t border-[#E8E6E1]">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs font-mono-tech text-[#666] gap-4">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>API Backend: <strong>{healthStatus}</strong></span>
-              {errorDetails && <span className="text-red-500">({errorDetails})</span>}
-            </div>
-            <span>Monitoreo en tiempo real • Django Core</span>
-          </div>
-        </section>
       </main>
 
       {/* Footer Estructurado y Editorial */}

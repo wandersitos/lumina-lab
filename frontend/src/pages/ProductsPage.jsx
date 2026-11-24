@@ -34,6 +34,8 @@ export default function ProductsPage({ onNavigate }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshSuccess, setRefreshSuccess] = useState(false);
 
   // Helper para resolver la URL base de la API
   const getApiBaseUrl = () => {
@@ -44,14 +46,37 @@ export default function ProductsPage({ onNavigate }) {
     return '';
   };
 
-  // Conexión a la API de Django /api/products/
-  useEffect(() => {
-    let isMounted = true;
-    setLoading(true);
+  const CACHE_KEY = 'lumina_products_cache_v1';
+  const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutos
 
-    const apiUrl = `${getApiBaseUrl()}/api/products/`;
+  // Carga de catálogo con caché y opción de refresco forzado desde BD
+  const fetchCatalogFromApi = (forceRefresh = false) => {
+    // Si no se fuerza el refresco, verificar si tenemos copia en caché válida
+    if (!forceRefresh && typeof window !== 'undefined') {
+      try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.timestamp && (Date.now() - parsed.timestamp < CACHE_TTL_MS) && Array.isArray(parsed.products)) {
+            setProducts(parsed.products);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Error leyendo caché de catálogo:', e);
+      }
+    }
 
-    fetch(apiUrl)
+    if (forceRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    const apiUrl = `${getApiBaseUrl()}/api/products/${forceRefresh ? '?refresh=true' : ''}`;
+
+    fetch(apiUrl, { cache: forceRefresh ? 'no-store' : 'default' })
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -59,34 +84,48 @@ export default function ProductsPage({ onNavigate }) {
         return res.json();
       })
       .then((data) => {
-        if (isMounted) {
-          if (Array.isArray(data)) {
-            const normalized = data.map((item) => ({
-              ...item,
-              inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
-              image: item.image_url || (item.images && item.images[0]) || item.image || '',
+        if (Array.isArray(data)) {
+          const normalized = data.map((item) => ({
+            ...item,
+            inStock: item.in_stock !== undefined ? Boolean(item.in_stock) : Boolean(item.inStock),
+            image: item.image_url || (item.images && item.images[0]) || item.image || '',
+          }));
+          setProducts(normalized);
+          setError(null);
+
+          // Guardar en caché local
+          try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+              timestamp: Date.now(),
+              products: normalized,
             }));
-            setProducts(normalized);
-            setError(null);
-          } else {
-            setProducts([]);
+          } catch (e) {
+            console.warn('Error guardando en caché:', e);
           }
-          setLoading(false);
+
+          if (forceRefresh) {
+            setRefreshSuccess(true);
+            setTimeout(() => setRefreshSuccess(false), 4000);
+          }
+        } else {
+          setProducts([]);
         }
+        setLoading(false);
+        setRefreshing(false);
       })
       .catch((err) => {
-        if (isMounted) {
-          console.warn('API /api/products/ no disponible, usando catálogo local de respaldo:', err);
-          // Fallback resiliente solo si la red o el backend fallan totalmente
-          setProducts(officialProducts);
-          setError(err.message);
-          setLoading(false);
-        }
+        console.warn('API /api/products/ no disponible, usando catálogo local de respaldo:', err);
+        setProducts(officialProducts);
+        setError(err.message);
+        setLoading(false);
+        setRefreshing(false);
       });
+  };
 
-    return () => {
-      isMounted = false;
-    };
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const forceRefresh = params.get('refresh') === 'true' || params.get('refresh') === '1';
+    fetchCatalogFromApi(forceRefresh);
   }, []);
 
   // Sincronizar cambios en los filtros con la URL para enlaces compartibles
@@ -264,9 +303,28 @@ export default function ProductsPage({ onNavigate }) {
               <span>Filtros {hasActiveFilters ? `(${selectedCollections.length + selectedCategories.length + (inStockOnly ? 1 : 0)})` : ''}</span>
             </button>
 
-            {/* Ordenamiento */}
-            <div className="flex items-center gap-2">
-              <label htmlFor="sortSelect" className="text-[#888] uppercase tracking-wider hidden sm:inline">
+            {/* Controles: Refrescar Caché y Ordenamiento */}
+            <div className="flex items-center gap-3">
+              {refreshSuccess && (
+                <span className="text-[10px] font-mono-tech text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-1 border border-emerald-200 rounded">
+                  ✓ Catálogo Actualizado
+                </span>
+              )}
+
+              <button
+                type="button"
+                onClick={() => fetchCatalogFromApi(true)}
+                disabled={refreshing}
+                title="Refrescar catálogo y textos desde la base de datos"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E0DED7] bg-white text-xs font-mono-tech tracking-wider uppercase text-[#555] hover:text-black hover:border-black transition-colors"
+              >
+                <svg className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>{refreshing ? 'Actualizando...' : 'Refrescar'}</span>
+              </button>
+
+              <label htmlFor="sortSelect" className="text-[#888] uppercase tracking-wider hidden sm:inline text-xs font-mono-tech">
                 Ordenar por:
               </label>
               <select

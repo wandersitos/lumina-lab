@@ -1,7 +1,11 @@
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.db.models import Q
+from django.core.cache import cache
 from .models import Product
 from .serializers import ProductSerializer
+
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
@@ -31,7 +35,49 @@ class ProductListView(generics.ListAPIView):
             )
         return queryset
 
+    def list(self, request, *args, **kwargs):
+        # Soporte de invalidación / refresco forzado de caché
+        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        query_string = request.META.get('QUERY_STRING', '')
+        cache_key = f'lumina_products_list_{query_string}'
+
+        if not force_refresh:
+            cached_data = cache.get(cache_key)
+            if cached_data is not None:
+                return Response(cached_data)
+
+        # Si no está en caché o se pidió refrescar, consultar BD
+        response = super().list(request, *args, **kwargs)
+        cache.set(cache_key, response.data, timeout=900)  # 15 minutos
+        return response
+
+
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.filter(is_active=True)
     serializer_class = ProductSerializer
     lookup_field = 'slug'
+
+    def retrieve(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        cache_key = f'lumina_product_detail_{slug}'
+
+        if not force_refresh:
+            cached = cache.get(cache_key)
+            if cached is not None:
+                return Response(cached)
+
+        response = super().retrieve(request, *args, **kwargs)
+        cache.set(cache_key, response.data, timeout=900)
+        return response
+
+
+class ClearCatalogCacheView(APIView):
+    """Endpoint para limpiar y refrescar toda la caché de catálogo bajo demanda."""
+    def post(self, request, *args, **kwargs):
+        cache.clear()
+        return Response({'status': 'ok', 'message': 'Caché de catálogo limpiada exitosamente.'})
+
+    def get(self, request, *args, **kwargs):
+        cache.clear()
+        return Response({'status': 'ok', 'message': 'Caché de catálogo limpiada exitosamente.'})

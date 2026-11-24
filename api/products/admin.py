@@ -79,8 +79,15 @@ class ProductAdmin(admin.ModelAdmin):
     def foto_portada(self, obj):
         if not obj or not obj.image_url:
             return mark_safe('<span style="color: #999; font-size: 11px;">Sin foto</span>')
+
+        fallback = 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=120&q=80'
         return mark_safe(
-            f'<img src="{obj.image_url}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;" title="{obj.name}" />'
+            f'<div style="width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background: #1e293b; border: 1px solid #475569; display: flex; align-items: center; justify-content: center;">'
+            f'<img src="{obj.image_url}" '
+            f'onerror="this.onerror=null; this.src=\'{fallback}\';" '
+            f'style="width: 100%; height: 100%; object-fit: cover; display: block;" '
+            f'title="{obj.name}" />'
+            f'</div>'
         )
 
     @admin.display(description="Selector Visual de Portada")
@@ -228,8 +235,20 @@ class ProductAdmin(admin.ModelAdmin):
                 self.admin_site.admin_view(self.seleccionar_portada_view),
                 name='products_product_set_cover'
             ),
+            path(
+                'limpiar-cache/',
+                self.admin_site.admin_view(self.limpiar_cache_view),
+                name='products_product_clear_cache'
+            ),
         ]
         return custom_urls + urls
+
+    def limpiar_cache_view(self, request):
+        """Limpia la caché de catálogo bajo demanda."""
+        from django.core.cache import cache
+        cache.clear()
+        messages.success(request, "✓ Caché de catálogo limpiada correctamente. Los cambios ya son visibles.")
+        return redirect('admin:products_product_changelist')
 
     def seleccionar_portada_view(self, request, product_id):
         """Endpoint AJAX para cambiar la portada de un producto con 1 solo clic."""
@@ -254,7 +273,10 @@ class ProductAdmin(admin.ModelAdmin):
         if hasattr(response, 'render') and callable(response.render):
             response.render()
             import_url = reverse('admin:products_product_import')
+            cache_url = reverse('admin:products_product_clear_cache')
             btn_html = (
+                f'<li><a href="{cache_url}" class="historylink" style="background: #059669; color: white; font-weight: bold; padding: 5px 12px; border-radius: 4px; margin-right: 8px;">'
+                f'⚡ Refrescar Caché</a></li>'
                 f'<li><a href="{import_url}" class="historylink" style="background: #2563eb; color: white; font-weight: bold; padding: 5px 12px; border-radius: 4px;">'
                 f'Subir catálogo masivo / Importar</a></li>'
             )

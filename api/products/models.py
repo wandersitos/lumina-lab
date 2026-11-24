@@ -21,3 +21,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().delete(*args, **kwargs)

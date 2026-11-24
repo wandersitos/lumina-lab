@@ -41,4 +41,4 @@ USER appuser
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py seed_lumina_catalog && python manage.py init_admin --skip-if-missing && exec gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3 --threads 2"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py init_admin --skip-if-missing && exec gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3 --threads 2"]
