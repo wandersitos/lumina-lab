@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db.models import Q
 from django.core.cache import cache
-from .models import Product
+from .models import Product, Content
 from .serializers import ProductSerializer
 
 
@@ -81,3 +81,34 @@ class ClearCatalogCacheView(APIView):
     def get(self, request, *args, **kwargs):
         cache.clear()
         return Response({'status': 'ok', 'message': 'Caché de catálogo limpiada exitosamente.'})
+
+
+class ContentListView(APIView):
+    """
+    Endpoint de clave-valor para contenidos editables del sitio
+    (WhatsApp, Instagram, imagen hero, etc.) con soporte de caché.
+    """
+    def get(self, request, *args, **kwargs):
+        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        cache_key = 'lumina_site_content_dict'
+
+        if not force_refresh:
+            cached_data = cache.get(cache_key)
+            if cached_data is not None:
+                return Response(cached_data)
+
+        qs = Content.objects.all()
+        data = {c.key: c.value for c in qs}
+
+        defaults = {
+            'whatsapp_number': '+573001234567',
+            'instagram_handle': '@luminalab_co',
+            'instagram_url': 'https://www.instagram.com/luminalab_co/',
+            'hero_image_url': 'https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg',
+        }
+        for k, v in defaults.items():
+            if k not in data or not data[k]:
+                data[k] = v
+
+        cache.set(cache_key, data, timeout=900)  # 15 minutos
+        return Response(data)

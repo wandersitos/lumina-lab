@@ -134,29 +134,17 @@ export default function HomePage({ onNavigate }) {
                 <span className="px-2 py-0.5 bg-black text-white text-[9px] font-mono-tech tracking-widest uppercase">DISPONIBLE</span>
               </div>
 
-              <div className="my-auto flex justify-center items-center relative py-6">
-                <div className="absolute w-28 h-28 rounded-full bg-[#FFB86A] blur-xl opacity-75 animate-pulse"></div>
+              <div className="my-auto flex justify-center items-center relative py-4">
+                <div className="absolute w-36 h-36 rounded-full bg-[#FFB86A] blur-2xl opacity-40 pointer-events-none"></div>
                 
-                <svg className="w-64 h-64 relative z-10 glow-lamp transition-transform duration-700 hover:scale-105" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="75" y="215" width="50" height="8" rx="2" fill="#2B2824"/>
-                  <line x1="100" y1="210" x2="100" y2="215" stroke="#444" strokeWidth="3"/>
-                  <ellipse cx="100" cy="130" rx="60" ry="75" fill="url(#lampGrad)" stroke="#1A1816" strokeWidth="1.2"/>
-                  <path d="M45 110 C 65 118, 135 118, 155 110" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-                  <path d="M42 125 C 65 135, 135 135, 158 125" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
-                  <path d="M43 140 C 65 150, 135 150, 157 140" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-                  <path d="M48 155 C 68 165, 132 165, 152 155" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5"/>
-                  <path d="M58 170 C 75 178, 125 178, 142 170" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5"/>
-                  <ellipse cx="100" cy="58" rx="28" ry="10" fill="#FFE2B8" stroke="#1A1816" strokeWidth="1.5"/>
-                  <circle cx="100" cy="58" r="14" fill="#FFA94D" filter="blur(2px)"/>
-                  <defs>
-                    <linearGradient id="lampGrad" x1="100" y1="55" x2="100" y2="205" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#FFEED6"/>
-                      <stop offset="0.3" stopColor="#FCD5A3"/>
-                      <stop offset="0.7" stopColor="#EAA663"/>
-                      <stop offset="1" stopColor="#C27A3A"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
+                <div className="relative z-10 w-64 h-64 rounded-xl overflow-hidden shadow-lg border border-black/5 bg-[#FAF9F7] flex items-center justify-center transition-transform duration-700 hover:scale-105">
+                  <img
+                    src={siteConfig.heroImageUrl || "https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg"}
+                    alt="O1 Gravity Sculpted Lamp - Colección Leora"
+                    className="w-full h-full object-cover object-center"
+                    loading="eager"
+                  />
+                </div>
               </div>
 
               <div className="flex justify-between items-end border-t border-black/10 pt-4 z-10">

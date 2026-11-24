@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import path, reverse
 from django.http import JsonResponse
 from django.utils.html import mark_safe
-from .models import Product
+from .models import Product, Content
 from .importer import CatalogImporter
 
 
@@ -325,3 +325,19 @@ class ProductAdmin(admin.ModelAdmin):
             'opts': self.model._meta,
         }
         return render(request, 'admin/products/product/import_catalog.html', context)
+
+
+@admin.register(Content)
+class ContentAdmin(admin.ModelAdmin):
+    list_display = ('key', 'value_preview', 'description', 'updated_at')
+    search_fields = ('key', 'value', 'description')
+    ordering = ('key',)
+
+    def value_preview(self, obj):
+        if not obj.value:
+            return mark_safe('<em style="color:#999;">(vacío)</em>')
+        if len(obj.value) > 60:
+            return obj.value[:57] + '...'
+        return obj.value
+
+    value_preview.short_description = "Valor"

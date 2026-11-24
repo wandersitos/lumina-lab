@@ -61,17 +61,8 @@ export default function ProductCard({ product, onSelectDetail }) {
         className="block relative aspect-square w-full overflow-hidden bg-[#F7F6F3] cursor-pointer"
         aria-label={`Ver detalles de ${product.name}`}
       >
-        {/* Badges superiores estilizados en píldora con fondo translúcido */}
-        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 pointer-events-none">
-          <span className="px-2.5 py-1 bg-white/95 backdrop-blur-md rounded-full text-[9px] font-mono-tech uppercase tracking-wider text-[#121212] font-semibold shadow-sm product-badge-ondemand">
-            {product.inStock ? 'En Stock' : 'Bajo Demanda'}
-          </span>
-          {product.category && (
-            <span className="px-2 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-[8px] font-mono-tech uppercase tracking-wider text-white">
-              {product.category}
-            </span>
-          )}
-        </div>
+        {/* Accesibilidad para lectores de pantalla sin superponer tags visuales sobre la foto */}
+        <span className="sr-only">{product.inStock ? 'En Stock' : 'Bajo Demanda'}</span>
 
         <img
           src={imgSrc}

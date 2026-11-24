@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { siteConfig } from './config/site.js';
+import { siteConfig, updateSiteConfigFromContent } from './config/site.js';
 import CartDrawer from './components/CartDrawer.jsx';
 import CheckoutModal from './components/CheckoutModal.jsx';
 import { CartProvider, useCart } from './context/CartContext.jsx';
@@ -197,6 +197,27 @@ function parseCurrentRoute() {
 
 function MainApp() {
   const [route, setRoute] = useState(parseCurrentRoute);
+  const [, setContentTimestamp] = useState(Date.now());
+
+  // Cargar contenidos dinámicos del sitio desde la API (WhatsApp, Instagram, Hero, etc.)
+  useEffect(() => {
+    const envUrl = import.meta.env.VITE_API_URL;
+    const baseUrl = envUrl ? envUrl.replace(/\/+$/, '') : '';
+    fetch(`${baseUrl}/api/content/`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (data && typeof data === 'object') {
+          updateSiteConfigFromContent(data);
+          setContentTimestamp(Date.now());
+        }
+      })
+      .catch((err) => {
+        console.warn('API /api/content/ no disponible, usando configuración local:', err);
+      });
+  }, []);
 
   // Manejo de historial del navegador (popstate)
   useEffect(() => {

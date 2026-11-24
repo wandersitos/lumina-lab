@@ -31,3 +31,32 @@ class Product(models.Model):
         from django.core.cache import cache
         cache.clear()
         super().delete(*args, **kwargs)
+
+
+class Content(models.Model):
+    """
+    Tabla clave-valor para almacenar configuraciones editables del sitio
+    (teléfono WhatsApp, Instagram, imagen destacada, etc.) con soporte de caché.
+    """
+    key = models.CharField(max_length=100, unique=True, db_index=True, verbose_name="Clave")
+    value = models.TextField(blank=True, default="", verbose_name="Valor")
+    description = models.CharField(max_length=255, blank=True, default="", verbose_name="Descripción")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Última modificación")
+
+    class Meta:
+        verbose_name = "Contenido / Configuración"
+        verbose_name_plural = "Contenidos / Configuraciones"
+        ordering = ['key']
+
+    def __str__(self):
+        return f"{self.key}: {self.value[:30]}"
+
+    def save(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.delete('lumina_site_content_dict')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.delete('lumina_site_content_dict')
+        super().delete(*args, **kwargs)

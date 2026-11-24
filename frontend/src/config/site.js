@@ -29,6 +29,28 @@ export const siteConfig = {
     gatewayEnabled: false,
     defaultMethod: 'whatsapp',
   },
+  heroImageUrl: 'https://res.cloudinary.com/dja3bhm9j/image/upload/v1795490346/Leora-Floral-May-2025_4_ue6skw.jpg',
 };
+
+/**
+ * Actualiza la configuración del sitio a partir del endpoint dinámico /api/content/
+ */
+export function updateSiteConfigFromContent(content) {
+  if (!content || typeof content !== 'object') return;
+  if (content.whatsapp_number) {
+    siteConfig.social.whatsapp.number = content.whatsapp_number;
+    const cleanNumber = content.whatsapp_number.replace(/[^0-9]/g, '');
+    siteConfig.social.whatsapp.url = `https://wa.me/${cleanNumber}?text=Hola%20Lumina%20Lab`;
+  }
+  if (content.instagram_handle) {
+    siteConfig.social.instagram.handle = content.instagram_handle;
+  }
+  if (content.instagram_url) {
+    siteConfig.social.instagram.url = content.instagram_url;
+  }
+  if (content.hero_image_url) {
+    siteConfig.heroImageUrl = content.hero_image_url;
+  }
+}
 
 export default siteConfig;
