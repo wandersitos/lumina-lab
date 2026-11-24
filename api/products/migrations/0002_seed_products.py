@@ -49,5 +49,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create_initial_products, remove_initial_products),
+        migrations.RunPython(migrations.RunPython.noop, migrations.RunPython.noop),
     ]

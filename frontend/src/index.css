@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Tokens de diseño: Identidad Editorial Lumina Lab */
   --color-primary: #E07A5F;          /* Terracota cálido luminiscente */

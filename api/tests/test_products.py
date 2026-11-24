@@ -4,6 +4,17 @@ from rest_framework.test import APIClient
 class ProductCatalogTests(TestCase):
     def setUp(self):
         self.client = APIClient()
+        from products.models import Product
+        self.product = Product.objects.create(
+            name='Lámpara Vórtice',
+            slug='lampara-vortice',
+            description='Diseño helicoidal orgánico con entramado geométrico que difumina la luz suavemente.',
+            price=120000,
+            dimensions='24 x 16 cm',
+            image_url='https://images.unsplash.com/photo-1507473885765-e6ed057f782c',
+            colors=['Blanco Cálido', 'Terracota', 'Verde Salvia'],
+            is_active=True
+        )
 
     def test_r1_list_active_products(self):
         """R1: GET /api/products/ retorna lista JSON con productos activos."""

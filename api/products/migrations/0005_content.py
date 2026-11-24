@@ -57,5 +57,5 @@ class Migration(migrations.Migration):
                 'ordering': ['key'],
             },
         ),
-        migrations.RunPython(seed_initial_content, rollback_initial_content),
+        migrations.RunPython(migrations.RunPython.noop, migrations.RunPython.noop),
     ]

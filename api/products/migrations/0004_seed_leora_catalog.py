@@ -47,5 +47,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(seed_leora_products, rollback_leora_products),
+        migrations.RunPython(migrations.RunPython.noop, migrations.RunPython.noop),
     ]
