@@ -41,28 +41,8 @@ export default function ProductsPage({ onNavigate }) {
     return '';
   };
 
-  const CACHE_KEY = 'lumina_products_cache_v1';
-  const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutos
-
-  // Carga de catálogo con caché y opción de refresco forzado desde BD
+  // Carga de catálogo siempre consultando a la API Django (la caché reside en backend)
   const fetchCatalogFromApi = (forceRefresh = false) => {
-    // Si no se fuerza el refresco, verificar si tenemos copia en caché válida
-    if (!forceRefresh && typeof window !== 'undefined') {
-      try {
-        const cached = sessionStorage.getItem(CACHE_KEY);
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (parsed && parsed.timestamp && (Date.now() - parsed.timestamp < CACHE_TTL_MS) && Array.isArray(parsed.products)) {
-            setProducts(parsed.products);
-            setLoading(false);
-            return;
-          }
-        }
-      } catch (e) {
-        console.warn('Error leyendo caché de catálogo:', e);
-      }
-    }
-
     setLoading(true);
 
     const apiUrl = `${getApiBaseUrl()}/api/products/${forceRefresh ? '?refresh=true' : ''}`;
@@ -83,17 +63,6 @@ export default function ProductsPage({ onNavigate }) {
           }));
           setProducts(normalized);
           setError(null);
-
-          // Guardar en caché local
-          try {
-            sessionStorage.setItem(CACHE_KEY, JSON.stringify({
-              timestamp: Date.now(),
-              products: normalized,
-            }));
-          } catch (e) {
-            console.warn('Error guardando en caché:', e);
-          }
-
         } else {
           setProducts([]);
         }

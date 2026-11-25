@@ -7,6 +7,9 @@ from django.core.cache import cache
 from .models import Product, Content
 from .serializers import ProductSerializer
 
+# TTL de caché de catálogo en backend: 3 meses (90 días = 90 * 24 * 3600 segundos)
+CATALOG_CACHE_TIMEOUT = 7776000
+
 
 def _check_refresh_permission(request):
     """
@@ -66,7 +69,7 @@ class ProductListView(generics.ListAPIView):
 
         # Si no está en caché o se pidió refrescar, consultar BD
         response = super().list(request, *args, **kwargs)
-        cache.set(cache_key, response.data, timeout=900)  # 15 minutos
+        cache.set(cache_key, response.data, timeout=CATALOG_CACHE_TIMEOUT)
         return response
 
 
@@ -89,7 +92,7 @@ class ProductDetailView(generics.RetrieveAPIView):
                 return Response(cached)
 
         response = super().retrieve(request, *args, **kwargs)
-        cache.set(cache_key, response.data, timeout=900)
+        cache.set(cache_key, response.data, timeout=CATALOG_CACHE_TIMEOUT)
         return response
 
 
@@ -136,5 +139,5 @@ class ContentListView(APIView):
             if k not in data or not data[k]:
                 data[k] = v
 
-        cache.set(cache_key, data, timeout=900)  # 15 minutos
+        cache.set(cache_key, data, timeout=CATALOG_CACHE_TIMEOUT)
         return Response(data)
