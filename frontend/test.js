@@ -66,7 +66,9 @@ assert(cartContextContent.includes('updateQuantity'), 'R3: CartContext must prov
 assert(cartContextContent.includes('localStorage'), 'R3: CartContext must persist cart in localStorage');
 
 const cartDrawerContent = fs.readFileSync(cartDrawerPath, 'utf-8');
-assert(cartDrawerContent.includes('ShippingCalculator'), 'R3: CartDrawer must include ShippingCalculator');
+assert(!cartDrawerContent.includes('<ShippingCalculator'), 'R1 (020): CartDrawer must not render ShippingCalculator');
+assert(!cartDrawerContent.includes('Costo de envío'), 'R2 (020): CartDrawer must not display Costo de envío');
+assert(!cartDrawerContent.includes('Calcula tu ciudad'), 'R2 (020): CartDrawer must not display Calcula tu ciudad');
 assert(cartDrawerContent.includes('subtotal') || cartDrawerContent.includes('Subtotal'), 'R3: CartDrawer must display subtotal');
 assert(cartDrawerContent.includes('total') || cartDrawerContent.includes('Total'), 'R3: CartDrawer must display total');
 assert(cartDrawerContent.includes('whatsapp') || cartDrawerContent.includes('WhatsApp'), 'R3: CartDrawer must have WhatsApp order button');
