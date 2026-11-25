@@ -1,10 +1,25 @@
 from rest_framework import generics, status
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db.models import Q
 from django.core.cache import cache
 from .models import Product, Content
 from .serializers import ProductSerializer
+
+
+def _check_refresh_permission(request):
+    """
+    Valida si se solicita refresco forzado (?refresh=true/1/yes) y verifica que el usuario
+    esté autenticado como administrador (is_staff=True).
+    """
+    force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+    if force_refresh and not (request.user and request.user.is_authenticated and request.user.is_staff):
+        return True, Response(
+            {'detail': 'No tienes permisos para refrescar la caché.'},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+    return force_refresh, None
 
 
 class ProductListView(generics.ListAPIView):
@@ -37,7 +52,10 @@ class ProductListView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         # Soporte de invalidación / refresco forzado de caché
-        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        force_refresh, denied_response = _check_refresh_permission(request)
+        if denied_response is not None:
+            return denied_response
+
         query_string = request.META.get('QUERY_STRING', '')
         cache_key = f'lumina_products_list_{query_string}'
 
@@ -59,7 +77,10 @@ class ProductDetailView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         slug = kwargs.get('slug')
-        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        force_refresh, denied_response = _check_refresh_permission(request)
+        if denied_response is not None:
+            return denied_response
+
         cache_key = f'lumina_product_detail_{slug}'
 
         if not force_refresh:
@@ -74,6 +95,8 @@ class ProductDetailView(generics.RetrieveAPIView):
 
 class ClearCatalogCacheView(APIView):
     """Endpoint para limpiar y refrescar toda la caché de catálogo bajo demanda."""
+    permission_classes = [IsAdminUser]
+
     def post(self, request, *args, **kwargs):
         cache.clear()
         return Response({'status': 'ok', 'message': 'Caché de catálogo limpiada exitosamente.'})
@@ -89,7 +112,10 @@ class ContentListView(APIView):
     (WhatsApp, Instagram, imagen hero, etc.) con soporte de caché.
     """
     def get(self, request, *args, **kwargs):
-        force_refresh = request.query_params.get('refresh') in ('true', '1', 'yes')
+        force_refresh, denied_response = _check_refresh_permission(request)
+        if denied_response is not None:
+            return denied_response
+
         cache_key = 'lumina_site_content_dict'
 
         if not force_refresh:

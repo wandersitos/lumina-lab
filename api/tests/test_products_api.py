@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import TestCase
 from django.core.management import call_command
 from rest_framework.test import APIClient
-from products.models import Product
+from products.models import Content, Product
 
 class ProductsApiIntegrationTests(TestCase):
     def setUp(self):
@@ -112,3 +114,128 @@ class ProductsApiIntegrationTests(TestCase):
         leora_seeded = Product.objects.filter(collection='leora').exclude(slug='lampara-leora-test').count()
         self.assertEqual(leora_seeded, 20)
         self.assertGreaterEqual(total, 20)
+
+
+class RefreshCacheAuthTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.client = APIClient()
+        User = get_user_model()
+        self.regular_user = User.objects.create_user(
+            username='regular_user',
+            password='password123',
+            is_staff=False,
+        )
+        self.admin_user = User.objects.create_user(
+            username='admin_user',
+            password='password123',
+            is_staff=True,
+        )
+        self.product = Product.objects.create(
+            name="Lámpara Caché Test",
+            slug="lampara-cache-test",
+            description="Descripción inicial",
+            price=250000,
+            collection="leora",
+            category="Sculpted",
+            in_stock=True,
+            images=["/img/cache1.jpg"],
+            order=1,
+            is_active=True,
+        )
+        self.content = Content.objects.create(
+            key="whatsapp_number",
+            value="+573000000001",
+        )
+
+    def tearDown(self):
+        cache.clear()
+
+    def test_r1_anonymous_and_non_staff_rejected_on_refresh(self):
+        """R1: Anónimo y no-staff reciben 403 con ?refresh=true y no saltan ni invalidan la caché."""
+        # Poblar caché con peticiones públicas iniciales
+        self.assertEqual(self.client.get('/api/products/').status_code, 200)
+        self.assertEqual(self.client.get(f'/api/products/{self.product.slug}/').status_code, 200)
+        self.assertEqual(self.client.get('/api/content/').status_code, 200)
+
+        # Modificar BD directamente sin invalidar caché
+        Product.objects.filter(pk=self.product.pk).update(name="Nombre Actualizado BD")
+        Content.objects.filter(pk=self.content.pk).update(value="+573009999999")
+
+        endpoints = [
+            '/api/products/?refresh=true',
+            f'/api/products/{self.product.slug}/?refresh=true',
+            '/api/content/?refresh=true',
+        ]
+
+        # Anónimo recibe 403
+        self.client.force_authenticate(user=None)
+        for url in endpoints:
+            resp = self.client.get(url)
+            self.assertEqual(resp.status_code, 403, f"Anónimo debía recibir 403 en {url}")
+
+        # Usuario normal (is_staff=False) recibe 403
+        self.client.force_authenticate(user=self.regular_user)
+        for url in endpoints:
+            resp = self.client.get(url)
+            self.assertEqual(resp.status_code, 403, f"No-staff debía recibir 403 en {url}")
+
+        # Verificar que la caché sigue intacta (devuelve valores originales)
+        self.client.force_authenticate(user=None)
+        list_data = self.client.get('/api/products/').json()
+        self.assertEqual(list_data[0]['name'], "Lámpara Caché Test")
+        detail_data = self.client.get(f'/api/products/{self.product.slug}/').json()
+        self.assertEqual(detail_data['name'], "Lámpara Caché Test")
+        content_data = self.client.get('/api/content/').json()
+        self.assertEqual(content_data['whatsapp_number'], "+573000000001")
+
+    def test_r2_admin_can_refresh_and_gets_fresh_data(self):
+        """R2: Admin autenticado (is_staff=True) recibe 200 con ?refresh=true/1/yes y obtiene datos frescos."""
+        # Poblar caché inicial
+        self.assertEqual(self.client.get('/api/products/').status_code, 200)
+        self.assertEqual(self.client.get(f'/api/products/{self.product.slug}/').status_code, 200)
+        self.assertEqual(self.client.get('/api/content/').status_code, 200)
+
+        # Actualizar BD
+        Product.objects.filter(pk=self.product.pk).update(name="Nombre Refrescado Admin")
+        Content.objects.filter(pk=self.content.pk).update(value="+573008888888")
+
+        self.client.force_authenticate(user=self.admin_user)
+
+        resp_list = self.client.get('/api/products/?refresh=true')
+        self.assertEqual(resp_list.status_code, 200)
+        self.assertEqual(resp_list.json()[0]['name'], "Nombre Refrescado Admin")
+
+        resp_detail = self.client.get(f'/api/products/{self.product.slug}/?refresh=1')
+        self.assertEqual(resp_detail.status_code, 200)
+        self.assertEqual(resp_detail.json()['name'], "Nombre Refrescado Admin")
+
+        resp_content = self.client.get('/api/content/?refresh=yes')
+        self.assertEqual(resp_content.status_code, 200)
+        self.assertEqual(resp_content.json()['whatsapp_number'], "+573008888888")
+
+    def test_r3_clear_catalog_cache_requires_admin(self):
+        """R3: GET y POST a /api/products/cache/clear/ devuelven 403 para anónimo/no-staff y 200 para admin."""
+        url = '/api/products/cache/clear/'
+
+        # Anónimo -> 403
+        self.client.force_authenticate(user=None)
+        self.assertEqual(self.client.get(url).status_code, 403)
+        self.assertEqual(self.client.post(url).status_code, 403)
+
+        # No-staff -> 403
+        self.client.force_authenticate(user=self.regular_user)
+        self.assertEqual(self.client.get(url).status_code, 403)
+        self.assertEqual(self.client.post(url).status_code, 403)
+
+        # Admin -> 200 en GET y POST
+        self.client.force_authenticate(user=self.admin_user)
+        self.assertEqual(self.client.get(url).status_code, 200)
+        self.assertEqual(self.client.post(url).status_code, 200)
+
+    def test_r4_public_endpoints_without_refresh_return_200(self):
+        """R4: Peticiones sin ?refresh siguen devolviendo 200 para usuarios anónimos."""
+        self.client.force_authenticate(user=None)
+        self.assertEqual(self.client.get('/api/products/').status_code, 200)
+        self.assertEqual(self.client.get(f'/api/products/{self.product.slug}/').status_code, 200)
+        self.assertEqual(self.client.get('/api/content/').status_code, 200)
