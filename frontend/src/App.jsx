@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { siteConfig, updateSiteConfigFromContent } from './config/site.js';
 import CartDrawer from './components/CartDrawer.jsx';
-import CheckoutModal from './components/CheckoutModal.jsx';
 import { CartProvider, useCart } from './context/CartContext.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProductsPage from './pages/ProductsPage.jsx';
@@ -116,9 +115,9 @@ function NavbarContent({ currentView, onNavigate }) {
               type="button"
               onClick={() => setIsCartOpen(true)}
               className="flex items-center gap-2 px-3 sm:px-4 py-2 border border-[#121212] bg-[#121212] text-white hover:bg-black text-[10px] sm:text-[11px] font-mono-tech tracking-[0.18em] uppercase transition-all shadow-sm"
-              aria-label="Abrir bolsa de compra"
+              aria-label="Abrir carrito de compra"
             >
-              <span>Bolsa</span>
+              <span>Carrito</span>
               <span className="w-4 h-4 rounded-full bg-white text-[#121212] flex items-center justify-center font-bold text-[10px]">
                 {totalItems}
               </span>
@@ -355,9 +354,6 @@ function MainApp() {
 
       {/* Slide-over Carrito */}
       <CartDrawer />
-
-      {/* Checkout Modal */}
-      <CheckoutModal />
     </div>
   );
 }

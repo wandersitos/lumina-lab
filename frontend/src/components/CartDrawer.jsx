@@ -9,7 +9,6 @@ export default function CartDrawer() {
     items,
     isCartOpen,
     setIsCartOpen,
-    setIsCheckoutOpen,
     removeFromCart,
     updateQuantity,
     subtotal,
@@ -197,17 +196,6 @@ export default function CartDrawer() {
         {/* Drawer Actions Footer */}
         {items.length > 0 && (
           <div className="p-6 bg-white border-t border-[#E8E6E1] space-y-3">
-            <button
-              type="button"
-              className="w-full py-4 bg-[#121212] hover:bg-black text-white text-[11px] font-mono-tech uppercase tracking-[0.2em] transition-smooth shadow-md"
-              onClick={() => {
-                setIsCartOpen(false);
-                setIsCheckoutOpen(true);
-              }}
-            >
-              Proceder al Checkout
-            </button>
-
             <a
               href={whatsappUrl}
               target="_blank"

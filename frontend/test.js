@@ -79,7 +79,7 @@ const appContent = fs.readFileSync(appJsxPath, 'utf-8');
 assert(appContent.includes('CartProvider'), 'R3: App.jsx must wrap application in CartProvider');
 assert(appContent.includes('CartDrawer'), 'R3: App.jsx must render CartDrawer');
 
-// 5. R3 (005): Checkout, pasarela desacoplada y pedidos por WhatsApp
+// 5. R3 (005 / 019): Carrito, pasarela desacoplada y pedidos por WhatsApp
 assert(siteConfig.payments, 'R3 (005): siteConfig must have payments section');
 assert.strictEqual(siteConfig.payments.gatewayEnabled, false, 'R3 (005): gatewayEnabled must be false by default');
 assert.strictEqual(siteConfig.payments.defaultMethod, 'whatsapp', 'R3 (005): defaultMethod must be whatsapp');
@@ -94,9 +94,10 @@ assert(checkoutModalContent.includes('clearCart'), 'R3 (005): CheckoutModal must
 assert(checkoutModalContent.includes('wa.me') || checkoutModalContent.includes('WhatsApp'), 'R3 (005): CheckoutModal must include WhatsApp order option');
 assert(checkoutModalContent.includes('gatewayEnabled'), 'R3 (005): CheckoutModal must inspect gatewayEnabled setting');
 
-assert(cartDrawerContent.includes('CheckoutModal') || cartDrawerContent.includes('checkout') || cartDrawerContent.includes('Checkout'), 'R3 (005): CartDrawer must trigger checkout process');
-
-assert(appContent.includes('CheckoutModal'), 'R3 (005): App.jsx must mount CheckoutModal');
+// 019: Checkout temporalmente desmontado del cajón y de la app
+assert(!cartDrawerContent.includes('Proceder al Checkout'), 'R2 (019): CartDrawer must not render Proceder al Checkout button');
+assert(!appContent.includes('<CheckoutModal'), 'R2 (019): App.jsx must not mount CheckoutModal');
+assert(!appContent.includes("import CheckoutModal"), 'R2 (019): App.jsx must not import CheckoutModal');
 
 // =============================================================================
 // 6. R1-R3 (008-rediseno-ui): Minimalismo Cálido Nórdico & Elementos de Confianza
@@ -116,7 +117,9 @@ assert(indexCssContent.includes('16px'), 'R1 (008): index.css must include 16px 
 assert(appContent.includes('ESTUDIO DE ILUMINACIÓN') || appContent.includes('Estudio de Iluminación'), 'R3 (015): App.jsx must brand as Estudio de Iluminación');
 assert(!appContent.includes('EDICIONES 3D LIMITADAS'), 'R3 (015): App.jsx topbar must not mention EDICIONES 3D LIMITADAS');
 assert(!appContent.includes('STUDIO • 3D LIGHTING'), 'R3 (015): App.jsx navbar must not mention STUDIO • 3D LIGHTING');
-assert(appContent.includes('Bolsa'), 'R3 (015): App.jsx navbar must include Bolsa button');
+assert(appContent.includes('<span>Carrito</span>'), 'R1 (019): App.jsx navbar must show Carrito button text');
+assert(appContent.includes('aria-label="Abrir carrito de compra"'), 'R1 (019): App.jsx navbar button must have aria-label="Abrir carrito de compra"');
+assert(!appContent.includes('<span>Bolsa</span>'), 'R1 (019): App.jsx navbar must not show Bolsa');
 
 // R1: Footer con información de marca y redes oficiales
 assert(appContent.includes('footer') || appContent.includes('Footer') || appContent.includes('site-footer'), 'R1 (008): App.jsx must include structured site footer');
