@@ -163,7 +163,7 @@ export default function ProductDetailModal({ product, onClose }) {
               </div>
               <div className="spec-item">
                 <span className="spec-label">Tipo de iluminación:</span>
-                <span className="spec-value">LED Cálida 2700K difusa (socket universal E27 incluida)</span>
+                <span className="spec-value">LED</span>
               </div>
               <div className="spec-item">
                 <span className="spec-label">Material de impresión:</span>
