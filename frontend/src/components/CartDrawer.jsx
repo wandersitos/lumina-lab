@@ -26,12 +26,20 @@ export default function CartDrawer() {
   if (!isCartOpen) return null;
 
   // Generar mensaje estructurado de WhatsApp
+  const formatItemOptions = (item) => {
+    if (!Array.isArray(item.selectedOptions) || item.selectedOptions.length === 0) return '';
+    return item.selectedOptions
+      .map((opt) => `${opt.groupName}: ${opt.optionName}`)
+      .join(' · ');
+  };
+
   const generateWhatsAppMessage = () => {
-    let msg = `¡Hola Lumina Lab! Deseo realizar el siguiente pedido de lámparas 3D:\n\n`;
+    let msg = `¡Hola Lumina Lab! Deseo realizar el siguiente pedido de lámparas:\n\n`;
     items.forEach((item, index) => {
-      msg += `${index + 1}. ${item.name}${item.dimensions ? ` (${item.dimensions})` : ''} x ${item.quantity} = ${formatCOP(
-        item.price * item.quantity
-      )} COP\n`;
+      const optsText = formatItemOptions(item);
+      msg += `${index + 1}. ${item.name}${optsText ? ` [${optsText}]` : ''}${
+        item.dimensions ? ` (${item.dimensions})` : ''
+      } x ${item.quantity} = ${formatCOP(item.price * item.quantity)} COP\n`;
     });
     msg += `\nSubtotal productos: ${formatCOP(subtotal)} COP`;
     msg += `\nEnvío: Por cotizar`;
@@ -114,6 +122,14 @@ export default function CartDrawer() {
                         {formatCOP(item.price * item.quantity)} COP
                       </span>
                     </div>
+
+                    {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0 && (
+                      <p className="text-[11px] font-mono-tech text-[#555]">
+                        {item.selectedOptions
+                          .map((opt) => `${opt.groupName}: ${opt.optionName}`)
+                          .join(' · ')}
+                      </p>
+                    )}
 
                     {item.dimensions && (
                       <p className="text-[11px] font-mono-tech text-[#777]">

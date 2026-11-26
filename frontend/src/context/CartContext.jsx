@@ -26,9 +26,26 @@ export function CartProvider({ children }) {
     }
   }, [items]);
 
-  const addToCart = (product, selectedColor = null, quantity = 1) => {
+  const addToCart = (product, selectedColor = null, quantity = 1, selectedOptions = []) => {
     const color = selectedColor || (product.colors && product.colors[0]) || 'Estándar';
-    const itemId = `${product.id || product.slug}-${color}`;
+    const normalizedOptions = Array.isArray(selectedOptions) ? selectedOptions : [];
+    const optionsKey = normalizedOptions
+      .slice()
+      .sort((a, b) => (a.groupSlug || '').localeCompare(b.groupSlug || ''))
+      .map((opt) => `${opt.groupSlug}:${opt.optionSlug}`)
+      .join('|');
+    const itemId = optionsKey
+      ? `${product.id || product.slug}-${color}-${optionsKey}`
+      : `${product.id || product.slug}-${color}`;
+
+    const optionsDelta = normalizedOptions.reduce(
+      (sum, opt) => sum + Number(opt.priceDelta || 0),
+      0
+    );
+    const unitPrice =
+      product.effectivePrice !== undefined
+        ? Number(product.effectivePrice)
+        : Number(product.price) + optionsDelta;
 
     setItems((prevItems) => {
       const existingIndex = prevItems.findIndex((item) => item.cartItemId === itemId);
@@ -47,10 +64,11 @@ export function CartProvider({ children }) {
           id: product.id,
           name: product.name,
           slug: product.slug,
-          price: product.price,
+          price: unitPrice,
           dimensions: product.dimensions,
           image_url: product.image_url,
           color,
+          selectedOptions: normalizedOptions,
           quantity,
         },
       ];

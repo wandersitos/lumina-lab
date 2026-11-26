@@ -29,7 +29,11 @@ class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        queryset = Product.objects.filter(is_active=True).order_by('order', 'id')
+        queryset = (
+            Product.objects.filter(is_active=True)
+            .prefetch_related('option_assignments__option__group')
+            .order_by('order', 'id')
+        )
         category = self.request.query_params.get('category')
         collection = self.request.query_params.get('collection')
         in_stock = self.request.query_params.get('in_stock')
@@ -74,7 +78,7 @@ class ProductListView(generics.ListAPIView):
 
 
 class ProductDetailView(generics.RetrieveAPIView):
-    queryset = Product.objects.filter(is_active=True)
+    queryset = Product.objects.filter(is_active=True).prefetch_related('option_assignments__option__group')
     serializer_class = ProductSerializer
     lookup_field = 'slug'
 

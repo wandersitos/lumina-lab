@@ -3,7 +3,13 @@ from django.shortcuts import render, redirect
 from django.urls import path, reverse
 from django.http import JsonResponse
 from django.utils.html import mark_safe
-from .models import Product, Content
+from .models import (
+    Product,
+    Content,
+    ProductOptionGroup,
+    ProductOption,
+    ProductOptionAssignment,
+)
 from .importer import CatalogImporter
 
 
@@ -50,6 +56,12 @@ def get_resolved_image_list(obj):
     return unique_list
 
 
+class ProductOptionAssignmentInline(admin.TabularInline):
+    model = ProductOptionAssignment
+    extra = 0
+    fields = ('option', 'is_visible', 'in_stock', 'price_delta_override')
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('foto_portada', 'name', 'slug', 'price', 'dimensions', 'is_active', 'created_at')
@@ -57,6 +69,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('selector_de_portada',)
+    inlines = [ProductOptionAssignmentInline]
 
     fields = (
         'name',
@@ -341,3 +354,22 @@ class ContentAdmin(admin.ModelAdmin):
         return obj.value
 
     value_preview.short_description = "Valor"
+
+
+@admin.register(ProductOptionGroup)
+class ProductOptionGroupAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('name', 'slug')
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ('order', 'id')
+
+
+@admin.register(ProductOption)
+class ProductOptionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'group', 'slug', 'is_visible', 'in_stock', 'price_delta', 'order')
+    list_filter = ('group', 'is_visible', 'in_stock')
+    list_editable = ('is_visible', 'in_stock', 'price_delta', 'order')
+    search_fields = ('name', 'slug', 'group__name')
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ('group__order', 'order', 'id')
