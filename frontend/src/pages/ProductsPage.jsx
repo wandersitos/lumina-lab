@@ -180,14 +180,14 @@ export default function ProductsPage({ onNavigate }) {
 
     // Ordenamiento
     if (sortBy === 'price-asc') {
-      result = [...result].sort((a, b) => a.price - b.price);
+      result = result.toSorted((a, b) => a.price - b.price);
     } else if (sortBy === 'price-desc') {
-      result = [...result].sort((a, b) => b.price - a.price);
+      result = result.toSorted((a, b) => b.price - a.price);
     } else if (sortBy === 'name') {
-      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
+      result = result.toSorted((a, b) => a.name.localeCompare(b.name));
     } else {
       // featured / default: por orden o ID
-      result = [...result].sort((a, b) => (a.order || 99) - (b.order || 99));
+      result = result.toSorted((a, b) => (a.order || 99) - (b.order || 99));
     }
 
     return result;
