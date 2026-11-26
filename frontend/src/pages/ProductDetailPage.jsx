@@ -279,7 +279,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
                 onError={(e) => {
                   e.target.src = FALLBACK_IMAGE;
                 }}
-                className="w-full h-full object-contain object-center"
+                className="w-full h-full object-cover object-center"
               />
             </div>
 

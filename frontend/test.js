@@ -341,9 +341,9 @@ assert(!detailModalContent.includes('E27'), 'R1 (022): ProductDetailModal.jsx mu
 assert(detailPageContent.includes('>LED<'), 'R1 (022): ProductDetailPage.jsx must display LED');
 assert(detailModalContent.includes('>LED<'), 'R1 (022): ProductDetailModal.jsx must display LED');
 
-// R2: Imagen principal en formato cuadrado estándar con object-contain y sin zoom hover
+// R2: Imagen principal en formato cuadrado estándar igual al listado (aspect-square + object-cover sin zoom hover)
 assert(!detailPageContent.includes('sm:aspect-[4/5]'), 'R2 (022): ProductDetailPage.jsx must use standard square aspect-square instead of sm:aspect-[4/5]');
 assert(!detailPageContent.includes('group-hover:scale-105'), 'R2 (022): ProductDetailPage.jsx must not zoom main image with group-hover:scale-105');
-assert(detailPageContent.includes('object-contain object-center'), 'R2 (022): ProductDetailPage.jsx main image must use object-contain object-center');
+assert(detailPageContent.includes('object-cover object-center'), 'R2 (022): ProductDetailPage.jsx main image must use object-cover object-center');
 
 console.log('All frontend verification tests passed successfully!');
