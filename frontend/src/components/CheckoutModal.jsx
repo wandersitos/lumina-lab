@@ -96,13 +96,19 @@ export default function CheckoutModal() {
       customer_phone: formData.phone.trim(),
       shipping_address: formData.address.trim(),
       shipping_city: formData.city.trim(),
-      items: items.map((item) => ({
-        product_id: item.id,
-        name: item.name,
-        variant: item.color,
-        price: item.price,
-        quantity: item.quantity,
-      })),
+      items: items.map((item) => {
+        const optsText = Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0
+          ? item.selectedOptions.map((o) => `${o.groupName}: ${o.optionName}`).join(', ')
+          : '';
+        return {
+          product_id: item.id,
+          name: item.name,
+          variant: optsText ? `${item.color} (${optsText})` : item.color,
+          selected_options: item.selectedOptions || [],
+          price: item.price,
+          quantity: item.quantity,
+        };
+      }),
       shipping_cost: shippingCost,
     };
 
@@ -335,7 +341,11 @@ export default function CheckoutModal() {
                       <div className="checkout-item-info">
                         <span className="checkout-item-name">{item.name}</span>
                         <span className="checkout-item-meta">
-                          {item.color} &times; {item.quantity}
+                          {item.color}
+                          {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0
+                            ? ` · ${item.selectedOptions.map((o) => `${o.groupName}: ${o.optionName}`).join(' · ')}`
+                            : ''}
+                          {' '}&times; {item.quantity}
                         </span>
                       </div>
                       <span className="checkout-item-sub">

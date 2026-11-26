@@ -27,6 +27,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
   });
   const [activeImage, setActiveImage] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [selectedOptionsByGroup, setSelectedOptionsByGroup] = useState({});
   const [loading, setLoading] = useState(!product);
   const [error, setError] = useState(null);
 
@@ -87,6 +88,28 @@ export default function ProductDetailPage({ slug, onNavigate }) {
       isMounted = false;
     };
   }, [slug, apiUrl]);
+
+  useEffect(() => {
+    const groups = Array.isArray(product?.option_groups) ? product.option_groups : [];
+    if (groups.length === 0) {
+      setSelectedOptionsByGroup({});
+      return;
+    }
+    setSelectedOptionsByGroup((prev) => {
+      const next = {};
+      for (const group of groups) {
+        const current = prev[group.slug];
+        const stillValid =
+          current && (group.options || []).find((o) => o.slug === current.slug && o.in_stock);
+        if (stillValid) {
+          next[group.slug] = stillValid;
+        } else {
+          next[group.slug] = (group.options || []).find((o) => o.in_stock) || null;
+        }
+      }
+      return next;
+    });
+  }, [product]);
 
   if (loading) {
     return (
@@ -157,14 +180,53 @@ export default function ProductDetailPage({ slug, onNavigate }) {
     .filter((p) => p.slug !== product.slug && (p.collection === product.collection || p.category === product.category))
     .slice(0, 3);
 
+  const optionGroups = Array.isArray(product.option_groups) ? product.option_groups : [];
+  const allGroupsAvailable = optionGroups.every(
+    (g) => Boolean(selectedOptionsByGroup[g.slug] && selectedOptionsByGroup[g.slug].in_stock)
+  );
+  const optionsDelta = optionGroups.reduce(
+    (sum, g) => sum + Number(selectedOptionsByGroup[g.slug]?.price_delta || 0),
+    0
+  );
+  const effectivePrice = Number(product.price || 0) + optionsDelta;
+  const selectedOptionsPayload = optionGroups
+    .map((g) => {
+      const opt = selectedOptionsByGroup[g.slug];
+      if (!opt) return null;
+      return {
+        groupId: g.id,
+        groupSlug: g.slug,
+        groupName: g.name,
+        optionId: opt.id,
+        optionSlug: opt.slug,
+        optionName: opt.name,
+        priceDelta: Number(opt.price_delta || 0),
+      };
+    })
+    .filter(Boolean);
+
+  const handleSelectOption = (groupSlug, option) => {
+    if (!option.in_stock) return;
+    setSelectedOptionsByGroup((prev) => ({
+      ...prev,
+      [groupSlug]: option,
+    }));
+  };
+
   const handleAddToCart = () => {
-    addToCart(product, null, quantity);
+    if (!allGroupsAvailable) return;
+    addToCart({ ...product, effectivePrice }, null, quantity, selectedOptionsPayload);
   };
 
   const handleBuyWhatsApp = () => {
     const wppNumber = siteConfig.social?.whatsapp?.number?.replace(/[^0-9]/g, '') || '573001234567';
+    const optsText = selectedOptionsPayload.length
+      ? ` [${selectedOptionsPayload.map((o) => `${o.groupName}: ${o.optionName}`).join(', ')}]`
+      : '';
     const message = encodeURIComponent(
-      `¡Hola Lumina Lab! Estoy interesado en ordenar la lámpara *${product.name}* (${product.dimensions || ''}) por ${formatCOP(product.price)} COP. ¿Tienen disponibilidad para envío?`
+      `¡Hola Lumina Lab! Estoy interesado en ordenar la lámpara *${product.name}*${optsText}${
+        product.dimensions ? ` (${product.dimensions})` : ''
+      } por ${formatCOP(effectivePrice)} COP. ¿Tienen disponibilidad para envío?`
     );
     window.open(`https://wa.me/${wppNumber}?text=${message}`, '_blank', 'noopener,noreferrer');
   };
@@ -266,7 +328,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
               </h1>
               <div className="pt-2">
                 <span className="text-2xl sm:text-3xl font-mono-tech font-bold text-[#121212]">
-                  {formatCOP(product.price)} COP
+                  {formatCOP(effectivePrice)} COP
                 </span>
                 <span className="text-xs font-mono-tech text-[#888] block mt-0.5">
                   IVA incluido • Envío asegurado a toda Colombia
@@ -278,6 +340,68 @@ export default function ProductDetailPage({ slug, onNavigate }) {
             <p className="text-sm sm:text-base text-[#555] font-light leading-relaxed border-t border-b border-[#E8E6E1] py-4">
               {product.description}
             </p>
+
+            {/* Selectores Dinámicos de Opciones */}
+            {optionGroups.length > 0 && (
+              <div className="space-y-4">
+                {optionGroups.map((group) => {
+                  const selected = selectedOptionsByGroup[group.slug];
+                  return (
+                    <div key={group.id || group.slug} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono-tech uppercase tracking-[0.15em] font-semibold text-[#121212]">
+                          {group.name}
+                        </span>
+                        {selected && (
+                          <span className="text-xs font-mono-tech text-[#666]">
+                            {selected.name}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {(group.options || []).map((opt) => {
+                          const isSelected = selected?.slug === opt.slug;
+                          const isAvailable = Boolean(opt.in_stock);
+                          const delta = Number(opt.price_delta || 0);
+                          return (
+                            <button
+                              key={opt.id || opt.slug}
+                              type="button"
+                              disabled={!isAvailable}
+                              onClick={() => handleSelectOption(group.slug, opt)}
+                              className={`px-3.5 py-2 rounded-lg border text-xs font-mono-tech transition-all flex items-center gap-2 ${
+                                !isAvailable
+                                  ? 'bg-[#F3F2EE] border-[#E5E3DD] text-[#999] cursor-not-allowed opacity-75'
+                                  : isSelected
+                                  ? 'bg-[#121212] text-white border-[#121212] shadow-sm'
+                                  : 'bg-white text-[#121212] border-[#D8D5CD] hover:border-[#121212]'
+                              }`}
+                            >
+                              <span className={!isAvailable ? 'line-through' : ''}>{opt.name}</span>
+                              {delta !== 0 && isAvailable && (
+                                <span className={isSelected ? 'text-white/80' : 'text-[#666]'}>
+                                  {delta > 0 ? `+${formatCOP(delta)}` : `-${formatCOP(Math.abs(delta))}`}
+                                </span>
+                              )}
+                              {!isAvailable && (
+                                <span className="px-1.5 py-0.5 text-[9px] uppercase tracking-wider rounded bg-[#E5E3DD] text-[#666] font-semibold">
+                                  Agotada
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+                {!allGroupsAvailable && (
+                  <p className="text-xs font-mono-tech text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+                    Algunas opciones están agotadas temporalmente y no es posible añadir esta combinación al carrito.
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Selector de Cantidad y Acciones de Compra */}
             <div className="space-y-4 pt-2">
@@ -306,10 +430,15 @@ export default function ProductDetailPage({ slug, onNavigate }) {
 
                 <button
                   type="button"
+                  disabled={!allGroupsAvailable}
                   onClick={handleAddToCart}
-                  className="flex-1 py-3.5 px-6 bg-[#121212] text-white hover:bg-black text-[11px] font-mono-tech tracking-[0.2em] uppercase transition-all shadow-md flex items-center justify-center gap-2"
+                  className={`flex-1 py-3.5 px-6 text-[11px] font-mono-tech tracking-[0.2em] uppercase transition-all shadow-md flex items-center justify-center gap-2 ${
+                    allGroupsAvailable
+                      ? 'bg-[#121212] text-white hover:bg-black'
+                      : 'bg-[#D6D3CB] text-[#777] cursor-not-allowed shadow-none'
+                  }`}
                 >
-                  <span>+ Añadir a la Bolsa</span>
+                  <span>{allGroupsAvailable ? '+ Añadir a la Bolsa' : 'Opción Agotada'}</span>
                 </button>
               </div>
 

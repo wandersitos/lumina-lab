@@ -60,3 +60,103 @@ class Content(models.Model):
         from django.core.cache import cache
         cache.delete('lumina_site_content_dict')
         super().delete(*args, **kwargs)
+
+
+class ProductOptionGroup(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Nombre")
+    slug = models.SlugField(max_length=100, unique=True)
+    order = models.IntegerField(default=0, verbose_name="Orden")
+    is_active = models.BooleanField(default=True, verbose_name="Activo")
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = "Grupo de opciones"
+        verbose_name_plural = "Grupos de opciones"
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().delete(*args, **kwargs)
+
+
+class ProductOption(models.Model):
+    group = models.ForeignKey(
+        ProductOptionGroup,
+        on_delete=models.CASCADE,
+        related_name='options',
+        verbose_name="Grupo",
+    )
+    name = models.CharField(max_length=100, verbose_name="Nombre")
+    slug = models.SlugField(max_length=100)
+    price_delta = models.IntegerField(default=0, verbose_name="Variación de precio (COP)")
+    is_visible = models.BooleanField(default=True, verbose_name="Visible")
+    in_stock = models.BooleanField(default=True, verbose_name="Disponible")
+    order = models.IntegerField(default=0, verbose_name="Orden")
+
+    class Meta:
+        ordering = ['order', 'id']
+        unique_together = [('group', 'slug')]
+        verbose_name = "Opción de producto"
+        verbose_name_plural = "Opciones de producto"
+
+    def __str__(self):
+        return f"{self.group.name}: {self.name}"
+
+    def save(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().delete(*args, **kwargs)
+
+
+class ProductOptionAssignment(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='option_assignments',
+        verbose_name="Producto",
+    )
+    option = models.ForeignKey(
+        ProductOption,
+        on_delete=models.CASCADE,
+        related_name='product_assignments',
+        verbose_name="Opción",
+    )
+    is_visible = models.BooleanField(default=True, verbose_name="Visible en este producto")
+    in_stock = models.BooleanField(default=True, verbose_name="Disponible en este producto")
+    price_delta_override = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name="Variación de precio específica (COP)",
+    )
+
+    class Meta:
+        ordering = ['option__group__order', 'option__order', 'id']
+        unique_together = [('product', 'option')]
+        verbose_name = "Asignación de opción"
+        verbose_name_plural = "Asignaciones de opciones"
+
+    def __str__(self):
+        return f"{self.product.name} — {self.option}"
+
+    def save(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        from django.core.cache import cache
+        cache.clear()
+        super().delete(*args, **kwargs)

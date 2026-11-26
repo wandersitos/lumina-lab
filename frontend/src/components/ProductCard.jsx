@@ -20,6 +20,28 @@ export default function ProductCard({ product, onSelectDetail }) {
   );
 
   const productUrl = `/product/${product.slug}`;
+  const optionGroups = Array.isArray(product.option_groups) ? product.option_groups : [];
+  const hasOptions = optionGroups.length > 0;
+
+  const minDelta = optionGroups.reduce((sum, g) => {
+    const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+    return sum + (deltas.length ? Math.min(...deltas) : 0);
+  }, 0);
+  const maxDelta = optionGroups.reduce((sum, g) => {
+    const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+    return sum + (deltas.length ? Math.max(...deltas) : 0);
+  }, 0);
+  const basePrice = Number(product.price || 0);
+  const hasPriceRange = minDelta !== maxDelta;
+  const displayPriceText = hasPriceRange
+    ? `Desde ${formatCOP(basePrice + minDelta)} COP`
+    : `${formatCOP(basePrice + minDelta)} COP`;
+
+  const connectionGroup =
+    optionGroups.find((g) => g.slug === 'conexion') ||
+    optionGroups.find((g) => g.slug !== 'tamano') ||
+    null;
+  const sizeGroup = optionGroups.find((g) => g.slug === 'tamano') || null;
 
   // Manejo de navegación que respeta el click de la rueda del ratón (botón central) y teclas modificadoras
   const handleLinkClick = (e, path) => {
@@ -74,13 +96,23 @@ export default function ProductCard({ product, onSelectDetail }) {
 
         {/* Acciones flotantes al pasar el cursor */}
         <div className="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-1.5 z-20">
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="w-full py-2.5 bg-[#121212] text-white text-[10px] font-mono-tech tracking-[0.2em] uppercase hover:bg-black transition-colors shadow-md btn-add-to-cart"
-          >
-            + Añadir a la Bolsa
-          </button>
+          {hasOptions ? (
+            <button
+              type="button"
+              onClick={(e) => handleLinkClick(e, productUrl)}
+              className="w-full py-2.5 bg-[#121212] text-white text-[10px] font-mono-tech tracking-[0.2em] uppercase hover:bg-black transition-colors shadow-md btn-choose-options"
+            >
+              Elegir opciones
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="w-full py-2.5 bg-[#121212] text-white text-[10px] font-mono-tech tracking-[0.2em] uppercase hover:bg-black transition-colors shadow-md btn-add-to-cart"
+            >
+              + Añadir a la Bolsa
+            </button>
+          )}
           <button
             type="button"
             onClick={handleBuyWhatsApp}
@@ -104,9 +136,33 @@ export default function ProductCard({ product, onSelectDetail }) {
               {product.name}
             </a>
             <span className="font-mono-tech text-sm font-semibold text-[#121212] block mt-1">
-              {formatCOP(product.price)} COP
+              {displayPriceText}
             </span>
           </div>
+
+          {(connectionGroup || (sizeGroup && sizeGroup.options?.length > 0)) && (
+            <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+              {connectionGroup?.options?.map((opt) => (
+                <span
+                  key={opt.id || opt.slug}
+                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono-tech border ${
+                    opt.in_stock
+                      ? 'bg-[#F7F6F3] text-[#444] border-[#E8E6E1]'
+                      : 'bg-[#FAF9F7] text-[#999] border-[#EAE8E3] line-through'
+                  }`}
+                >
+                  {opt.name}
+                  {!opt.in_stock && ' (Agotada)'}
+                </span>
+              ))}
+              {sizeGroup && sizeGroup.options?.length > 0 && (
+                <span className="text-[10px] font-mono-tech text-[#777]">
+                  · {sizeGroup.options.length}{' '}
+                  {sizeGroup.options.length === 1 ? 'tamaño' : 'tamaños'}
+                </span>
+              )}
+            </div>
+          )}
 
           <p className="text-xs text-[#666] font-light line-clamp-2 leading-relaxed">
             {product.description}
