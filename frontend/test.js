@@ -326,4 +326,24 @@ assert.strictEqual(siteConfig.social.instagram.url, 'https://www.instagram.com/o
 // App.jsx (incluyendo menú móvil) no debe hardcodear Instagram @luminalab_co
 assert(!appContent.includes('Instagram @luminalab_co'), 'R3 (016): App.jsx mobile menu must use siteConfig.social.instagram.handle instead of hardcoded @luminalab_co');
 
+// =============================================================================
+// 12. R1-R2 (022-tecnologia-luz-led-y-zoom-imagen): Tecnología LED y encuadre cuadrado
+// =============================================================================
+console.log('Verifying 022-tecnologia-luz-led-y-zoom-imagen requirements...');
+
+const detailPageContent = fs.readFileSync(productDetailPagePath, 'utf-8');
+const detailModalPath = path.join(__dirname, 'src/components/ProductDetailModal.jsx');
+const detailModalContent = fs.readFileSync(detailModalPath, 'utf-8');
+
+// R1: Tecnología de luz debe ser LED (sin E27)
+assert(!detailPageContent.includes('E27'), 'R1 (022): ProductDetailPage.jsx must not mention E27');
+assert(!detailModalContent.includes('E27'), 'R1 (022): ProductDetailModal.jsx must not mention E27');
+assert(detailPageContent.includes('>LED<'), 'R1 (022): ProductDetailPage.jsx must display LED');
+assert(detailModalContent.includes('>LED<'), 'R1 (022): ProductDetailModal.jsx must display LED');
+
+// R2: Imagen principal en formato cuadrado estándar con object-contain y sin zoom hover
+assert(!detailPageContent.includes('sm:aspect-[4/5]'), 'R2 (022): ProductDetailPage.jsx must use standard square aspect-square instead of sm:aspect-[4/5]');
+assert(!detailPageContent.includes('group-hover:scale-105'), 'R2 (022): ProductDetailPage.jsx must not zoom main image with group-hover:scale-105');
+assert(detailPageContent.includes('object-contain object-center'), 'R2 (022): ProductDetailPage.jsx main image must use object-contain object-center');
+
 console.log('All frontend verification tests passed successfully!');

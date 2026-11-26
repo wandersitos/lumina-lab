@@ -260,7 +260,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
           
           {/* Columna Izquierda: Galería e Imagen Principal */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="relative aspect-square sm:aspect-[4/5] bg-[#F7F6F3] border border-[#E8E6E1] rounded-2xl overflow-hidden shadow-sm flex items-center justify-center group">
+            <div className="relative aspect-square bg-[#F7F6F3] border border-[#E8E6E1] rounded-2xl overflow-hidden shadow-sm flex items-center justify-center">
               {/* Badges superiores */}
               <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
                 <span className="px-3 py-1 bg-white/95 backdrop-blur-md rounded-full text-[10px] font-mono-tech uppercase tracking-wider text-[#121212] font-semibold shadow-sm">
@@ -279,7 +279,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
                 onError={(e) => {
                   e.target.src = FALLBACK_IMAGE;
                 }}
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-contain object-center"
               />
             </div>
 
@@ -478,7 +478,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
                 </div>
                 <div className="flex justify-between py-2 border-b border-[#F0EFEA]">
                   <span className="text-[#888]">Tecnología de luz:</span>
-                  <span className="font-medium text-[#121212]">LED Cálida 2700K difusa (Socket universal E27)</span>
+                  <span className="font-medium text-[#121212]">LED</span>
                 </div>
               </div>
             </div>
