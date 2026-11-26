@@ -59,11 +59,21 @@ class ProductSerializer(serializers.ModelSerializer):
                 if assignment.price_delta_override is not None
                 else option.price_delta
             )
+            effective_price = (
+                assignment.price_override
+                if assignment.price_override is not None
+                else option.price
+            )
+            effective_dimensions = assignment.dimensions_override or option.dimensions or ''
+            effective_production_time = assignment.production_time_override or option.production_time or ''
             groups_map[group.id]['options'].append({
                 'id': option.id,
                 'name': option.name,
                 'slug': option.slug,
                 'price_delta': effective_price_delta,
+                'effective_price': effective_price,
+                'effective_dimensions': effective_dimensions,
+                'effective_production_time': effective_production_time,
                 'in_stock': bool(option.in_stock and assignment.in_stock),
                 'order': option.order,
             })

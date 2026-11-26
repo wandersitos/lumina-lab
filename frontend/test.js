@@ -346,4 +346,27 @@ assert(!detailPageContent.includes('sm:aspect-[4/5]'), 'R2 (022): ProductDetailP
 assert(!detailPageContent.includes('group-hover:scale-105'), 'R2 (022): ProductDetailPage.jsx must not zoom main image with group-hover:scale-105');
 assert(detailPageContent.includes('object-cover object-center'), 'R2 (022): ProductDetailPage.jsx main image must use object-cover object-center');
 
+// =============================================================================
+// 13. R1-R2 (023-tamanos-precio-tiempo-dimensiones-y-sin-material): Sin Material y detalles por tamaño
+// =============================================================================
+console.log('Verifying 023-tamanos-precio-tiempo-dimensiones-y-sin-material requirements...');
+
+// R1: Sin texto Material en ProductDetailPage.jsx ni ProductDetailModal.jsx
+assert(!/material/i.test(detailPageContent), 'R1 (023): ProductDetailPage.jsx must not contain Material');
+assert(!/material/i.test(detailModalContent), 'R1 (023): ProductDetailModal.jsx must not contain Material');
+
+// R2: Uso de effective_price, effective_dimensions y effective_production_time
+for (const [name, content] of [
+  ['ProductDetailPage.jsx', detailPageContent],
+  ['ProductDetailModal.jsx', detailModalContent],
+]) {
+  assert(content.includes('effective_price'), `R2 (023): ${name} must use effective_price`);
+  assert(content.includes('effective_dimensions'), `R2 (023): ${name} must use effective_dimensions`);
+  assert(content.includes('effective_production_time'), `R2 (023): ${name} must use effective_production_time`);
+}
+
+assert(productCardContent.includes('effective_price'), 'R2 (023): ProductCard.jsx must support effective_price');
+assert(cartContextContent.includes('productionTime'), 'R2 (023): CartContext.jsx must store productionTime');
+assert(cartDrawerContent.includes('productionTime'), 'R2 (023): CartDrawer.jsx must display productionTime');
+
 console.log('All frontend verification tests passed successfully!');

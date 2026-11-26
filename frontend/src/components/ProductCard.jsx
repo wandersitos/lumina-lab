@@ -23,19 +23,52 @@ export default function ProductCard({ product, onSelectDetail }) {
   const optionGroups = Array.isArray(product.option_groups) ? product.option_groups : [];
   const hasOptions = optionGroups.length > 0;
 
-  const minDelta = optionGroups.reduce((sum, g) => {
-    const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
-    return sum + (deltas.length ? Math.min(...deltas) : 0);
-  }, 0);
-  const maxDelta = optionGroups.reduce((sum, g) => {
-    const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
-    return sum + (deltas.length ? Math.max(...deltas) : 0);
-  }, 0);
   const basePrice = Number(product.price || 0);
-  const hasPriceRange = minDelta !== maxDelta;
+  let minPrice = basePrice;
+  let maxPrice = basePrice;
+  if (hasOptions) {
+    const ownPriceGroup = optionGroups.find((g) =>
+      (g.options || []).some(
+        (o) => o.effective_price !== null && o.effective_price !== undefined
+      )
+    );
+    if (ownPriceGroup) {
+      const ownPrices = (ownPriceGroup.options || []).map((o) =>
+        o.effective_price !== null && o.effective_price !== undefined
+          ? Number(o.effective_price)
+          : basePrice + Number(o.price_delta || 0)
+      );
+      const otherMinDelta = optionGroups
+        .filter((g) => g !== ownPriceGroup)
+        .reduce((sum, g) => {
+          const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+          return sum + (deltas.length ? Math.min(...deltas) : 0);
+        }, 0);
+      const otherMaxDelta = optionGroups
+        .filter((g) => g !== ownPriceGroup)
+        .reduce((sum, g) => {
+          const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+          return sum + (deltas.length ? Math.max(...deltas) : 0);
+        }, 0);
+      minPrice = (ownPrices.length ? Math.min(...ownPrices) : basePrice) + otherMinDelta;
+      maxPrice = (ownPrices.length ? Math.max(...ownPrices) : basePrice) + otherMaxDelta;
+    } else {
+      const minDelta = optionGroups.reduce((sum, g) => {
+        const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+        return sum + (deltas.length ? Math.min(...deltas) : 0);
+      }, 0);
+      const maxDelta = optionGroups.reduce((sum, g) => {
+        const deltas = (g.options || []).map((o) => Number(o.price_delta || 0));
+        return sum + (deltas.length ? Math.max(...deltas) : 0);
+      }, 0);
+      minPrice = basePrice + minDelta;
+      maxPrice = basePrice + maxDelta;
+    }
+  }
+  const hasPriceRange = minPrice !== maxPrice;
   const displayPriceText = hasPriceRange
-    ? `Desde ${formatCOP(basePrice + minDelta)} COP`
-    : `${formatCOP(basePrice + minDelta)} COP`;
+    ? `Desde ${formatCOP(minPrice)} COP`
+    : `${formatCOP(minPrice)} COP`;
 
   const connectionGroup =
     optionGroups.find((g) => g.slug === 'conexion') ||

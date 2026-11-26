@@ -36,11 +36,31 @@ export default function ProductDetailModal({ product, onClose }) {
   const allGroupsAvailable = optionGroups.every(
     (g) => Boolean(selectedOptionsByGroup[g.slug] && selectedOptionsByGroup[g.slug].in_stock)
   );
-  const optionsDelta = optionGroups.reduce(
-    (sum, g) => sum + Number(selectedOptionsByGroup[g.slug]?.price_delta || 0),
-    0
+  const selectedOptionsList = optionGroups
+    .map((g) => selectedOptionsByGroup[g.slug])
+    .filter(Boolean);
+  const ownPriceOption = selectedOptionsList.find(
+    (opt) => opt.effective_price !== null && opt.effective_price !== undefined
   );
-  const effectivePrice = Number(product.price || 0) + optionsDelta;
+  const extraDelta = selectedOptionsList.reduce((sum, opt) => {
+    if (ownPriceOption && opt === ownPriceOption) return sum;
+    return sum + Number(opt.price_delta || 0);
+  }, 0);
+  const effectivePrice = ownPriceOption
+    ? Number(ownPriceOption.effective_price) + extraDelta
+    : Number(product.price || 0) + extraDelta;
+
+  const optionDimensions = selectedOptionsList.find(
+    (opt) => opt.effective_dimensions
+  )?.effective_dimensions;
+  const effectiveDimensions = optionDimensions || product.dimensions || '24 x 16 cm';
+
+  const defaultProductionTime = product.deliveryTime || '2 a 3 días hábiles';
+  const optionProductionTime = selectedOptionsList.find(
+    (opt) => opt.effective_production_time
+  )?.effective_production_time;
+  const effectiveProductionTime = optionProductionTime || defaultProductionTime;
+
   const selectedOptionsPayload = optionGroups
     .map((g) => {
       const opt = selectedOptionsByGroup[g.slug];
@@ -53,6 +73,9 @@ export default function ProductDetailModal({ product, onClose }) {
         optionSlug: opt.slug,
         optionName: opt.name,
         priceDelta: Number(opt.price_delta || 0),
+        effectivePrice: opt.effective_price ?? null,
+        effectiveDimensions: opt.effective_dimensions || '',
+        effectiveProductionTime: opt.effective_production_time || '',
       };
     })
     .filter(Boolean);
@@ -62,7 +85,7 @@ export default function ProductDetailModal({ product, onClose }) {
     : '';
   const message = encodeURIComponent(
     `¡Hola! Estoy interesado en ordenar la ${product.name}${optsText}${
-      product.dimensions ? ` (${product.dimensions})` : ''
+      effectiveDimensions ? ` (${effectiveDimensions})` : ''
     } por ${formatCOP(effectivePrice)} COP de Lumina Lab.`
   );
   const whatsappUrl = `https://wa.me/${siteConfig.social.whatsapp.number.replace(/[^0-9]/g, '')}?text=${message}`;
@@ -77,7 +100,17 @@ export default function ProductDetailModal({ product, onClose }) {
 
   const handleAddToCart = () => {
     if (!allGroupsAvailable) return;
-    addToCart({ ...product, effectivePrice }, null, 1, selectedOptionsPayload);
+    addToCart(
+      {
+        ...product,
+        effectivePrice,
+        dimensions: effectiveDimensions,
+        productionTime: effectiveProductionTime,
+      },
+      null,
+      1,
+      selectedOptionsPayload
+    );
     onClose();
   };
 
@@ -136,7 +169,10 @@ export default function ProductDetailModal({ product, onClose }) {
                               }`}
                             >
                               <span className={!isAvailable ? 'line-through' : ''}>{opt.name}</span>
-                              {delta !== 0 && isAvailable && (
+                              {opt.effective_price !== null && opt.effective_price !== undefined && isAvailable && (
+                                <span>{formatCOP(opt.effective_price)}</span>
+                              )}
+                              {(opt.effective_price === null || opt.effective_price === undefined) && delta !== 0 && isAvailable && (
                                 <span>
                                   {delta > 0 ? `+${formatCOP(delta)}` : `-${formatCOP(Math.abs(delta))}`}
                                 </span>
@@ -159,20 +195,16 @@ export default function ProductDetailModal({ product, onClose }) {
             <div className="modal-specs">
               <div className="spec-item">
                 <span className="spec-label">Dimensiones y medidas:</span>
-                <span className="spec-value">{product.dimensions || '24 x 16 cm'}</span>
+                <span className="spec-value">{effectiveDimensions}</span>
               </div>
               <div className="spec-item">
                 <span className="spec-label">Tipo de iluminación:</span>
                 <span className="spec-value">LED</span>
               </div>
-              <div className="spec-item">
-                <span className="spec-label">Material de impresión:</span>
-                <span className="spec-value">PLA biodegradable de origen vegetal de alta resistencia</span>
-              </div>
             </div>
 
             <div className="modal-ondemand-notice">
-              <strong>⚡ Fabricación bajo demanda:</strong> Cada pieza se imprime de forma individual tras tu pedido. Tiempo estimado de impresión y acabado: <strong>2 a 3 días hábiles</strong>.
+              <strong>⚡ Fabricación bajo demanda:</strong> Cada pieza se imprime de forma individual tras tu pedido. Tiempo estimado de producción y acabado: <strong>{effectiveProductionTime}</strong>.
             </div>
 
             <p className="modal-description">{product.description}</p>
