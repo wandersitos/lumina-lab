@@ -59,7 +59,15 @@ def get_resolved_image_list(obj):
 class ProductOptionAssignmentInline(admin.TabularInline):
     model = ProductOptionAssignment
     extra = 0
-    fields = ('option', 'is_visible', 'in_stock', 'price_delta_override')
+    fields = (
+        'option',
+        'is_visible',
+        'in_stock',
+        'price_delta_override',
+        'price_override',
+        'dimensions_override',
+        'production_time_override',
+    )
 
 
 @admin.register(Product)
@@ -80,7 +88,6 @@ class ProductAdmin(admin.ModelAdmin):
         'in_stock',
         'is_active',
         'dimensions',
-        'material',
         'order',
         'selector_de_portada',
         'image_url',
@@ -367,9 +374,28 @@ class ProductOptionGroupAdmin(admin.ModelAdmin):
 
 @admin.register(ProductOption)
 class ProductOptionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'group', 'slug', 'is_visible', 'in_stock', 'price_delta', 'order')
+    list_display = (
+        'name',
+        'group',
+        'slug',
+        'is_visible',
+        'in_stock',
+        'price_delta',
+        'price',
+        'dimensions',
+        'production_time',
+        'order',
+    )
     list_filter = ('group', 'is_visible', 'in_stock')
-    list_editable = ('is_visible', 'in_stock', 'price_delta', 'order')
+    list_editable = (
+        'is_visible',
+        'in_stock',
+        'price_delta',
+        'price',
+        'dimensions',
+        'production_time',
+        'order',
+    )
     search_fields = ('name', 'slug', 'group__name')
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('group__order', 'order', 'id')

@@ -184,11 +184,33 @@ export default function ProductDetailPage({ slug, onNavigate }) {
   const allGroupsAvailable = optionGroups.every(
     (g) => Boolean(selectedOptionsByGroup[g.slug] && selectedOptionsByGroup[g.slug].in_stock)
   );
-  const optionsDelta = optionGroups.reduce(
-    (sum, g) => sum + Number(selectedOptionsByGroup[g.slug]?.price_delta || 0),
-    0
+  const selectedOptionsList = optionGroups
+    .map((g) => selectedOptionsByGroup[g.slug])
+    .filter(Boolean);
+  const ownPriceOption = selectedOptionsList.find(
+    (opt) => opt.effective_price !== null && opt.effective_price !== undefined
   );
-  const effectivePrice = Number(product.price || 0) + optionsDelta;
+  const extraDelta = selectedOptionsList.reduce((sum, opt) => {
+    if (ownPriceOption && opt === ownPriceOption) return sum;
+    return sum + Number(opt.price_delta || 0);
+  }, 0);
+  const effectivePrice = ownPriceOption
+    ? Number(ownPriceOption.effective_price) + extraDelta
+    : Number(product.price || 0) + extraDelta;
+
+  const optionDimensions = selectedOptionsList.find(
+    (opt) => opt.effective_dimensions
+  )?.effective_dimensions;
+  const effectiveDimensions = optionDimensions || product.dimensions || '24 x 25 x 25 cm';
+
+  const defaultProductionTime =
+    product.deliveryTime ||
+    (product.inStock ? 'Envío Inmediato (2-4 días)' : 'Bajo demanda (7-10 días)');
+  const optionProductionTime = selectedOptionsList.find(
+    (opt) => opt.effective_production_time
+  )?.effective_production_time;
+  const effectiveProductionTime = optionProductionTime || defaultProductionTime;
+
   const selectedOptionsPayload = optionGroups
     .map((g) => {
       const opt = selectedOptionsByGroup[g.slug];
@@ -201,6 +223,9 @@ export default function ProductDetailPage({ slug, onNavigate }) {
         optionSlug: opt.slug,
         optionName: opt.name,
         priceDelta: Number(opt.price_delta || 0),
+        effectivePrice: opt.effective_price ?? null,
+        effectiveDimensions: opt.effective_dimensions || '',
+        effectiveProductionTime: opt.effective_production_time || '',
       };
     })
     .filter(Boolean);
@@ -215,7 +240,17 @@ export default function ProductDetailPage({ slug, onNavigate }) {
 
   const handleAddToCart = () => {
     if (!allGroupsAvailable) return;
-    addToCart({ ...product, effectivePrice }, null, quantity, selectedOptionsPayload);
+    addToCart(
+      {
+        ...product,
+        effectivePrice,
+        dimensions: effectiveDimensions,
+        productionTime: effectiveProductionTime,
+      },
+      null,
+      quantity,
+      selectedOptionsPayload
+    );
   };
 
   const handleBuyWhatsApp = () => {
@@ -225,7 +260,7 @@ export default function ProductDetailPage({ slug, onNavigate }) {
       : '';
     const message = encodeURIComponent(
       `¡Hola Lumina Lab! Estoy interesado en ordenar la lámpara *${product.name}*${optsText}${
-        product.dimensions ? ` (${product.dimensions})` : ''
+        effectiveDimensions ? ` (${effectiveDimensions})` : ''
       } por ${formatCOP(effectivePrice)} COP. ¿Tienen disponibilidad para envío?`
     );
     window.open(`https://wa.me/${wppNumber}?text=${message}`, '_blank', 'noopener,noreferrer');
@@ -378,7 +413,12 @@ export default function ProductDetailPage({ slug, onNavigate }) {
                               }`}
                             >
                               <span className={!isAvailable ? 'line-through' : ''}>{opt.name}</span>
-                              {delta !== 0 && isAvailable && (
+                              {opt.effective_price !== null && opt.effective_price !== undefined && isAvailable && (
+                                <span className={isSelected ? 'text-white/80' : 'text-[#666]'}>
+                                  {formatCOP(opt.effective_price)}
+                                </span>
+                              )}
+                              {(opt.effective_price === null || opt.effective_price === undefined) && delta !== 0 && isAvailable && (
                                 <span className={isSelected ? 'text-white/80' : 'text-[#666]'}>
                                   {delta > 0 ? `+${formatCOP(delta)}` : `-${formatCOP(Math.abs(delta))}`}
                                 </span>
@@ -458,22 +498,18 @@ export default function ProductDetailPage({ slug, onNavigate }) {
             {/* Especificaciones y Ficha Técnica */}
             <div className="pt-6 border-t border-[#E8E6E1] space-y-4">
               <h2 className="text-xs font-mono-tech uppercase tracking-[0.2em] font-semibold text-[#121212]">
-                Ficha Técnica y Materiales
+                Ficha Técnica
               </h2>
               
               <div className="grid grid-cols-1 gap-2.5 text-xs font-mono-tech">
                 <div className="flex justify-between py-2 border-b border-[#F0EFEA]">
                   <span className="text-[#888]">Dimensiones:</span>
-                  <span className="font-medium text-[#121212]">{product.dimensions || '24 x 25 x 25 cm'}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b border-[#F0EFEA]">
-                  <span className="text-[#888]">Material de fabricación:</span>
-                  <span className="font-medium text-[#121212]">{product.material || 'PLA Biodegradable ecológico'}</span>
+                  <span className="font-medium text-[#121212]">{effectiveDimensions}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-[#F0EFEA]">
                   <span className="text-[#888]">Tiempo de producción:</span>
                   <span className="font-medium text-[#121212]">
-                    {product.deliveryTime || (product.inStock ? 'Envío Inmediato (2-4 días)' : 'Bajo demanda (7-10 días)')}
+                    {effectiveProductionTime}
                   </span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-[#F0EFEA]">

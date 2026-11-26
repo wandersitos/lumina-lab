@@ -39,7 +39,7 @@ export default function CartDrawer() {
       const optsText = formatItemOptions(item);
       msg += `${index + 1}. ${item.name}${optsText ? ` [${optsText}]` : ''}${
         item.dimensions ? ` (${item.dimensions})` : ''
-      } x ${item.quantity} = ${formatCOP(item.price * item.quantity)} COP\n`;
+      }${item.productionTime ? ` [${item.productionTime}]` : ''} x ${item.quantity} = ${formatCOP(item.price * item.quantity)} COP\n`;
     });
     msg += `\nSubtotal productos: ${formatCOP(subtotal)} COP`;
     msg += `\nEnvío: Por cotizar`;
@@ -134,6 +134,12 @@ export default function CartDrawer() {
                     {item.dimensions && (
                       <p className="text-[11px] font-mono-tech text-[#777]">
                         {item.dimensions}
+                      </p>
+                    )}
+
+                    {item.productionTime && (
+                      <p className="text-[11px] font-mono-tech text-[#777]">
+                        Producción: {item.productionTime}
                       </p>
                     )}
 

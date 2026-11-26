@@ -97,6 +97,9 @@ class ProductOption(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nombre")
     slug = models.SlugField(max_length=100)
     price_delta = models.IntegerField(default=0, verbose_name="Variación de precio (COP)")
+    price = models.IntegerField(null=True, blank=True, verbose_name="Precio propio (COP)")
+    dimensions = models.CharField(max_length=100, blank=True, default='', verbose_name="Dimensiones")
+    production_time = models.CharField(max_length=100, blank=True, default='', verbose_name="Tiempo de producción")
     is_visible = models.BooleanField(default=True, verbose_name="Visible")
     in_stock = models.BooleanField(default=True, verbose_name="Disponible")
     order = models.IntegerField(default=0, verbose_name="Orden")
@@ -140,6 +143,23 @@ class ProductOptionAssignment(models.Model):
         null=True,
         blank=True,
         verbose_name="Variación de precio específica (COP)",
+    )
+    price_override = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name="Precio propio específico (COP)",
+    )
+    dimensions_override = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+        verbose_name="Dimensiones específicas",
+    )
+    production_time_override = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+        verbose_name="Tiempo de producción específico",
     )
 
     class Meta:

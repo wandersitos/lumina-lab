@@ -66,6 +66,7 @@ export function CartProvider({ children }) {
           slug: product.slug,
           price: unitPrice,
           dimensions: product.dimensions,
+          productionTime: product.productionTime || '',
           image_url: product.image_url,
           color,
           selectedOptions: normalizedOptions,
